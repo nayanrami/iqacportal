@@ -1,0 +1,236 @@
+﻿Tables found: 8
+
+=== Table 0 (9 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Basic Science Course | 202000104 | Calculus | 3 | 2 | 4 | 150/52
+Engineering Science Course | 202000110 | Computer Programming with C | 3 | 2 | 4 | 150/52
+Engineering Science Course | 202001203 | Basics of Electrical and Electronics Engineering | 3 | 2 | 4 | 150/52
+Mandatory Course | 202001206 | Constitution of India | 2 | 50/18
+Engineering Science Course | 202001209 | Engineering Workshop | 4 | 2 | 100/35
+Humanity And Social Science Course | 202001215 | Professional Communication | 2 | 2 | 3 | 150/52
+Semester Total: | 11 | 2 | 12 | 17 | ΓÇö | ΓÇö
+
+=== Table 1 (15 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Basic Science Course | 202000211 | Linear Algebra, Vector Calculus and ODE | 3 | 2 | 4 | 150/52
+Engineering Science Course | 202000212 | Object Oriented Programming | 3 | 2 | 4 | 150/52
+Engineering Science Course | 202001202 | Basic Mechanical Engineering | 3 | 2 | 4 | 150/52
+Basic Science Course | 202001207 | Energy and Environment Science | 3 | 3 | 100/35
+Engineering Science Course | 202001208 | Engineering Graphics | 2 | 4 | 4 | 150/52
+Basic Science Course | 202001213 | Physics | 3 | 2 | 4 | 150/52
+Liberal Arts | 900009902 | A Course on Liberal Arts - Painting | 2 | 2 | 100/35
+Liberal Arts | 900009903 | A Course on Liberal Arts - Photography | 2 | 2 | 100/35
+Liberal Arts | 900009904 | A Course on Liberal Arts - Media and Graphics | 2 | 2 | 100/35
+Liberal Arts | 900009905 | A Course on Liberal Arts - Music | 2 | 2 | 100/35
+Liberal Arts | 900009906 | A Course on Liberal Arts - Dramatics | 2 | 2 | 50/18
+Liberal Arts | 900009907 | A Course on Liberal Arts - Contemporary Dance | 2 | 2 | 50/18
+Semester Total: | 17 | 2 | 22 | 35 | ΓÇö | ΓÇö
+
+=== Table 2 (10 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Basic Science Courses | 202000303 | Probability - Statistics and Numerical Methods | 3 | 2 | 4 | 100/35
+Humanities & Social Science | 202003402 | Fundamentals of Economics and Business Management | 3 | 3 | 100/35
+Mandatory Course | 202003403 | Indian Ethos and Value Education | 2 | 50/18
+Professional Core Course - I | 202040301 | Data Structures | 4 | 2 | 5 | 150/53
+Professional Core Course - II | 202040302 | Database Management Systems | 4 | 2 | 5 | 150/53
+Engineering Science | 202040303 | Digital Fundamentals | 3 | 2 | 4 | 150/53
+Skill Development | 900009901 | Creativity, Problem Solving and Innovation | 2 | 2 | 100/35
+Semester Total: | 19 | 2 | 8 | 23 | ΓÇö | ΓÇö
+
+=== Table 3 (10 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Humanities & Social Science | 202003404 | Technical Writing and Soft Skills | 3 | 3 | 100/35
+Mandatory Course | 202003405 | Entrepreneur Skills | 2 | 50/18
+Professional Core Course ΓÇô III | 202040401 | Computer Organization and Architecture | 3 | 2 | 4 | 150/53
+Professional Core Course ΓÇô IV | 202040402 | Operating Systems | 3 | 2 | 4 | 150/53
+Mandatory Course | 202040404 | Seminar | 2 | 1 | 50/17
+Professional Core Course ΓÇô V | 202044501 | Computer Networks | 3 | 2 | 4 | 150/53
+Professional Core Course - VI | 202044502 | Programming with Java | 3 | 2 | 4 | 150/53
+Semester Total: | 17 | 10 | 20 | ΓÇö | ΓÇö
+
+=== Table 4 (25 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Open Elective-I | 202005601 | Fuzzy Logic with Engineering Applications | 2 | 2 | 3 | 150/53
+Open Elective-I | 202005602 | Introduction To Numerical Methods in Differential Equations | 2 | 2 | 3 | 100/35
+Open Elective-I | 202005603 | Probability Theory with Applications | 2 | 2 | 3 | 100/35
+Open Elective-I | 202020521 | Sustainability Engineering | 3 | 3 | 100/35
+Open Elective-I | 202030521 | Disaster Management | 3 | 3 | 100/35
+Open Elective-I | 202030522 | Industrial Safety and Health Management | 3 | 3 | 100/35
+Professional Elective Course -I | 202044503 | Artificial Intelligence | 3 | 2 | 4 | 150/53
+Professional Core Course ΓÇô VII | 202044504 | Programming with Python | 3 | 2 | 4 | 150/53
+Professional Core Course ΓÇô VIII | 202044505 | Web Development | 3 | 2 | 4 | 150/53
+Professional Core Course -IX | 202045601 | Design and Analysis of Algorithm | 4 | 2 | 5 | 150/53
+Professional Core Course ΓÇô X | 202045602 | Software Engineering | 3 | 2 | 4 | 150/53
+Professional Elective Course -I | 202045604 | .NET Technology | 3 | 2 | 4 | 150/53
+Professional Elective Course -I | 202045605 | Advance Java Programming | 3 | 2 | 4 | 150/53
+Professional Elective Course -I | 202045607 | Cyber Security | 3 | 2 | 4 | 150/53
+Open Elective-I | 202050521 | Energy Conservation and Management | 3 | 3 | 100/35
+Open Elective-I | 202050522 | Energy Systems | 3 | 3 | 100/35
+Open Elective-I | 202060521 | Principles of Electronics Communication | 2 | 2 | 3 | 150/53
+Open Elective-I | 202060522 | Sensors and Automation | 2 | 2 | 3 | 150/53
+Open Elective-I | 202070521 | Fundamentals of Food Safety and Quality | 3 | 3 | 100/35
+Open Elective-I | 202070522 | Principles of Food Engineering | 3 | 3 | 100/35
+Open Elective-I | 202090521 | Non Conventional Energy Sources | 3 | 3 | 100/35
+Open Elective-I | 202090522 | Project Management | 3 | 3 | 100/35
+Semester Total: | 62 | 26 | 75 | ΓÇö | ΓÇö
+
+=== Table 5 (26 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Open Elective-II | 202005601 | Fuzzy Logic with Engineering Applications | 2 | 2 | 3 | 150/53
+Open Elective-II | 202005602 | Introduction To Numerical Methods in Differential Equations | 2 | 2 | 3 | 100/35
+Open Elective-II | 202005603 | Probability Theory with Applications | 2 | 2 | 3 | 100/35
+Open Elective-II | 202020621 | Smart Materials | 3 | 3 | 100/35
+Open Elective-II | 202020622 | Waste to Energy | 3 | 3 | 100/35
+Open Elective-II | 202030621 | Infrastructure Utilities | 3 | 3 | 100/35
+Open Elective-II | 202030622 | Smart Cities Planning and Management | 3 | 3 | 100/35
+Mandatory Course | 202040601 | Mini Project | 4 | 2 | 100/35
+Professional Core Course ΓÇôXI | 202045609 | Machine Learning | 3 | 2 | 4 | 150/53
+Professional Elective Course -II | 202046701 | Advanced Web Development | 3 | 2 | 4 | 150/53
+Professional Elective Course -II | 202046705 | Computer Vision and Image Processing | 3 | 2 | 4 | 150/53
+Professional Elective Course -II | 202046706 | Data Mining and Business Intelligence | 3 | 2 | 4 | 150/53
+Professional Core Course - XII | 202046708 | Information and Network Security | 3 | 2 | 4 | 150/53
+Professional Core Course - XIII | 202046709 | Internet of Things | 3 | 2 | 4 | 150/53
+Professional Elective Course -II | 202046713 | Software Project Management | 3 | 2 | 4 | 150/53
+Open Elective-II | 202050621 | Electrical Power Utilization | 3 | 3 | 100/35
+Open Elective-II | 202050622 | Industrial Automation | 2 | 2 | 3 | 150/53
+Open Elective-II | 202060621 | Multimedia Systems and Applications | 3 | 3 | 100/35
+Open Elective-II | 202060622 | Soft Computing Techniques | 2 | 2 | 3 | 150/53
+Open Elective-II | 202070621 | Food Nutrition and Health | 3 | 3 | 100/35
+Open Elective-II | 202070622 | Fundamentals of Food Preservation | 3 | 3 | 100/35
+Open Elective-II | 202090621 | Robotics for Engineers | 2 | 2 | 3 | 150/53
+Open Elective-II | 202090622 | Supply Chain Management | 3 | 3 | 100/35
+Semester Total: | 60 | 30 | 75 | ΓÇö | ΓÇö
+
+=== Table 6 (14 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Mandatory Course | 202000701 | Summer Training | 2 | 100/35
+Professional Elective Course -IV | 202046703 | Blockchain | 3 | 2 | 4 | 150/53
+Professional Core Course - XIV | 202046707 | Data Science and Visualization | 3 | 2 | 4 | 150/53
+Professional Core Course - XV | 202046710 | Introduction to Cloud Computing | 3 | 2 | 4 | 150/53
+Professional Elective Course ΓÇôIII | 202046711 | Language Processors | 3 | 2 | 4 | 150/53
+Professional Core Course - XVI | 202046712 | Mobile Application Development | 3 | 2 | 4 | 150/53
+Professional Elective Course -IV | 202046715 | UI/UX Design | 3 | 2 | 4 | 150/53
+Professional Elective Course ΓÇôIII | 202047801 | Advanced Software Engineering | 3 | 2 | 4 | 150/53
+Professional Elective Course ΓÇôIII | 202047803 | Big Data Analytics | 3 | 2 | 4 | 150/53
+Professional Elective Course -IV | 202047804 | Deep Learning and Applications | 3 | 2 | 4 | 150/53
+Professional Elective Course ΓÇôIII | 202047808 | Management of IT Infrastructure | 3 | 2 | 4 | 150/53
+Semester Total: | 30 | 20 | 42 | ΓÇö | ΓÇö
+
+=== Table 7 (11 rows) ===
+Course Group | Course Code | Course Title | Contact Hours per Week | CourseCredits | Grand TotalMax. / Passing | PDF
+Lecture | Tutorial | Practical
+Internship | 202000801 | Industrial Internship | 32 | 16 | 300/105
+Professional Elective Course -V | 202047802 | Augmented Reality and Virtual Reality | 3 | 2 | 4 | 150/53
+Professional Elective Course -V | 202047805 | Geographical Information Systems | 3 | 2 | 4 | 150/53
+Professional Elective Course -V | 202047806 | High Performance Computing | 3 | 2 | 4 | 150/53
+Professional Elective Course-VI | 202047807 | Introduction to Software Defined Networking | 3 | 2 | 4 | 150/53
+Professional Elective Course-VI | 202047809 | Natural Language Processing | 3 | 2 | 4 | 150/53
+Professional Elective Course-VI | 202047810 | Service Oriented Computing | 3 | 2 | 4 | 150/53
+Industrial Project Training/Project | 202080801 | Industry/User Defined Project (IDP/UDP) | 16 | 8 | 150/53
+Semester Total: | 18 | 60 | 48 | ΓÇö | ΓÇö
+
+=== Syllabus Links ===
+ADIT_Central_Committee => ../assets/pdf/ADIT Central committee 2025-26.pdf
+ => ../assets/pdf/syllabus/202000104_Calculus.pdf
+ => ../assets/pdf/syllabus/202000110_Computer Programming with C.pdf
+ => ../assets/pdf/syllabus/202001203_Basics of Electrical and Electronics Engineering.pdf
+ => ../assets/pdf/syllabus/202001206_Constitution of India.pdf
+ => ../assets/pdf/syllabus/202001209_Engineering Workshop.pdf
+ => ../assets/pdf/syllabus/202001215_Professional Communication.pdf
+ => ../assets/pdf/syllabus/202000211_Linear Algebra, Vector Calculus and ODE.pdf
+ => ../assets/pdf/syllabus/202000212_Object Oriented Programming.pdf
+ => ../assets/pdf/syllabus/202001202_Basic Mechanical Engineering.pdf
+ => ../assets/pdf/syllabus/202001207_Energy and Environment Science.pdf
+ => ../assets/pdf/syllabus/202001208_Engineering Graphics.pdf
+ => ../assets/pdf/syllabus/202001213_Physics.pdf
+ => ../assets/pdf/syllabus/900009902_Painting.pdf
+ => ../assets/pdf/syllabus/900009903_Photography.pdf
+ => ../assets/pdf/syllabus/900009904_Media and Graphics.pdf
+ => ../assets/pdf/syllabus/900009905_Music.pdf
+ => ../assets/pdf/syllabus/900009906_Dramatics.pdf
+ => ../assets/pdf/syllabus/900009907_Contemporary Dance.pdf
+ => ../assets/pdf/syllabus/202000303_Probability - Statistics and Numerical Methods.pdf
+ => ../assets/pdf/syllabus/202003402_Fundamentals of Economics and Business Management.pdf
+ => ../assets/pdf/syllabus/202003403_Indian Ethos and Value Education.pdf
+ => ../assets/pdf/syllabus/202040301_Data Structures.pdf
+ => ../assets/pdf/syllabus/202040302_Database Management Systems.pdf
+ => ../assets/pdf/syllabus/202040303_Digital Fundamentals.pdf
+ => ../assets/pdf/syllabus/900009901_Creativity, Problem Solving and Innovation.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM IV_PDF\202003404_Technical Writing and Soft Skills.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM IV_PDF\202003405_Entrepreneur Skills.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM IV_PDF\202040401_Computer Organization and Architecture.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM IV_PDF\202040402_Operating Systems.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM IV_PDF\202040404_Seminar.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM IV_PDF\202044501_Computer Networks.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM IV_PDF\202044502_Programming with Java.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202005601_Fuzzy Logic with Engineering Applications.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202005602_Introduction To Numerical Methods in Differential Equations.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202005603_Probability Theory with Applications.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202020521_Sustainability Engineering.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202030521_Disaster Management.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202030522_Industrial Safety and Health Management.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202044503_Artificial Intelligence.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202044504_Programming with Python.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202044505_Web Development.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202045601_Design and Analysis of Algorithm.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202045602_Software Engineering.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202045604_.NET Technology.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202045605_Advance Java Programming.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202045607_Cyber Security.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202050521_Energy Conservation and Management.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202050522_Energy Systems.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202060521_Principles of Electronics Communication.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202060522_Sensors and Automation.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202070521_Fundamentals of Food Safety and Quality.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202070522_Principles of Food Engineering.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202090521_Non Conventional Energy Sources.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM V_PDF\202090522_Project Management.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202005601_Fuzzy Logic with Engineering Applications.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202005602_Introduction To Numerical Methods in Differential Equations.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202005603_Probability Theory with Applications.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202020621_Smart Materials.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202020622_Waste to Energy.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202030621_Infrastructure Utilities.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202030622_Smart Cities Planning and Management.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202040601_Mini Project.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202045609_Machine Learning.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202046701_Advanced Web Development.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202046705_Computer Vision and Image Processing.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202046706_Data Mining and Business Intelligence.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202046708_Information and Network Security.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202046709_Internet of Things.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202046713_Software Project Management.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202050621_Electrical Power Utilization.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202050622_Industrial Automation.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202060621_Multimedia Systems and Applications.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202060622_Soft Computing Techniques.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202070621_Food Nutrition and Health.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202070622_Fundamentals of Food Preservation.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202090621_Robotics for Engineers.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VI_PDF\202090622_Supply Chain Management.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202000701_Summer Training.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202046703_Blockchain.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202046707_Data Science and Visualization.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202046710_Introduction to Cloud Computing.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202046711_Language Processors.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202046712_Mobile Application Development.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202046715_UI-UX Design.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202047801_Advanced Software Engineering.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202047803_Big Data Analytics.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202047804_Deep Learning and Applications.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VII_PDF\202047808_Management of IT Infrastructure.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202000801_Industrial Internship.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202047802_Augmented Reality and Virtual Reality.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202047805_Geographical Information Systems.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202047806_High Performance Computing.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202047807_Introduction to Software Defined Networking.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202047809_Natural Language Processing.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202047810_Service Oriented Computing.pdf
+ => ../assets/pdf/syllabus/IT\InfoTech._2022-23\InfoTech._2022-23_SEM VIII_PDF\202080801_Industry-User Defined Project (UDP-IDP).pdf
