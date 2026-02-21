@@ -10,8 +10,8 @@ $id = intval($_GET['id'] ?? 0);
 $r = getResponseDetails($pdo, $id);
 
 if (!$r) {
-    setFlash('error', 'Response not found.');
-    redirect('responses.php');
+    setFlash('danger', 'Response not found.');
+    redirect(APP_URL . '/admin/responses.php');
 }
 
 require_once __DIR__ . '/header.php';
@@ -20,7 +20,7 @@ require_once __DIR__ . '/header.php';
 <div class="space-y-6">
     <!-- Header with Print -->
     <div class="flex items-center justify-between mb-2">
-        <a href="responses.php" class="text-indigo-600 hover:text-indigo-800 text-sm font-bold flex items-center gap-2 print:hidden">
+        <a href="<?= APP_URL ?>/admin/responses.php" class="text-indigo-600 hover:text-indigo-800 text-sm font-bold flex items-center gap-2 print:hidden">
             <i class="fas fa-arrow-left"></i> Back to Responses
         </a>
         <button onclick="window.print()" class="px-4 py-2 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm font-bold hover:bg-gray-50 transition shadow-sm print:hidden">

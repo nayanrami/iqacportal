@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - <?= APP_NAME ?></title>
+    <title>Portal Login - <?= APP_NAME ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
     <link rel="stylesheet" href="assets/css/style.css">
@@ -107,9 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
 
             <div class="mt-6 text-center">
-                <a href="<?= APP_URL ?>" class="text-xs text-gray-400 hover:text-indigo-500 transition">
-                    <i class="fas fa-arrow-left mr-1"></i> Back to Feedback Portal
-                </a>
+                <p class="text-xs text-gray-400">
+                    <i class="fas fa-shield-alt mr-1"></i> Use your Admin or Student credentials to sign in
+                </p>
             </div>
         </div>
     </div>

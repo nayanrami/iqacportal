@@ -48,6 +48,7 @@ try {
         `username` VARCHAR(50) NOT NULL UNIQUE,
         `password` VARCHAR(255) NOT NULL,
         `full_name` VARCHAR(100) DEFAULT 'IQAC Coordinator',
+        `department_id` INT DEFAULT NULL,
         `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB");
 
@@ -208,6 +209,12 @@ try {
     }
     if (!in_array('credits', $cCols)) {
         $pdo->exec("ALTER TABLE courses ADD COLUMN `credits` INT DEFAULT NULL AFTER `course_type`");
+    }
+
+    // Migrate admins table
+    $adminCols = array_column($pdo->query("SHOW COLUMNS FROM admins")->fetchAll(), 'Field');
+    if (!in_array('department_id', $adminCols)) {
+        $pdo->exec("ALTER TABLE admins ADD COLUMN `department_id` INT DEFAULT NULL AFTER `full_name`");
     }
 
     // Insert default admin if not exists

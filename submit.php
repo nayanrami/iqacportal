@@ -120,7 +120,7 @@ $colors = $formColors[$formType] ?? $formColors['general'];
     <title><?= sanitize($form['title']) ?> - <?= APP_NAME ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="font-sans min-h-screen">
@@ -217,17 +217,17 @@ $colors = $formColors[$formType] ?? $formColors['general'];
         <form method="POST" id="feedback-form">
             <!-- Student Info (optional) -->
             <div class="glass-card p-6 mb-6 animate-slide-down" style="animation-delay:200ms">
-                <h3 class="text-sm font-bold text-gray-600 mb-4"><i class="fas fa-user text-gray-400 mr-2"></i>Student Information (Optional)</h3>
+                <h3 class="text-sm font-bold text-gray-600 mb-4"><i class="fas fa-user text-gray-400 mr-2"></i>Student Information</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-medium text-gray-500 mb-1">Full Name</label>
-                        <input type="text" name="student_name" placeholder="Enter your name"
-                               class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 outline-none transition">
+                        <input type="text" name="student_name" value="<?= sanitize($_SESSION['student_name'] ?? '') ?>" readonly
+                               class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-lg text-sm text-gray-700 cursor-not-allowed">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-500 mb-1">Enrollment / Roll Number</label>
-                        <input type="text" name="student_roll" placeholder="e.g. 22IT001"
-                               class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 outline-none transition">
+                        <input type="text" name="student_roll" value="<?= sanitize($_SESSION['student_enrollment'] ?? '') ?>" readonly
+                               class="w-full px-4 py-2.5 bg-gray-100 border border-gray-200 rounded-lg text-sm text-gray-700 cursor-not-allowed">
                     </div>
                 </div>
             </div>

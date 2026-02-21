@@ -428,3 +428,94 @@ function getFormTypeIcon($type) {
     ];
     return $icons[$type] ?? 'fa-clipboard-list';
 }
+
+// ── Semester-wise feedback completion stats ──
+function getSemesterWiseStats($pdo, $deptId = null) {
+    $where = $deptId ? "AND ff.department_id = ?" : "";
+    $params = $deptId ? [$deptId] : [];
+    
+    $sql = "
+        SELECT 
+            COALESCE(ff.semester, c.semester, 0) as semester,
+            COUNT(DISTINCT ff.id) as total_forms,
+            COUNT(DISTINCT r.id) as total_responses,
+            COUNT(DISTINCT r.student_id) as unique_students,
+            COUNT(DISTINCT s.id) as total_students_in_sem,
+            ROUND(AVG(ra.score), 1) as avg_score
+        FROM feedback_forms ff
+        LEFT JOIN courses c ON c.id = ff.course_id
+        LEFT JOIN responses r ON r.feedback_form_id = ff.id
+        LEFT JOIN response_answers ra ON ra.response_id = r.id
+        LEFT JOIN students s ON s.department_id = ff.department_id AND s.semester >= COALESCE(ff.semester, c.semester, 0)
+        WHERE ff.is_active = 1 $where
+        GROUP BY COALESCE(ff.semester, c.semester, 0)
+        ORDER BY semester ASC
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
+}
+
+// ── Student completion tracking ──
+function getStudentCompletionStatus($pdo, $deptId = null, $semFilter = null) {
+    $where = "WHERE 1=1";
+    $params = [];
+    if ($deptId) { $where .= " AND s.department_id = ?"; $params[] = $deptId; }
+    if ($semFilter) { $where .= " AND s.semester = ?"; $params[] = $semFilter; }
+    
+    $sql = "
+        SELECT 
+            s.id, s.enrollment_no, s.name, s.semester, d.name as dept_name,
+            (SELECT COUNT(DISTINCT ff2.id) 
+             FROM feedback_forms ff2 
+             LEFT JOIN courses c2 ON c2.id = ff2.course_id
+             WHERE ff2.department_id = s.department_id 
+             AND ff2.is_active = 1
+             AND (COALESCE(ff2.semester, c2.semester) IS NULL OR COALESCE(ff2.semester, c2.semester) <= s.semester)
+            ) as total_forms,
+            (SELECT COUNT(DISTINCT r2.feedback_form_id) 
+             FROM responses r2 
+             JOIN feedback_forms ff3 ON ff3.id = r2.feedback_form_id
+             WHERE r2.student_id = s.id
+            ) as completed_forms
+        FROM students s
+        JOIN departments d ON d.id = s.department_id
+        $where
+        ORDER BY s.semester ASC, s.name ASC
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
+}
+
+// ── Subject-wise completion per semester ──
+function getSubjectWiseStats($pdo, $deptId = null, $semFilter = null) {
+    $where = "WHERE ff.is_active = 1";
+    $params = [];
+    if ($deptId) { $where .= " AND ff.department_id = ?"; $params[] = $deptId; }
+    if ($semFilter) { $where .= " AND COALESCE(ff.semester, c.semester) = ?"; $params[] = $semFilter; }
+    
+    $sql = "
+        SELECT 
+            ff.id as form_id, ff.title, ff.form_type,
+            COALESCE(c.name, 'N/A') as course_name,
+            COALESCE(c.code, '') as course_code,
+            COALESCE(ff.semester, c.semester, 0) as semester,
+            COUNT(DISTINCT r.id) as response_count,
+            (SELECT COUNT(*) FROM students st 
+             WHERE st.department_id = ff.department_id 
+             AND st.semester >= COALESCE(ff.semester, c.semester, 0)
+            ) as eligible_students,
+            ROUND(AVG(ra.score), 1) as avg_score
+        FROM feedback_forms ff
+        LEFT JOIN courses c ON c.id = ff.course_id
+        LEFT JOIN responses r ON r.feedback_form_id = ff.id
+        LEFT JOIN response_answers ra ON ra.response_id = r.id
+        $where
+        GROUP BY ff.id
+        ORDER BY semester ASC, course_name ASC
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
+}

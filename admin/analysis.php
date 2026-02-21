@@ -160,7 +160,7 @@ require_once __DIR__ . '/header.php';
             </div>
             <?php 
                 $poAvgTotal = 0; $poFound = 0;
-                foreach($naacReport['po_summary'] ?? [] as $ps) { if($ps['type'] === 'PO') { $poAvgTotal += $ps['avg_pct']; $poFound++; } }
+                foreach($poStats as $ps) { if($ps['type'] === 'PO') { $max = $ps['max_score'] ?: 5; $poAvgTotal += ($ps['avg_score'] / $max) * 100; $poFound++; } }
                 $poAvgDisplay = $poFound > 0 ? round($poAvgTotal / $poFound, 1) : 0;
             ?>
             <div class="text-2xl font-black text-gray-800"><?= $poAvgDisplay ?>%</div>
@@ -207,6 +207,9 @@ require_once __DIR__ . '/header.php';
                 <h3 class="font-bold text-gray-700">Course Outcome Attainment Detail</h3>
                 <p class="text-xs text-gray-400">Detailed subject-wise analysis for Sem/Year filtered cohorts</p>
             </div>
+            <a href="<?= APP_URL ?>/admin/co_analysis.php?dept=<?= $selectedDept ?>&sem=<?= $selectedSem ?>&year=<?= $selectedYear ?>" class="px-4 py-2 bg-indigo-50 text-indigo-600 border border-indigo-100 rounded-xl text-sm font-bold hover:bg-indigo-100 transition shadow-sm print:hidden">
+                <i class="fas fa-bullseye mr-2"></i>Detailed CO Analysis →
+            </a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">

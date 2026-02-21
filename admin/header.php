@@ -16,6 +16,21 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        function confirmDelete(url, name) {
+            if (confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)) {
+                window.location.href = url;
+            }
+        }
+    </script>
 </head>
 <body class="font-sans text-gray-800" style="background:linear-gradient(135deg,#f0f4ff 0%,#faf5ff 50%,#ecfdf5 100%);">
 
@@ -40,7 +55,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             ['courses.php', 'Courses', 'fa-book', 'blue'],
             ['departments.php', 'Departments', 'fa-building', 'emerald'],
             ['responses.php', 'Responses', 'fa-comments', 'amber'],
-            ['analysis.php', 'CO/PO Analysis', 'fa-chart-bar', 'rose'],
+            ['analysis.php', 'NAAC Analysis', 'fa-chart-bar', 'rose'],
+            ['co_analysis.php', 'CO Analysis', 'fa-bullseye', 'cyan'],
+            ['students.php', 'Students', 'fa-user-graduate', 'indigo'],
             ['seed_all.php', 'Seed Data', 'fa-database', 'violet'],
         ];
 
@@ -52,7 +69,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             
             $isActive = $currentPage === $item[0];
         ?>
-            <a href="<?= $item[0] ?>"
+            <a href="<?= APP_URL ?>/admin/<?= $item[0] ?>"
                class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
                       <?= $isActive
                           ? 'bg-gradient-to-r from-' . $item[3] . '-50 to-' . $item[3] . '-50/50 text-' . $item[3] . '-700 shadow-sm border border-' . $item[3] . '-100'

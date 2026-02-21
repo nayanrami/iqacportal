@@ -5,11 +5,19 @@
 require_once __DIR__ . '/functions.php';
 
 $formId = intval($_GET['form'] ?? 0);
+$responseId = intval($_GET['response'] ?? 0);
 $form = null;
 if ($formId) {
     $stmt = $pdo->prepare("SELECT ff.*, c.name as course_name, d.name as dept_name FROM feedback_forms ff LEFT JOIN courses c ON c.id = ff.course_id LEFT JOIN departments d ON d.id = ff.department_id WHERE ff.id = ?");
     $stmt->execute([$formId]);
     $form = $stmt->fetch();
+}
+// If no response ID in URL, look up the most recent one for this student+form
+if (!$responseId && $formId && isStudent()) {
+    $stmt = $pdo->prepare("SELECT id FROM responses WHERE feedback_form_id = ? AND student_id = ? ORDER BY submitted_at DESC LIMIT 1");
+    $stmt->execute([$formId, $_SESSION['student_id']]);
+    $row = $stmt->fetch();
+    if ($row) $responseId = $row['id'];
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +28,7 @@ if ($formId) {
     <title>Thank You - <?= APP_NAME ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="font-sans min-h-screen flex items-center justify-center">
@@ -50,9 +58,9 @@ if ($formId) {
             <a href="<?= APP_URL ?>" class="btn-primary">
                 <i class="fas fa-home"></i> Back to Forms
             </a>
-            <?php if ($formId): ?>
-                <a href="submit.php?id=<?= $formId ?>" class="px-6 py-2.5 border-2 border-gray-200 rounded-lg text-sm font-semibold text-gray-500 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50 transition flex items-center gap-2">
-                    <i class="fas fa-redo"></i> Submit Another Response
+            <?php if ($responseId): ?>
+                <a href="<?= APP_URL ?>/download_feedback.php?id=<?= $responseId ?>" class="px-6 py-2.5 border-2 border-indigo-200 rounded-lg text-sm font-semibold text-indigo-600 hover:border-indigo-400 hover:bg-indigo-50 transition flex items-center gap-2">
+                    <i class="fas fa-download"></i> Download PDF
                 </a>
             <?php endif; ?>
         </div>

@@ -4,7 +4,7 @@
  * Run this from admin panel to populate all data
  */
 require_once __DIR__ . '/../functions.php';
-requireLogin();
+requireAdmin();
 
 $messages = [];
 
