@@ -4,7 +4,7 @@
  */
 $pageTitle = 'Courses';
 require_once __DIR__ . '/../functions.php';
-requireLogin();
+requireAdmin();
 
 $isDeptAdmin = isset($_SESSION['admin_dept_id']) && $_SESSION['admin_dept_id'] !== null;
 $deptId = $isDeptAdmin ? intval($_SESSION['admin_dept_id']) : null;

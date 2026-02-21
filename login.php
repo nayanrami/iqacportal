@@ -4,12 +4,19 @@
  */
 require_once __DIR__ . '/functions.php';
 
-if (isLoggedIn()) { redirect(APP_URL . '/admin/'); }
+if (isLoggedIn()) { 
+    if (isset($_SESSION['admin_id'])) {
+        redirect(APP_URL . '/admin/');
+    } else {
+        redirect(APP_URL . '/');
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
 
+    // Check Admin Table
     $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
@@ -22,7 +29,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         setFlash('success', 'Welcome back, ' . $user['full_name'] . '!');
         redirect(APP_URL . '/admin/');
     } else {
-        setFlash('danger', 'Invalid username or password.');
+        // Check Student Table (Enrollment No)
+        $stmt = $pdo->prepare("SELECT * FROM students WHERE enrollment_no = ?");
+        $stmt->execute([$username]);
+        $student = $stmt->fetch();
+
+        if ($student && password_verify($password, $student['password'])) {
+            $_SESSION['student_id'] = $student['id'];
+            $_SESSION['student_name'] = $student['name'];
+            $_SESSION['student_enrollment'] = $student['enrollment_no'];
+            $_SESSION['student_dept_id'] = $student['department_id'];
+            $_SESSION['student_semester'] = $student['semester'];
+
+            setFlash('success', 'Welcome back, ' . $student['name'] . '!');
+            redirect(APP_URL . '/');
+        } else {
+            setFlash('danger', 'Invalid enrollment number or password.');
+        }
     }
 }
 ?>
@@ -47,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-xl shadow-indigo-500/20 mx-auto mb-4">
                     <i class="fas fa-shield-alt"></i>
                 </div>
-                <h2 class="text-2xl font-black gradient-text mb-1">Admin Login</h2>
-                <p class="text-sm text-gray-400"><?= APP_NAME ?> — <?= APP_INSTITUTE ?></p>
+                <h2 class="text-2xl font-black gradient-text mb-1">Portal Login</h2>
+                <p class="text-sm text-gray-400"><?= APP_NAME ?> — Institutional Quality Assurance</p>
             </div>
 
             <?php if ($flash = getFlash()): ?>
@@ -60,12 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <form method="POST" class="space-y-5">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Username</label>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Username / Enrollment No</label>
                     <div class="relative">
                         <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm"></i>
                         <input type="text" name="username" required autofocus
                                class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 transition"
-                               placeholder="Enter username">
+                               placeholder="Enter Username or Enrollment No">
                     </div>
                 </div>
                 <div>

@@ -7,13 +7,28 @@
 require_once __DIR__ . '/config.php';
 
 function isLoggedIn() {
+    return isset($_SESSION['admin_id']) || isset($_SESSION['student_id']);
+}
+
+function isAdmin() {
     return isset($_SESSION['admin_id']);
 }
 
-function requireLogin() {
-    if (!isLoggedIn()) {
-        header('Location: ' . APP_URL . '/login.php');
-        exit;
+function isStudent() {
+    return isset($_SESSION['student_id']);
+}
+
+function requireAdmin() {
+    if (!isAdmin()) {
+        setFlash('danger', 'Access denied. Administrative login required.');
+        redirect(APP_URL . '/login.php');
+    }
+}
+
+function requireStudent() {
+    if (!isStudent()) {
+        setFlash('danger', 'Please log in to access the portal.');
+        redirect(APP_URL . '/login.php');
     }
 }
 

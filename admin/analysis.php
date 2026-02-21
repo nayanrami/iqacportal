@@ -5,7 +5,7 @@
  */
 $pageTitle = 'NAAC Detailed Analysis';
 require_once __DIR__ . '/../functions.php';
-requireLogin();
+requireAdmin();
 
 // Filters
 $isDeptAdmin = isset($_SESSION['admin_dept_id']) && $_SESSION['admin_dept_id'] !== null;

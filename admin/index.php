@@ -4,7 +4,7 @@
  */
 $pageTitle = 'Dashboard';
 require_once __DIR__ . '/../functions.php';
-requireLogin();
+requireAdmin();
 require_once __DIR__ . '/header.php';
 
 $deptId = $_SESSION['admin_dept_id'] ?? null;

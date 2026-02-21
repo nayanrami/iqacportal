@@ -124,15 +124,29 @@ try {
         FOREIGN KEY (`po_id`) REFERENCES `program_outcomes`(`id`) ON DELETE SET NULL
     ) ENGINE=InnoDB");
 
+    // ── Student tables ──
+    $pdo->exec("CREATE TABLE IF NOT EXISTS `students` (
+        `id` INT AUTO_INCREMENT PRIMARY KEY,
+        `enrollment_no` VARCHAR(50) NOT NULL UNIQUE,
+        `password` VARCHAR(255) NOT NULL,
+        `name` VARCHAR(100) NOT NULL,
+        `department_id` INT NOT NULL,
+        `semester` INT NOT NULL,
+        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (`department_id`) REFERENCES `departments`(`id`) ON DELETE CASCADE
+    ) ENGINE=InnoDB");
+
     // ── Response tables ──
     $pdo->exec("CREATE TABLE IF NOT EXISTS `responses` (
         `id` INT AUTO_INCREMENT PRIMARY KEY,
         `feedback_form_id` INT NOT NULL,
+        `student_id` INT DEFAULT NULL,
         `student_name` VARCHAR(100) DEFAULT NULL,
         `student_roll` VARCHAR(50) DEFAULT NULL,
         `submitted_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         `ip_address` VARCHAR(45) DEFAULT NULL,
-        FOREIGN KEY (`feedback_form_id`) REFERENCES `feedback_forms`(`id`) ON DELETE CASCADE
+        FOREIGN KEY (`feedback_form_id`) REFERENCES `feedback_forms`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`student_id`) REFERENCES `students`(`id`) ON DELETE SET NULL
     ) ENGINE=InnoDB");
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS `response_answers` (
@@ -158,6 +172,12 @@ try {
     }
     if (!in_array('form_type', $existingCols)) {
         $pdo->exec("ALTER TABLE feedback_forms ADD COLUMN `form_type` ENUM('co_attainment','exit_survey','dept_feedback','general') NOT NULL DEFAULT 'general' AFTER `title`");
+    }
+
+    $respCols = array_column($pdo->query("SHOW COLUMNS FROM responses")->fetchAll(), 'Field');
+    if (!in_array('student_id', $respCols)) {
+        $pdo->exec("ALTER TABLE responses ADD COLUMN `student_id` INT DEFAULT NULL AFTER `feedback_form_id` ");
+        $pdo->exec("ALTER TABLE responses ADD CONSTRAINT fk_resp_student FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE SET NULL");
     }
 
     $qCols = array_column($pdo->query("SHOW COLUMNS FROM questions")->fetchAll(), 'Field');

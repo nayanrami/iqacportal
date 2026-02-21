@@ -4,7 +4,7 @@
  */
 $pageTitle = 'Response Detail';
 require_once __DIR__ . '/../functions.php';
-requireLogin();
+requireAdmin();
 
 $id = intval($_GET['id'] ?? 0);
 $r = getResponseDetails($pdo, $id);

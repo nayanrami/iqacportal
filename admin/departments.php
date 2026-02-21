@@ -4,7 +4,7 @@
  */
 $pageTitle = 'Departments';
 require_once __DIR__ . '/../functions.php';
-requireLogin();
+requireAdmin();
 
 if (isset($_GET['delete'])) {
     $pdo->prepare("DELETE FROM departments WHERE id = ?")->execute([intval($_GET['delete'])]);

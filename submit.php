@@ -43,18 +43,38 @@ if (empty($questions)) {
     redirect(APP_URL);
 }
 
+// Force Student Login
+if (!isset($_SESSION['student_id'])) {
+    setFlash('danger', 'Please log in as a student to submit feedback.');
+    redirect(APP_URL . '/login.php');
+}
+
+$studentId = $_SESSION['student_id'];
+
+// Prevent Duplicate Submission
+$stmtCheck = $pdo->prepare("SELECT id FROM responses WHERE feedback_form_id = ? AND student_id = ?");
+$stmtCheck->execute([$formId, $studentId]);
+if ($stmtCheck->fetch()) {
+    setFlash('danger', 'You have already submitted feedback for this form.');
+    redirect(APP_URL);
+}
+
 // Handle submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $studentName = trim($_POST['student_name'] ?? '');
-    $studentRoll = trim($_POST['student_roll'] ?? '');
     $scores = $_POST['scores'] ?? [];
 
     if (!empty($scores)) {
         try {
             $pdo->beginTransaction();
 
-            $stmtR = $pdo->prepare("INSERT INTO responses (feedback_form_id, student_name, student_roll, ip_address) VALUES (?, ?, ?, ?)");
-            $stmtR->execute([$formId, $studentName ?: null, $studentRoll ?: null, $_SERVER['REMOTE_ADDR'] ?? null]);
+            $stmtR = $pdo->prepare("INSERT INTO responses (feedback_form_id, student_id, student_name, student_roll, ip_address) VALUES (?, ?, ?, ?, ?)");
+            $stmtR->execute([
+                $formId, 
+                $studentId, 
+                $_SESSION['student_name'], 
+                $_SESSION['student_enrollment'], 
+                $_SERVER['REMOTE_ADDR'] ?? null
+            ]);
             $responseId = $pdo->lastInsertId();
 
             $stmtA = $pdo->prepare("INSERT INTO response_answers (response_id, question_id, score) VALUES (?, ?, ?)");

@@ -4,7 +4,7 @@
  */
 $pageTitle = 'Feedback Forms';
 require_once __DIR__ . '/../functions.php';
-requireLogin();
+requireAdmin();
 
 $categories = [
     'Course Outcome Attainment', 'Program Exit Survey', 'Curriculum Feedback',
