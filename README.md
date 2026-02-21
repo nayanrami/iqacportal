@@ -1,6 +1,6 @@
 # IQAC Portal
 
-![Banner](file:///C:/Users/nayan/.gemini/antigravity/brain/de57a6b8-edbd-4d1a-929b-85e9776b2ee5/iqac_portal_banner.png)
+![Banner](assets/banner.svg)
 
 ## Overview
 **IQAC Portal** is a premium, multi-tenant auditing and feedback platform designed for institutional quality assurance. It simplifies the process of collecting student feedback, calculating NAAC (National Assessment and Accreditation Council) attainment levels, and generating detailed reports for Course Outcomes (CO) and Program Outcomes (PO).
@@ -40,7 +40,9 @@ Built with a modern, high-performance stack:
 - **Department Coordinators**: (Username: Dept Code, Password: Dept Code)
 
 ## Screenshots
-*(Screenshots to be added manually)*
+![Dashboard Mockup](assets/dashboard_mockup.svg)
+
+*(Note: These are conceptual designs. Real system screenshots can be captured from the portal.)*
 
 ## License
 Proprietary / Institutional Use
