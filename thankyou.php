@@ -2,7 +2,7 @@
 /**
  * Thank You Page - Post submission confirmation
  */
-require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/includes/functions.php';
 
 $formId = intval($_GET['form'] ?? 0);
 $responseId = intval($_GET['response'] ?? 0);

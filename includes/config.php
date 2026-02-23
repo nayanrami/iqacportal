@@ -15,12 +15,13 @@ define('DB_USER', 'root');
 define('DB_PASS', 'NEO007007');
 define('DB_CHARSET', 'utf8mb4');
 
-// App configuration
-define('APP_NAME', 'IQAC Portal');
-define('APP_INSTITUTE', 'IQAC Institute of Technology');
-define('APP_DEPT', 'Department of Technical Education');
-define('APP_URL', '/feedback');
-define('APP_VERSION', '2.0.0');
+// App configuration (Defaults)
+$defaultSettings = [
+    'app_name' => 'IQAC Portal',
+    'app_institute' => 'IQAC Institute of Technology',
+    'app_dept' => 'Department of Technical Education',
+    'app_url' => '/feedback'
+];
 
 // Database connection (PDO) — auto-creates DB & tables if not exists
 try {
@@ -42,6 +43,21 @@ try {
         ]
     );
 
+    // Load dynamic settings from DB
+    try {
+        $stmt = $pdo->query("SELECT setting_key, setting_value FROM portal_settings");
+        $dbSettings = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        $settings = array_merge($defaultSettings, $dbSettings);
+    } catch (Exception $e) {
+        $settings = $defaultSettings;
+    }
+
+    define('APP_NAME', $settings['app_name']);
+    define('APP_INSTITUTE', $settings['app_institute']);
+    define('APP_DEPT', $settings['app_dept']);
+    define('APP_URL', $settings['app_url']);
+    define('APP_VERSION', '2.0.0');
+
     // ── Core tables ──
     $pdo->exec("CREATE TABLE IF NOT EXISTS `admins` (
         `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,6 +65,7 @@ try {
         `password` VARCHAR(255) NOT NULL,
         `full_name` VARCHAR(100) DEFAULT 'IQAC Coordinator',
         `department_id` INT DEFAULT NULL,
+        `role` ENUM('superadmin', 'deptadmin', 'criterion_1', 'criterion_2', 'criterion_3', 'criterion_4', 'criterion_5', 'criterion_6', 'criterion_7') DEFAULT 'deptadmin',
         `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB");
 
@@ -133,6 +150,11 @@ try {
         `name` VARCHAR(100) NOT NULL,
         `department_id` INT NOT NULL,
         `semester` INT NOT NULL,
+        `division` VARCHAR(20) DEFAULT NULL,
+        `email` VARCHAR(100) DEFAULT NULL,
+        `mobile` VARCHAR(20) DEFAULT NULL,
+        `gender` VARCHAR(20) DEFAULT 'Male',
+        `category` VARCHAR(50) DEFAULT 'General',
         `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (`department_id`) REFERENCES `departments`(`id`) ON DELETE CASCADE
     ) ENGINE=InnoDB");
@@ -150,6 +172,33 @@ try {
         FOREIGN KEY (`student_id`) REFERENCES `students`(`id`) ON DELETE SET NULL
     ) ENGINE=InnoDB");
 
+    // ── Faculty tables ──
+    $pdo->exec("CREATE TABLE IF NOT EXISTS `faculties` (
+        `id` INT AUTO_INCREMENT PRIMARY KEY,
+        `name` VARCHAR(100) NOT NULL,
+        `email` VARCHAR(100) UNIQUE,
+        `phone` VARCHAR(20) DEFAULT NULL,
+        `designation` VARCHAR(100) DEFAULT NULL,
+        `experience` VARCHAR(50) DEFAULT NULL,
+        `specialization` TEXT DEFAULT NULL,
+        `department_id` INT NOT NULL,
+        `profile_image` VARCHAR(255) DEFAULT 'assets/img/default-avatar.png',
+        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (`department_id`) REFERENCES `departments`(`id`) ON DELETE CASCADE
+    ) ENGINE=InnoDB");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS `faculty_course_mapping` (
+        `id` INT AUTO_INCREMENT PRIMARY KEY,
+        `faculty_id` INT NOT NULL,
+        `course_id` INT NOT NULL,
+        `academic_year` VARCHAR(20) NOT NULL,
+        `semester` INT DEFAULT NULL,
+        `role` VARCHAR(50) DEFAULT 'Primary',
+        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (`faculty_id`) REFERENCES `faculties`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON DELETE CASCADE
+    ) ENGINE=InnoDB");
+
     $pdo->exec("CREATE TABLE IF NOT EXISTS `response_answers` (
         `id` INT AUTO_INCREMENT PRIMARY KEY,
         `response_id` INT NOT NULL,
@@ -164,6 +213,13 @@ try {
     $existingCols = array_column($pdo->query("SHOW COLUMNS FROM feedback_forms")->fetchAll(), 'Field');
     if (!in_array('category', $existingCols)) {
         $pdo->exec("ALTER TABLE feedback_forms ADD COLUMN `category` VARCHAR(100) DEFAULT 'General' AFTER `title`");
+    }
+
+    $adminCols = array_column($pdo->query("SHOW COLUMNS FROM admins")->fetchAll(), 'Field');
+    if (!in_array('role', $adminCols)) {
+        $pdo->exec("ALTER TABLE admins ADD COLUMN `role` ENUM('superadmin', 'deptadmin', 'criterion_1', 'criterion_2', 'criterion_3', 'criterion_4', 'criterion_5', 'criterion_6', 'criterion_7') DEFAULT 'deptadmin' AFTER `department_id` ");
+        // Set existing admin to superadmin
+        $pdo->exec("UPDATE admins SET role = 'superadmin' WHERE username = 'iqac'");
     }
     if (!in_array('department_id', $existingCols)) {
         $pdo->exec("ALTER TABLE feedback_forms ADD COLUMN `department_id` INT DEFAULT NULL AFTER `category`");
@@ -211,10 +267,22 @@ try {
         $pdo->exec("ALTER TABLE courses ADD COLUMN `credits` INT DEFAULT NULL AFTER `course_type`");
     }
 
-    // Migrate admins table
-    $adminCols = array_column($pdo->query("SHOW COLUMNS FROM admins")->fetchAll(), 'Field');
-    if (!in_array('department_id', $adminCols)) {
-        $pdo->exec("ALTER TABLE admins ADD COLUMN `department_id` INT DEFAULT NULL AFTER `full_name`");
+    // Migrate students table
+    $studentCols = array_column($pdo->query("SHOW COLUMNS FROM students")->fetchAll(), 'Field');
+    if (!in_array('division', $studentCols)) {
+        $pdo->exec("ALTER TABLE students ADD COLUMN `division` VARCHAR(20) DEFAULT NULL AFTER `semester`");
+    }
+    if (!in_array('email', $studentCols)) {
+        $pdo->exec("ALTER TABLE students ADD COLUMN `email` VARCHAR(100) DEFAULT NULL AFTER `division` ");
+    }
+    if (!in_array('mobile', $studentCols)) {
+        $pdo->exec("ALTER TABLE students ADD COLUMN `mobile` VARCHAR(20) DEFAULT NULL AFTER `email`");
+    }
+    if (!in_array('gender', $studentCols)) {
+        $pdo->exec("ALTER TABLE students ADD COLUMN `gender` VARCHAR(20) DEFAULT 'Male' AFTER `mobile`");
+    }
+    if (!in_array('category', $studentCols)) {
+        $pdo->exec("ALTER TABLE students ADD COLUMN `category` VARCHAR(50) DEFAULT 'General' AFTER `gender`");
     }
 
     // Insert default admin if not exists

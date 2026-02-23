@@ -4,7 +4,7 @@
  * Three sections: CO Attainment | Exit Survey | Department Feedback
  * + Available Feedback Forms listing
  */
-require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/includes/functions.php';
 
 // Force Student Login (Admins are redirected out of here in login.php)
 if (!isset($_SESSION['student_id'])) {

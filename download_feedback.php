@@ -3,7 +3,7 @@
  * Download Feedback as PDF - Printable feedback report
  * Shows student info, department, college, all answers, and signature space
  */
-require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/includes/functions.php';
 
 if (!isStudent()) {
     setFlash('danger', 'Please login to download your feedback.');

@@ -2,7 +2,7 @@
 /**
  * Migration - Add Department Support to Feedback Forms
  */
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 try {
     // 1. Add department_id column to feedback_forms table if not exists

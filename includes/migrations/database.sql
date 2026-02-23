@@ -95,3 +95,54 @@ INSERT INTO `courses` (`department_id`, `name`, `code`, `semester`, `year`) VALU
 (2, 'Web Technologies', 'IT302', 3, '2025-26'),
 (3, 'Digital Electronics', 'EC201', 2, '2025-26'),
 (4, 'Thermodynamics', 'ME301', 3, '2025-26');
+
+-- Research Categories table
+CREATE TABLE IF NOT EXISTS `research_categories` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `description` TEXT,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Research Records table
+CREATE TABLE IF NOT EXISTS `research_records` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `department_id` INT NOT NULL,
+    `category_id` INT NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
+    `faculty_name` VARCHAR(150),
+    `publication_date` DATE,
+    `journal_conference` VARCHAR(255),
+    `impact_factor` DECIMAL(10,3) DEFAULT 0.000,
+    `funding_amount` DECIMAL(15,2) DEFAULT 0.00,
+    `status` ENUM('proposed', 'ongoing', 'completed', 'published', 'patented') DEFAULT 'proposed',
+    `description` TEXT,
+    `link` VARCHAR(255),
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`department_id`) REFERENCES `departments`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`category_id`) REFERENCES `research_categories`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- Insert default research categories
+INSERT IGNORE INTO `research_categories` (`name`, `description`) VALUES 
+('Journal Publication', 'Research articles published in peer-reviewed journals'),
+('Conference Paper', 'Papers presented and published in academic conferences'),
+('Research Grant', 'Research funding received from government or private agencies'),
+('Patent', 'Intellectual property rights and patents filed or granted'),
+('Book Chapter', 'Chapters contributed to academic or professional books'),
+('Ongoing Project', 'Research projects currently in progress');
+
+-- Portal Settings table
+CREATE TABLE IF NOT EXISTS `portal_settings` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `setting_key` VARCHAR(50) NOT NULL UNIQUE,
+    `setting_value` TEXT,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Insert default settings
+INSERT IGNORE INTO `portal_settings` (`setting_key`, `setting_value`) VALUES 
+('app_name', 'IQAC Portal'),
+('app_institute', 'IQAC Institute of Technology'),
+('app_dept', 'Department of Technical Education'),
+('app_url', '/feedback');

@@ -2,12 +2,16 @@
 /**
  * Migration - Add Department Support to Admins
  */
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 try {
     // 1. Add department_id column to admins table if not exists
-    $pdo->exec("ALTER TABLE admins ADD COLUMN department_id INT DEFAULT NULL AFTER full_name");
-    $pdo->exec("ALTER TABLE admins ADD CONSTRAINT fk_admin_dept FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE");
+    try {
+        $pdo->exec("ALTER TABLE admins ADD COLUMN department_id INT DEFAULT NULL AFTER full_name");
+        $pdo->exec("ALTER TABLE admins ADD CONSTRAINT fk_admin_dept FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE");
+    } catch (Exception $e) {
+        // Column probably exists, continue
+    }
     
     // 2. Update 'IT' department code to 'BTECHIT' if requested
     $pdo->prepare("UPDATE departments SET code = 'BTECHIT' WHERE code = 'IT'")->execute();

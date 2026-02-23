@@ -3,7 +3,7 @@
  * Admin - Individual Response Detail
  */
 $pageTitle = 'Response Detail';
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireAdmin();
 
 $id = intval($_GET['id'] ?? 0);

@@ -3,7 +3,7 @@
  * Admin Dashboard - Light Theme with CO/PO Stats
  */
 $pageTitle = 'Dashboard';
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireAdmin();
 require_once __DIR__ . '/header.php';
 
@@ -20,304 +20,173 @@ $semFilter = isset($_GET['sem']) ? intval($_GET['sem']) : null;
 $subjectStats = getSubjectWiseStats($pdo, $deptId, $semFilter);
 $studentStatus = getStudentCompletionStatus($pdo, $deptId, $semFilter);
 $incompleteStudents = array_filter($studentStatus, fn($s) => $s['completed_forms'] < $s['total_forms']);
+// Research Summary
+$resRecords = $pdo->query("SELECT r.id, c.name as cat_name FROM research_records r JOIN research_categories c ON c.id = r.category_id WHERE 1=1" . ($deptId ? " AND r.department_id = $deptId" : ""))->fetchAll();
+$pubCount = count(array_filter($resRecords, fn($r) => strpos($r['cat_name'], 'Publication') !== false));
+$grantCount = count(array_filter($resRecords, fn($r) => strpos($r['cat_name'], 'Grant') !== false));
+
+// Aggregate completion for summary
+$overallSatisfaction = $naac['satisfaction_pct'];
+$totalEligible = 0; $totalResponded = 0;
+foreach($semesterStats as $s) {
+    $totalEligible += $s['total_students_in_sem'];
+    $totalResponded += $s['unique_students'];
+}
+$completionPct = $totalEligible > 0 ? round(($totalResponded / $totalEligible) * 100) : 0;
 ?>
 
-<!-- Stats Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
-    <?php
-    $statCards = [
-        ['Total Forms', $stats['total_forms'], 'fa-clipboard-list', 'from-indigo-500 to-blue-600'],
-        ['Active Forms', $stats['active_forms'], 'fa-check-circle', 'from-emerald-500 to-green-600'],
-        ['Total Responses', $stats['total_responses'], 'fa-comments', 'from-amber-500 to-orange-600'],
-        ['Avg Score', $stats['avg_score'], 'fa-star', 'from-rose-500 to-pink-600'],
-    ];
-    foreach ($statCards as $i => $sc): ?>
-        <div class="stat-card hover:-translate-y-1 hover:shadow-xl transition-all duration-300 animate-slide-down" style="animation-delay:<?= $i * 80 ?>ms">
-            <div class="flex items-center justify-between mb-3">
-                <div class="text-sm font-semibold text-gray-400"><?= $sc[0] ?></div>
-                <div class="w-10 h-10 bg-gradient-to-br <?= $sc[3] ?> rounded-xl flex items-center justify-center text-white shadow-lg">
-                    <i class="fas <?= $sc[2] ?>"></i>
-                </div>
+<!-- At-a-Glance High Level Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="glass-card p-6 border-l-4 border-indigo-500 bg-white">
+        <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Feedback Volume</div>
+        <div class="flex items-end justify-between">
+            <div class="text-3xl font-black text-gray-800"><?= $stats['total_responses'] ?></div>
+            <div class="text-[10px] text-indigo-500 font-bold bg-indigo-50 px-2 py-0.5 rounded tracking-tighter">
+                <i class="fas fa-plus mr-1"></i> Responses
             </div>
-            <div class="text-3xl font-extrabold text-gray-800"><?= $sc[1] ?></div>
         </div>
-    <?php endforeach; ?>
-</div>
-
-<!-- Form Type Breakdown -->
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
-    <?php
-    $typeCards = [
-        ['CO Attainment', $stats['co_forms'], 'fa-bullseye', 'violet', 'Course Outcome based'],
-        ['Exit Survey', $stats['exit_forms'], 'fa-door-open', 'amber', 'PO-wise Exit Survey'],
-        ['Dept Feedback', $stats['dept_forms'], 'fa-building', 'emerald', 'Department level forms'],
-    ];
-    foreach ($typeCards as $tc): ?>
-        <div class="stat-card text-center">
-            <div class="w-12 h-12 bg-<?= $tc[3] ?>-100 rounded-2xl flex items-center justify-center text-<?= $tc[3] ?>-600 text-xl mx-auto mb-3">
-                <i class="fas <?= $tc[2] ?>"></i>
+    </div>
+    <div class="glass-card p-6 border-l-4 border-purple-500 bg-white">
+        <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Academic Performance</div>
+        <div class="flex items-end justify-between">
+            <div class="text-3xl font-black text-gray-800"><?= $stats['avg_score'] ?></div>
+            <div class="text-[10px] text-purple-500 font-bold bg-purple-50 px-2 py-0.5 rounded tracking-tighter uppercase">
+                Avg Rating
             </div>
-            <div class="text-3xl font-black text-gray-800"><?= $tc[1] ?></div>
-            <div class="text-sm font-bold text-gray-600 mt-1"><?= $tc[0] ?></div>
-            <div class="text-[10px] text-gray-400"><?= $tc[4] ?></div>
         </div>
-    <?php endforeach; ?>
+    </div>
+    <div class="glass-card p-6 border-l-4 border-emerald-500 bg-white">
+        <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Student Participation</div>
+        <div class="flex items-end justify-between">
+            <div class="text-3xl font-black text-gray-800"><?= $completionPct ?>%</div>
+            <div class="text-[10px] text-emerald-500 font-bold bg-emerald-50 px-2 py-0.5 rounded tracking-tighter">
+                Overall Sync
+            </div>
+        </div>
+    </div>
+    <div class="glass-card p-6 border-l-4 border-rose-500 bg-white">
+        <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">IQAC Satisfaction</div>
+        <div class="flex items-end justify-between">
+            <div class="text-3xl font-black text-gray-800"><?= $overallSatisfaction ?>%</div>
+            <div class="text-[10px] text-rose-500 font-bold bg-rose-50 px-2 py-0.5 rounded tracking-tighter uppercase">
+                NAAC Metric
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- NAAC Metrics -->
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
-    <div class="bg-white border border-gray-200 rounded-2xl p-6 text-center shadow-sm">
-        <div class="text-4xl font-black gradient-text"><?= $naac['overall_avg'] ?></div>
-        <div class="text-sm text-gray-400 mt-1">Overall Average</div>
-    </div>
-    <div class="bg-white border border-gray-200 rounded-2xl p-6 text-center shadow-sm">
-        <div class="text-4xl font-black text-emerald-600"><?= $naac['satisfaction_pct'] ?>%</div>
-        <div class="text-sm text-gray-400 mt-1">Satisfaction Rate</div>
-    </div>
-    <div class="bg-white border border-gray-200 rounded-2xl p-6 text-center shadow-sm">
-        <div class="text-4xl font-black text-blue-600"><?= $naac['forms_evaluated'] ?></div>
-        <div class="text-sm text-gray-400 mt-1">Forms Evaluated</div>
-    </div>
-</div>
+<!-- Navigation & Module Hub -->
+<div class="mb-8">
+    <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4"><i class="fas fa-th-large mr-2"></i> Management Modules</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        <!-- NAAC Portal Module - Visible to All -->
+        <a href="<?= APP_URL ?>/admin/naac_hub.php" class="hub-card group p-6 glass-card bg-indigo-600 border border-indigo-400 hover:border-indigo-300 transition-all duration-300 shadow-xl shadow-indigo-100/30">
+            <div class="w-12 h-12 bg-white/10 text-white rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-white group-hover:text-indigo-600 transition shadow-inner">
+                <i class="fas fa-award"></i>
+            </div>
+            <h4 class="font-black text-white mb-1">NAAC Portal</h4>
+            <p class="text-xs text-indigo-100 mb-4 leading-relaxed">Centralized Criterion Hub (1-7) & IQAC Documentation.</p>
+            <div class="flex items-center justify-between">
+                <span class="text-[10px] font-bold text-white/80 uppercase">Open Hub →</span>
+            </div>
+        </a>
 
-<!-- Semester Filter -->
-<div class="mb-6">
-    <form method="GET" class="flex items-center gap-3 flex-wrap">
-        <label class="text-sm font-bold text-gray-500"><i class="fas fa-filter mr-1"></i>Filter by Semester:</label>
-        <select name="sem" onchange="this.form.submit()" class="px-4 py-2 border border-gray-200 rounded-xl text-sm font-medium bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 outline-none">
-            <option value="">All Semesters</option>
-            <?php for ($i = 1; $i <= 8; $i++): ?>
-                <option value="<?= $i ?>" <?= $semFilter == $i ? 'selected' : '' ?>>Semester <?= $i ?></option>
-            <?php endfor; ?>
-        </select>
-        <?php if ($semFilter): ?>
-            <a href="<?= APP_URL ?>/admin/index.php" class="text-xs text-red-500 hover:underline font-semibold"><i class="fas fa-times mr-1"></i>Clear</a>
+        <?php if (in_array($role, ['superadmin', 'university', 'deptadmin', 'criterion_1'])): ?>
+        <!-- Compliance Module -->
+        <a href="<?= APP_URL ?>/admin/compliance.php" class="hub-card group p-6 glass-card bg-white border border-gray-100 hover:border-indigo-200 transition-all duration-300">
+            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition shadow-inner">
+                <i class="fas fa-clipboard-check"></i>
+            </div>
+            <h4 class="font-black text-gray-800 mb-1">Feedback Compliance</h4>
+            <div class="flex items-center justify-between mt-4">
+                <span class="text-[10px] font-bold text-indigo-500">View Detail →</span>
+                <span class="text-[10px] px-2 py-1 bg-indigo-50 text-indigo-500 rounded-lg font-black"><?= $stats['total_responses'] ?> Entries</span>
+            </div>
+        </a>
         <?php endif; ?>
-    </form>
-</div>
 
-<!-- Semester-wise Completion Stats -->
-<div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm mb-8">
-    <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-violet-50 to-purple-50">
-        <h3 class="font-bold text-sm text-gray-700"><i class="fas fa-layer-group text-violet-500 mr-2"></i>Semester-wise Feedback Progress</h3>
-    </div>
-    <div class="overflow-x-auto">
-        <table class="w-full">
-            <thead>
-                <tr class="bg-gray-50">
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Semester</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Forms</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Responses</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Students Responded</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Eligible Students</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Avg Score</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Completion</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                <?php if (empty($semesterStats)): ?>
-                    <tr><td colspan="7" class="px-4 py-8 text-center text-gray-400"><i class="fas fa-inbox text-2xl block mb-2"></i>No data</td></tr>
-                <?php else: foreach ($semesterStats as $ss): 
-                    $pct = $ss['total_students_in_sem'] > 0 ? round(($ss['unique_students'] / $ss['total_students_in_sem']) * 100) : 0;
-                ?>
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-4 py-3">
-                            <a href="?sem=<?= $ss['semester'] ?>" class="font-bold text-sm text-indigo-600 hover:underline">
-                                <i class="fas fa-layer-group mr-1"></i> Semester <?= $ss['semester'] ?: 'General' ?>
-                            </a>
-                        </td>
-                        <td class="px-4 py-3 text-center text-sm font-bold text-gray-700"><?= $ss['total_forms'] ?></td>
-                        <td class="px-4 py-3 text-center text-sm text-gray-600"><?= $ss['total_responses'] ?></td>
-                        <td class="px-4 py-3 text-center text-sm text-gray-600"><?= $ss['unique_students'] ?></td>
-                        <td class="px-4 py-3 text-center text-sm text-gray-600"><?= $ss['total_students_in_sem'] ?></td>
-                        <td class="px-4 py-3 text-center text-sm font-bold text-gray-700"><?= $ss['avg_score'] ?? '-' ?></td>
-                        <td class="px-4 py-3 text-center">
-                            <div class="flex items-center justify-center gap-2">
-                                <div class="w-20 h-2 bg-gray-100 rounded-full overflow-hidden">
-                                    <div class="h-full rounded-full <?= $pct >= 80 ? 'bg-emerald-500' : ($pct >= 50 ? 'bg-amber-500' : 'bg-red-400') ?>" style="width:<?= $pct ?>%"></div>
-                                </div>
-                                <span class="text-xs font-black <?= $pct >= 80 ? 'text-emerald-600' : ($pct >= 50 ? 'text-amber-600' : 'text-red-500') ?>"><?= $pct ?>%</span>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endforeach; endif; ?>
-            </tbody>
-        </table>
-    </div>
-</div>
+        <?php if (in_array($role, ['superadmin', 'university', 'deptadmin', 'criterion_2', 'criterion_5'])): ?>
+        <!-- Student Analysis Module -->
+        <a href="<?= APP_URL ?>/admin/student_analysis.php" class="hub-card group p-6 glass-card bg-white border border-gray-100 hover:border-indigo-200 transition-all duration-300">
+            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition shadow-inner">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <h4 class="font-black text-gray-800 mb-1">Student Wise Analysis</h4>
+            <div class="flex items-center justify-between mt-4">
+                <span class="text-[10px] font-bold text-indigo-500">View Attainment →</span>
+                <span class="text-[10px] px-2 py-1 bg-indigo-50 text-indigo-500 rounded-lg font-black"><?= $stats['total_students'] ?? 0 ?> Students</span>
+            </div>
+        </a>
+        <?php endif; ?>
 
-<!-- Subject-wise Completion Stats -->
-<div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm mb-8">
-    <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <h3 class="font-bold text-sm text-gray-700">
-            <i class="fas fa-book text-blue-500 mr-2"></i>Subject-wise Feedback Stats
-            <?php if ($semFilter): ?><span class="text-indigo-500"> — Semester <?= $semFilter ?></span><?php endif; ?>
-        </h3>
-    </div>
-    <div class="overflow-x-auto">
-        <table class="w-full">
-            <thead>
-                <tr class="bg-gray-50">
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Subject / Form</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Sem</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Type</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Responses</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Eligible</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Avg Score</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Status</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                <?php if (empty($subjectStats)): ?>
-                    <tr><td colspan="7" class="px-4 py-8 text-center text-gray-400"><i class="fas fa-inbox text-2xl block mb-2"></i>No forms found</td></tr>
-                <?php else: foreach ($subjectStats as $sub): 
-                    $subPct = $sub['eligible_students'] > 0 ? round(($sub['response_count'] / $sub['eligible_students']) * 100) : 0;
-                ?>
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-4 py-3">
-                            <div class="text-sm font-bold text-gray-700"><?= sanitize($sub['title']) ?></div>
-                            <?php if ($sub['course_code']): ?>
-                                <div class="text-[10px] text-gray-400 font-medium"><?= sanitize($sub['course_code']) ?> — <?= sanitize($sub['course_name']) ?></div>
-                            <?php endif; ?>
-                        </td>
-                        <td class="px-4 py-3 text-center"><span class="outcome-badge peo">Sem <?= $sub['semester'] ?: '-' ?></span></td>
-                        <td class="px-4 py-3 text-center"><span class="outcome-badge <?= $sub['form_type'] === 'co_attainment' ? 'co' : ($sub['form_type'] === 'exit_survey' ? 'po' : 'pso') ?>"><?= getFormTypeLabel($sub['form_type']) ?></span></td>
-                        <td class="px-4 py-3 text-center text-sm font-bold text-gray-700"><?= $sub['response_count'] ?></td>
-                        <td class="px-4 py-3 text-center text-sm text-gray-500"><?= $sub['eligible_students'] ?></td>
-                        <td class="px-4 py-3 text-center text-sm font-bold text-gray-700"><?= $sub['avg_score'] ?? '-' ?></td>
-                        <td class="px-4 py-3 text-center">
-                            <?php if ($subPct >= 100): ?>
-                                <span class="px-2 py-1 bg-emerald-50 text-emerald-600 rounded-lg text-[10px] font-black border border-emerald-100"><i class="fas fa-check-circle mr-1"></i>Complete</span>
-                            <?php elseif ($subPct >= 50): ?>
-                                <span class="px-2 py-1 bg-amber-50 text-amber-600 rounded-lg text-[10px] font-black border border-amber-100"><i class="fas fa-clock mr-1"></i><?= $subPct ?>%</span>
-                            <?php else: ?>
-                                <span class="px-2 py-1 bg-red-50 text-red-500 rounded-lg text-[10px] font-black border border-red-100"><i class="fas fa-exclamation-triangle mr-1"></i><?= $subPct ?>%</span>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; endif; ?>
-            </tbody>
-        </table>
+        <?php if (in_array($role, ['superadmin', 'university', 'deptadmin', 'criterion_2', 'criterion_5'])): ?>
+        <!-- Student Tracker Module -->
+        <a href="<?= APP_URL ?>/admin/student_tracker.php" class="hub-card group p-6 glass-card bg-white border border-gray-100 hover:border-emerald-200 transition-all duration-300">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-emerald-600 group-hover:text-white transition shadow-inner">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h4 class="font-black text-gray-800 mb-1">Student Tracking</h4>
+            <div class="flex items-center justify-between mt-4">
+                <span class="text-[10px] font-bold text-emerald-600">Compliance Log →</span>
+                <?php if (count($incompleteStudents) > 0): ?>
+                    <span class="text-[10px] px-2 py-1 bg-rose-50 text-rose-500 rounded-lg font-black"><?= count($incompleteStudents) ?> Pending</span>
+                <?php endif; ?>
+            </div>
+        </a>
+        <?php endif; ?>
+
+        <?php if (in_array($role, ['superadmin', 'university', 'deptadmin', 'criterion_3'])): ?>
+        <!-- Research Module -->
+        <a href="<?= APP_URL ?>/admin/research.php" class="hub-card group p-6 glass-card bg-white border border-gray-100 hover:border-amber-200 transition-all duration-300">
+            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-amber-600 group-hover:text-white transition shadow-inner">
+                <i class="fas fa-microscope"></i>
+            </div>
+            <h4 class="font-black text-gray-800 mb-1">Research Records</h4>
+            <div class="flex items-center justify-between mt-4">
+                <span class="text-[10px] font-bold text-amber-600">Research Hub →</span>
+                <span class="text-[10px] px-2 py-1 bg-amber-50 text-amber-600 rounded-lg font-black"><?= count($resRecords) ?> Items</span>
+            </div>
+        </a>
+        <?php endif; ?>
+
+        <?php if (in_array($role, ['superadmin', 'university', 'deptadmin', 'criterion_2'])): ?>
+        <!-- NAAC Analysis Module -->
+        <a href="<?= APP_URL ?>/admin/analysis.php" class="hub-card group p-6 glass-card bg-white border border-gray-100 hover:border-violet-200 transition-all duration-300">
+            <div class="w-12 h-12 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-violet-600 group-hover:text-white transition shadow-inner">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <h4 class="font-black text-gray-800 mb-1">NAAC Analysis</h4>
+            <div class="flex items-center justify-between mt-4">
+                <span class="text-[10px] font-bold text-violet-600">Analytics →</span>
+                <span class="text-[10px] px-2 py-1 bg-violet-50 text-violet-500 rounded-lg font-black">Criterion 2.7</span>
+            </div>
+        </a>
+        <?php endif; ?>
     </div>
 </div>
 
-<!-- Student Completion Tracker -->
-<div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm mb-8">
-    <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-rose-50 to-pink-50 flex items-center justify-between">
-        <h3 class="font-bold text-sm text-gray-700">
-            <i class="fas fa-user-graduate text-rose-500 mr-2"></i>Student Completion Tracker
-            <?php if ($semFilter): ?><span class="text-rose-500"> — Semester <?= $semFilter ?></span><?php endif; ?>
-            <?php if (!empty($incompleteStudents)): ?>
-                <span class="ml-2 px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-[10px] font-black"><?= count($incompleteStudents) ?> Incomplete</span>
-            <?php endif; ?>
-        </h3>
-        <div class="flex gap-2 text-[10px] font-bold">
-            <span class="px-2 py-1 bg-emerald-50 text-emerald-600 rounded-lg border border-emerald-100"><i class="fas fa-check mr-1"></i>Completed</span>
-            <span class="px-2 py-1 bg-red-50 text-red-500 rounded-lg border border-red-100"><i class="fas fa-times mr-1"></i>Pending</span>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-8">
+    <div class="lg:col-span-3 space-y-8">
+        <!-- Top performing Courses -->
+        <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+            <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white flex justify-between items-center">
+                <h3 class="font-black text-xs text-gray-500 uppercase tracking-widest leading-none">Top Rated courses</h3>
+                <a href="<?= APP_URL ?>/admin/co_analysis.php" class="text-[10px] font-bold text-indigo-500 hover:underline">Analysis Hub →</a>
+            </div>
+            <div class="p-6">
+                <div class="chart-box" style="height: 250px;"><canvas id="courseChart"></canvas></div>
+            </div>
         </div>
-    </div>
-    <div class="overflow-x-auto" style="max-height: 500px; overflow-y: auto;">
-        <table class="w-full">
-            <thead class="sticky top-0 z-10">
-                <tr class="bg-gray-50">
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Student</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Enrollment</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Semester</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Completed</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Total</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Progress</th>
-                    <th class="px-4 py-3 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Status</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                <?php if (empty($studentStatus)): ?>
-                    <tr><td colspan="7" class="px-4 py-8 text-center text-gray-400"><i class="fas fa-inbox text-2xl block mb-2"></i>No students found</td></tr>
-                <?php else: foreach ($studentStatus as $stu): 
-                    $stuPct = $stu['total_forms'] > 0 ? round(($stu['completed_forms'] / $stu['total_forms']) * 100) : 0;
-                    $isComplete = $stu['completed_forms'] >= $stu['total_forms'] && $stu['total_forms'] > 0;
-                    $rowClass = $isComplete ? '' : 'bg-red-50/40';
-                ?>
-                    <tr class="<?= $rowClass ?> hover:bg-gray-50 transition">
-                        <td class="px-4 py-3">
-                            <span class="text-sm font-bold <?= $isComplete ? 'text-gray-700' : 'text-red-700' ?>">
-                                <?php if (!$isComplete): ?><i class="fas fa-exclamation-circle text-red-400 mr-1"></i><?php endif; ?>
-                                <?= sanitize($stu['name']) ?>
-                            </span>
-                        </td>
-                        <td class="px-4 py-3 text-center text-xs font-mono text-gray-500"><?= sanitize($stu['enrollment_no']) ?></td>
-                        <td class="px-4 py-3 text-center"><span class="outcome-badge peo">Sem <?= $stu['semester'] ?></span></td>
-                        <td class="px-4 py-3 text-center text-sm font-bold <?= $isComplete ? 'text-emerald-600' : 'text-red-500' ?>"><?= $stu['completed_forms'] ?></td>
-                        <td class="px-4 py-3 text-center text-sm text-gray-500"><?= $stu['total_forms'] ?></td>
-                        <td class="px-4 py-3 text-center">
-                            <div class="flex items-center justify-center gap-2">
-                                <div class="w-16 h-2 bg-gray-100 rounded-full overflow-hidden">
-                                    <div class="h-full rounded-full <?= $isComplete ? 'bg-emerald-500' : ($stuPct >= 50 ? 'bg-amber-500' : 'bg-red-400') ?>" style="width:<?= $stuPct ?>%"></div>
-                                </div>
-                                <span class="text-[10px] font-black text-gray-400"><?= $stuPct ?>%</span>
-                            </div>
-                        </td>
-                        <td class="px-4 py-3 text-center">
-                            <?php if ($isComplete): ?>
-                                <span class="px-2 py-1 bg-emerald-50 text-emerald-600 rounded-lg text-[10px] font-black border border-emerald-100"><i class="fas fa-check-circle mr-1"></i>Done</span>
-                            <?php else: ?>
-                                <span class="px-2 py-1 bg-red-50 text-red-500 rounded-lg text-[10px] font-black border border-red-100"><i class="fas fa-clock mr-1"></i>Pending</span>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; endif; ?>
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<!-- Charts & Recent Responses -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-    <!-- Course Scores Chart -->
-    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-indigo-50 to-blue-50">
-            <h3 class="font-bold text-sm text-gray-700"><i class="fas fa-chart-bar text-indigo-500 mr-2"></i>Course-wise Scores</h3>
+        <!-- Participation Map at-a-glance -->
+        <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+            <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
+                <h3 class="font-black text-xs text-gray-500 uppercase tracking-widest leading-none">Participation Sync</h3>
+            </div>
+            <div class="p-6">
+                <div class="chart-box" style="height: 200px;"><canvas id="trendChart"></canvas></div>
+            </div>
         </div>
-        <div class="p-6"><div class="chart-box"><canvas id="courseChart"></canvas></div></div>
-    </div>
-
-    <!-- Response Trends -->
-    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-        <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-cyan-50 to-teal-50">
-            <h3 class="font-bold text-sm text-gray-700"><i class="fas fa-chart-line text-cyan-500 mr-2"></i>Response Trends</h3>
-        </div>
-        <div class="p-6"><div class="chart-box"><canvas id="trendChart"></canvas></div></div>
-    </div>
-</div>
-
-<!-- Recent Responses Table -->
-<div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-    <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-amber-50 to-orange-50">
-        <h3 class="font-bold text-sm text-gray-700"><i class="fas fa-clock text-amber-500 mr-2"></i>Recent Responses</h3>
-        <a href="<?= APP_URL ?>/admin/responses.php" class="text-xs text-indigo-500 hover:underline font-semibold">View All →</a>
-    </div>
-    <div class="overflow-x-auto">
-        <table class="w-full">
-            <thead>
-                <tr class="bg-gray-50">
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Form</th>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Type</th>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Student</th>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Date</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                <?php if (empty($recent)): ?>
-                    <tr><td colspan="4" class="px-4 py-8 text-center text-gray-400"><i class="fas fa-inbox text-2xl block mb-2"></i>No responses yet</td></tr>
-                <?php else: foreach ($recent as $r): ?>
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-4 py-3 text-sm font-medium text-gray-700"><?= sanitize($r['form_title']) ?></td>
-                        <td class="px-4 py-3"><span class="outcome-badge <?= $r['form_type'] === 'co_attainment' ? 'co' : ($r['form_type'] === 'exit_survey' ? 'po' : 'pso') ?>"><?= getFormTypeLabel($r['form_type']) ?></span></td>
-                        <td class="px-4 py-3 text-sm text-gray-500"><?= sanitize($r['student_name'] ?: 'Anonymous') ?></td>
-                        <td class="px-4 py-3 text-sm text-gray-400"><?= date('d M Y, h:i A', strtotime($r['submitted_at'])) ?></td>
-                    </tr>
-                <?php endforeach; endif; ?>
-            </tbody>
-        </table>
     </div>
 </div>
 

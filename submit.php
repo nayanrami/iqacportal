@@ -3,7 +3,7 @@
  * IQAC Cell ADIT - Submit Feedback Form
  * Supports: CO Attainment (1–3), Exit Survey (1–5), Dept Feedback (1–5)
  */
-require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/includes/functions.php';
 
 $formId = intval($_GET['id'] ?? 0);
 if (!$formId) { redirect(APP_URL); }

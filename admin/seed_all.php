@@ -3,28 +3,39 @@
  * Seed All Data - Courses, COs, POs, and Feedback Forms
  * Run this from admin panel to populate all data
  */
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireAdmin();
 
 $messages = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed'])) {
+$isBackground = defined('BACKGROUND_TASK_ID');
+$bgId = $isBackground ? BACKGROUND_TASK_ID : null;
+
+function updateBGProgress($pdo, $id, $progress, $message) {
+    if (!$id) return;
+    $stmt = $pdo->prepare("UPDATE background_tasks SET progress = ?, message = ? WHERE id = ?");
+    $stmt->execute([$progress, $message, $id]);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed']) || $isBackground) {
     try {
-        $pdo->beginTransaction();
+        if (!$isBackground) $pdo->beginTransaction();
+
+        updateBGProgress($pdo, $bgId, 10, "Seeding Departments...");
 
         // ══════════════════════════════════════════
         // 1. DEPARTMENTS
         // ══════════════════════════════════════════
-        $pdo->exec("DELETE FROM departments WHERE code = 'IT'");
-        $pdo->exec("INSERT IGNORE INTO departments (name, code) VALUES ('Information Technology', 'IT')");
+        // Robust check: Update if exists, Insert if not. Preserves ID.
+        $stmtDept = $pdo->prepare("INSERT INTO departments (name, code) VALUES (?, ?) 
+                                 ON DUPLICATE KEY UPDATE name = VALUES(name)");
+        $stmtDept->execute(['Information Technology', 'IT']);
+        
         $deptId = $pdo->query("SELECT id FROM departments WHERE code='IT'")->fetch()['id'];
-        $messages[] = "✅ IT Department created (ID: $deptId)";
+        $messages[] = "✅ IT Department verified (ID: $deptId)";
 
         // ══════════════════════════════════════════
-        // 2. COURSES (All 8 Semesters)
-        // ══════════════════════════════════════════
-        $pdo->exec("DELETE FROM courses WHERE department_id = $deptId");
-
+        updateBGProgress($pdo, $bgId, 20, "Seeding Courses...");
         $courses = [
             // Semester 1
             ['202000104', 'Calculus', 1, 'Basic Science', 4],
@@ -103,7 +114,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed'])) {
             ['202080801', 'Industry/User Defined Project (IDP/UDP)', 8, 'Industrial Project', 8],
         ];
 
-        $stmtC = $pdo->prepare("INSERT INTO courses (department_id, code, name, semester, course_type, credits, year) VALUES (?, ?, ?, ?, ?, ?, '2025-26')");
+        $stmtC = $pdo->prepare("INSERT INTO courses (department_id, code, name, semester, course_type, credits, year) 
+                                VALUES (?, ?, ?, ?, ?, ?, '2025-26')
+                                ON DUPLICATE KEY UPDATE name = VALUES(name), semester = VALUES(semester), 
+                                course_type = VALUES(course_type), credits = VALUES(credits)");
         foreach ($courses as $c) {
             $stmtC->execute([$deptId, $c[0], $c[1], $c[2], $c[3], $c[4]]);
         }
@@ -140,6 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed'])) {
             ['PSO', 'PSO3', 'Innovation and Development', 'Apply domain knowledge to transform innovative ideas into reality by developing effective IT solutions.', 3],
         ];
 
+        updateBGProgress($pdo, $bgId, 60, "Seeding Program Outcomes...");
         $stmtPO = $pdo->prepare("INSERT INTO program_outcomes (department_id, type, code, title, description, sort_order) VALUES (?, ?, ?, ?, ?, ?)");
         foreach ($outcomes as $o) {
             $stmtPO->execute([$deptId, $o[0], $o[1], $o[2], $o[3], $o[4]]);
@@ -147,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed'])) {
         $messages[] = "✅ " . count($outcomes) . " Program Outcomes seeded (3 PEOs, 12 POs, 3 PSOs)";
 
         // ══════════════════════════════════════════
+        updateBGProgress($pdo, $bgId, 40, "Seeding Course Outcomes...");
         // 4. COURSE OUTCOMES (COs)
         // ══════════════════════════════════════════
         $courseRows = $pdo->query("SELECT id, code, name, course_type FROM courses WHERE department_id = $deptId ORDER BY semester, code")->fetchAll();
@@ -347,6 +363,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed'])) {
         $messages[] = "✅ $coCount Course Outcomes seeded across all courses";
 
         // ══════════════════════════════════════════
+        updateBGProgress($pdo, $bgId, 70, "Seeding Feedback Forms...");
         // 5. FEEDBACK FORMS
         // ══════════════════════════════════════════
         $pdo->exec("DELETE FROM feedback_forms WHERE department_id = $deptId");
@@ -578,6 +595,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed'])) {
         $messages[] = "✅ Student Satisfaction Survey created (" . count($sssQs) . " questions)";
 
         // ══════════════════════════════════════════
+        updateBGProgress($pdo, $bgId, 85, "Generating Dummy Responses...");
         // 6. DUMMY RESPONSES (100 Students)
         // ══════════════════════════════════════════
         $formRows = $pdo->query("SELECT id, form_type FROM feedback_forms WHERE department_id = $deptId")->fetchAll();
@@ -622,12 +640,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['seed'])) {
         }
         $messages[] = "✅ $count dummy responses generated for 100 students across all forms";
 
-        $pdo->commit();
+        updateBGProgress($pdo, $bgId, 95, "Finalizing...");
+        if (!$isBackground) $pdo->commit();
+        
+        // Final Action: Refresh session to ensure user has current IDs
+        if (function_exists('refreshAdminSession')) {
+            refreshAdminSession();
+        }
+        
         $messages[] = "🎉 All data seeded successfully!";
 
     } catch (Exception $e) {
         $pdo->rollBack();
         $messages[] = "❌ Error: " . $e->getMessage();
+    }
+}
+
+// Handle Remove All Forms
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_all'])) {
+    try {
+        // TRUNCATE causes implicit commit in MySQL, so we DON'T use a transaction here.
+        // Disable FK checks to allow truncation
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
+        $pdo->exec("TRUNCATE TABLE response_answers");
+        $pdo->exec("TRUNCATE TABLE responses");
+        $pdo->exec("TRUNCATE TABLE questions");
+        $pdo->exec("TRUNCATE TABLE feedback_forms");
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+        $messages[] = "✅ All feedback forms, questions, and responses have been permanently removed.";
+    } catch (Exception $e) {
+        $messages[] = "❌ Error deleting forms: " . $e->getMessage();
     }
 }
 
@@ -685,13 +727,23 @@ $counts = [
             </p>
         </div>
 
-        <form method="POST">
-            <button type="submit" name="seed" value="1"
-                    class="px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm"
-                    onclick="return confirm('This will reset all IT department data. Continue?')">
-                <i class="fas fa-magic mr-2"></i>Seed All Data
-            </button>
-        </form>
+        <div class="flex flex-wrap gap-4">
+            <form method="POST">
+                <button type="submit" name="seed" value="1"
+                        class="px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm"
+                        onclick="return confirm('This will reset all IT department data. Continue?')">
+                    <i class="fas fa-magic mr-2"></i>Seed All Data
+                </button>
+            </form>
+
+            <form method="POST">
+                <button type="submit" name="delete_all" value="1"
+                        class="px-6 py-3 bg-white border border-rose-200 text-rose-600 font-bold rounded-xl shadow-sm hover:bg-rose-50 hover:border-rose-300 transition-all text-sm"
+                        onclick="return confirm('CRITICAL: This will PERMANENTLY DELETE ALL feedback forms, questions, and student responses from ALL departments. This action cannot be undone. Are you absolutely sure?')">
+                    <i class="fas fa-trash-alt mr-2"></i>Remove All Forms
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 

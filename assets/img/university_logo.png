@@ -1,0 +1,4080 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="CVM">
+<head>
+	<meta charset="utf-8">
+	<meta name="color-scheme" content="light dark">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no">
+
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="theme-color" content="#ffffff">
+	<!-- 18-2-2025 -->
+	
+	
+	<!-- <base href="/cvmu_live/"> -->
+	<base href="/"> 
+  
+
+	<title ng-bind-template="{{page_title}}">Loading...</title>
+
+	<meta name="description" content="{{page_description}}">
+	<meta name="keywords" content="{{page_keywords}}">
+	<meta property="og:image" content="{{page_image}}" />
+	<meta name="twitter:image" content="{{page_image}}"></meta>
+
+	<link rel="shortcut icon" href="assets/images/homepage/favicon.png" type="image/x-icon">
+	<link type="text/css" rel="stylesheet" href="assets/css/min.css?v=16-9-2025" />
+	<!-- <link type="text/css" rel="stylesheet" href="assets/fonts/fonts.css?v=16-9-2025" /> -->
+	<!-- use <link type="text/css" rel="stylesheet" href="assets/css/angular-ui-swiper.css?v=16-9-2025">
+	<link type="text/css" rel="stylesheet" href="assets/css/angular-material.min.css?v=16-9-2025"> -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900?v=16-9-2025" rel="stylesheet"> -->
+	<!-- use <link rel="stylesheet" href="assets/css/bootstrap.min.css?v=16-9-2025"> -->
+	<!-- <link rel="stylesheet" href="assets/css/bootstrap-social.css?v=16-9-2025" /> -->
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css?v=16-9-2025">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<!-- use <link rel="stylesheet" href="assets/css/animate.css?v=16-9-2025"> -->
+	<!-- <link rel="stylesheet" href="assets/css/meanmenu.min.css?v=16-9-2025"> -->
+	<!-- use <link rel="stylesheet" href="assets/css/main.css?v=16-9-2025"> -->
+	<!-- <link rel="stylesheet" href="assets/css/metisMenu/metisMenu.min.css?v=16-9-2025"> -->
+	<!-- <link rel="stylesheet" href="assets/css/metisMenu/metisMenu-vertical.css?v=16-9-2025"> -->
+	<!-- <link rel="stylesheet" href="assets/css/form/all-type-forms.css?v=16-9-2025"> -->
+	<link rel="stylesheet" href="assets/css/style.css?v=16-9-2025">
+	<link rel="stylesheet" href="assets/css/nav.css?v=16-9-2025">
+	<link rel="stylesheet" href="assets/css/footer.css?v=16-9-2025">
+	<link rel="stylesheet" href="assets/css/responsive.css?v=16-9-2025">
+	<!-- use <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css?v=16-9-2025" /> -->
+	<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.min.css?v=16-9-2025">
+	<link  type="text/css" rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
+
+	<!-- <script src="assets/js/vendor/jquery-1.12.4.min.js?v=16-9-2025"></script> -->
+	<script src="assets/jscom/1_jquery-1.12.4.min.js?v=16-9-2025"></script>
+	<script src="assets/jscom/2_popper.min.js?v=16-9-2025"></script>
+	<script src="assets/jscom/3_bootstrap.min.js?v=16-9-2025"></script>
+	<!-- <script src="assets/js/bootstrap.min_old.js?v=16-9-2025"></script> -->
+  	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+  	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+	<script src="assets/jscom/4_wow.min.js?v=16-9-2025"></script>
+	<!-- <script src="assets/js/jquery.meanmenu.js?v=16-9-2025"></script> -->
+	<!-- <script src="assets/js/jquery.sticky.js?v=16-9-2025"></script> -->
+	<!-- <script src="assets/js/metisMenu/metisMenu.min.js?v=16-9-2025"></script> -->
+	<!-- <script src="assets/js/metisMenu/metisMenu-active.js?v=16-9-2025"></script>     -->
+	<script src="assets/jscom/5_tab.js?v=16-9-2025"></script>
+	<script src="assets/jscom/6_plugins.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/7_angular.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/8_angular-md5.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/sweetalert2.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/angular-sweetalert2.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/9_jquery-validate.min.js?v=16-9-2025"></script>
+	<!-- <script type="text/javascript" src="assets/js/additional-methods.js?v=16-9-2025"></script> -->
+	<script type="text/javascript" src="assets/jscom/10_moment.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/11_angular-moment.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/12_angular-route.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/13_ngStorage.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/14_angular-animate.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/15_angular-validate.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/16_location_autocomplete.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/17_underscore-min.js?v=16-9-2025"></script>
+	<!-- <script type="text/javascript" src="assets/js/star-rating.js?v=16-9-2025"></script> -->
+	<script type="text/javascript" src="assets/jscom/18_angularjs-dropdown-multiselect.min.js?v=16-9-2025"></script>
+	<!-- <script type="text/javascript" src="assets/js/google-plus-signin.js?v=16-9-2025"></script> -->
+	<script type="text/javascript" src="assets/jscom/19_checklist-model.js?v=16-9-2025"></script>
+	<!-- <script type="text/javascript" src="assets/js/ng-infinite-scroll.min.js?v=16-9-2025"></script> -->
+	<script type="text/javascript" src="assets/jscom/20_paging.min.js?v=16-9-2025"></script>
+	<!-- <script type="text/javascript" src="assets/js/rzslider.js?v=16-9-2025"></script> -->
+	<!-- <script type="text/javascript" src="assets/js/angular-sticky.js?v=16-9-2025"></script> -->
+	<script type="text/javascript" src="assets/jscom/21_swiper.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/22_angular-swiper.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/23_angular-aria.min.js?v=16-9-2025"></script>
+	<!-- <script type="text/javascript" src="assets/js/angular-messages.min.js?v=16-9-2025"></script>  -->
+	<script type="text/javascript" src="assets/jscom/24_angular-material.min.js?v=16-9-2025"></script>
+	<!-- <script type="text/javascript" src="assets/js/angular-scroll-animate.js?v=16-9-2025"></script> -->
+	<!-- <script type="text/javascript" src="assets/js/wow.min.js?v=16-9-2025"></script> -->
+	<script type="text/javascript" src="assets/jscom/25_angular-base64.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/26_angular-ui-swiper.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/27_ui-bootstrap.min.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/28_angularjs-social-login.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/29_angular-socialshare.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/30_ng-file-upload-shim.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/31_ng-file-upload.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/32_main.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="assets/jscom/33_jquery.fancybox.min.js?v=16-9-2025"></script>
+
+	<script type="text/javascript" src="assets/jscom/35_angular-sanitize.js?v=16-9-2025"></script>
+	<script type="text/javascript" src="app.js?v=16-9-2025"></script>
+
+	 <!-- Google Tag Manager -->
+    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-M2NB8ZP');</script> -->
+    <!-- EndGoogle Tag Manager -->
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-7C7N90JJRC"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-7C7N90JJRC');
+	</script>
+
+    	
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169801737-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        // gtag('config', 'UA-169801737-1', {'send_page_view': false});
+    </script> -->
+
+
+    <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '787026587681952'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=787026587681952&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+    
+
+</head>
+
+
+<!-- <style type="text/css">
+	.banner_alignment {
+		width: 100% !important;
+	}
+	.banner_alignment img {
+		width: 100% !important;
+	}
+
+</style> -->
+<body ng-controller="MainController">
+	<script type="text/javascript" async="" src="https://widgets.nopaperforms.com/emwgts.js"></script>
+
+	<!-- <div ng-include="'templates/include/header.html'"></div> -->
+	<div class="header_out">
+	<div class="web_header">
+  <header>
+    <div class="header-nav-global" ng-class="{'open_menubg' : mobileMenuToggleF}">
+      <div class="main header_width">
+        <div class="logo-container">
+          <svg class="logo">
+            <div class="logo">
+              <a href="{{rootUrl}}" ng-click="mobileMenuClose();">
+                <img src="assets/images/cvm/heaer_logo_final.svg" alt="CVM" class="tab_none main_logo mo_logo_main">
+                <img src="assets/images/cvm/heaer_logo_final.svg" alt="CVM" class="tab_none sticky_logo">
+                <img src="assets/images/cvm/heaer_logo_final.svg" alt="CVM" class="tab_view">
+              </a>
+            </div>
+          </svg>
+        </div>
+        <ul class="header-nav-icons">
+          <li class="hidden-md hidden-lg">
+            <button aria-label="Toggle Main Menu" class="mobile-nav_toggle" ng-click="mobileMenuToggle();">
+              <div class="mobile-nav_toggle_icon"></div>
+            </button>
+          </li>
+        </ul>
+        <div class="navigation ">
+          <div class="top site-navigation">
+            <ul class="header-nav-top">
+              <li class="header-nav-top_item">
+                <a class="header-nav-top_link" href="circular">
+                  Circulars & Notices
+                </a>
+              </li>
+              <!-- <li class="header-nav-top_item">
+                                    <a class="header-nav-top_link" href="assets/uploads/broucher/Promotion of Academic Integrity and Prevention of Plagiarism.pdf"  target="_blank">
+                                        Notices
+                                    </a>
+                                </li> -->
+              <li class="header-nav-top_item">
+                <a class="header-nav-top_link" href="nep2020">
+                  NEP 2020
+                </a>
+              </li>
+
+              <li class=" header-nav-top_item  dropdownlink new_dropdownlink">
+                <a class="header-nav-top_link" href="javascript:void(0)"> NIRF </a>
+                <div class="dropdown-content dropdown-content-new_width">
+                  <div class="flex-a">
+                  <a class="font-14" style="font-weight: 100;" href="assets/pdf/nirf/nirf2026.pdf" target="_blank"> <span class=""> NIRF  2026 </span> </a>
+                  <a class="font-14" style="font-weight: 100;" href="assets/pdf/nirf/nirf2025.pdf" target="_blank"> <span class=""> NIRF  2025 </span> </a>                   
+
+                  </div>
+                </div>
+              </li>
+
+
+              <li class="header-nav-top_item">
+                <a class="header-nav-top_link" href="career">Career </a>
+              </li>
+              <li class="header-nav-top_item dropdownlink">
+                <a class="header-nav-top_link" href="javascript:void(0);">
+                  Student Corner
+                </a>
+
+
+                <div class="dropdown-content">
+                  <div class="">
+                    <!-- <a class="font-14 " href="academics"> <span class="">   Under Graduate Programme  </span></a>
+                                        <a class="font-14 " href="academics"> <span class="">  Post Graduate Programme </span></a>
+                                        <a class="font-14 " href="doctral-program"> <span class="">  Doctoral Programme </span></a>                                         -->
+                    <a class="font-14 " href="exam-timetable"> <span class=""> Exam Time Table </span></a>
+                    <a class="font-14 " href="exam-timetable-notification"> <span class=""> Exam Result Notification
+                      </span></a>
+                    <a class="font-14 " href="campus_life"> <span class=""> Campus Life </span></a>
+                    <a class="font-14" ng-if="bookletObj.academic_calendar" href="{{bookletObj.academic_calendar}}"
+                      target="_blank"><span class="">Academic Calendar 2025-26 </span></a>
+
+
+
+
+                    <!-- <a class="font-14 " href="placement"> <span class="">  Placements </span></a> -->
+                    <a class="font-14 " href="sports_Recreation"> <span class=""> Sports & Recreation </span></a>
+                    <a class="font-14 " href="cvmhostels"> <span class=""> Hostel </span></a>
+                    <a class="font-14 " href="transportation-facility"> <span class=""> Transportation </span></a>
+                    <a class="font-14 " href="https://cvmu.ac.in/"> <span class=""> ERP </span></a>
+                    <!-- <a class="font-14 " href="https://elearning.cvmu.edu.in/"> <span class=""> e - Learning </span></a> -->
+                    <!-- <a class="font-14 " href="entrepreneurship"> <span class=""> CVMUISC (SSIP) </span></a> -->
+                    <a class="font-14 " href="cvmuhackathon"> <span class="">CVMU Hackathon </span></a>
+                    <a class="font-14 " href="cvmu-bbic"> <span class="">CVMU BBIC </span></a>
+                    <a class="font-14 " href="project-exhibition"> <span class=""> Project Exhibition </span></a>
+                    <a class="font-14 " href="mba"> <span class=""> CVMU MBA </span></a>
+                    <a class="font-14 " href="scholarship"> <span class=""> Scholarship </span></a>
+                    <!-- <a class="font-14 " href="placement"> <span class="">Placement  </span></a> -->
+                    <a class="font-14 " href="fees_Payment"> <span class="">Fees Payment </span></a>
+                    <a class="header-nav-top_link" href="https://www.coursera.org/" target="_blank"> <span class="">
+                        Coursera </span></a>
+                    <a class="font-14 " href="grievance"> <span class=""> Grievance Redressal &amp;
+                        Arbitration</span></a>
+                    <a class="font-14 " href="internationalization"> <span class=""> Internationalization & Erasmus
+                      </span></a>
+                    <a class="font-14 " href="https://shodhganga.inflibnet.ac.in/handle/10603/518015" target="_blank">
+                      <span class=""> PHD Thesis </span></a>
+                    
+					<a class="font-14 " href="ncc_nss"> <span class=""> NCC/NSS </span></a>
+					<a class="font-14 " href="assets/images/Coc_Undertaking_Code_of_Conduct_CVMU.pdf" target="_blank"> <span class=""> CoC-Undertaking </span></a>
+					
+					
+					
+                    <!-- <a class="font-14 " href="anti-ragging"> <span class=""> Anti Ragging </span></a> -->
+                    <!-- <a class="font-14 " href="grievance_Cell"> <span class=""> Grievance Cell</span></a> -->
+
+                    <!-- <a class="font-14 " href="assets/images/pdf/FET -Guidelines of Credit transfer through SWAYAM.pdf" target="_blank" > <span class=""> SWAYAM/NPTEL Courses </span></a> -->
+
+                  </div>
+                </div>
+              </li>
+              <li class="header-nav-top_item last_li_headerxx blinkxx">
+                <a class="header-nav-top_link" href="https://www.cvmu.edu.in/CVMU_Public_Self_Disclosure.pdf"
+                  target="_blank">
+                  Public Self Disclosure
+                </a>
+              </li>
+               <li class="header-nav-top_item  blinkx">
+                <a class="header-nav-top_link" href="https://www.cvmu.edu.in/doctral-program" style="">
+                  Ph.D. Admissions Open 
+                </a>
+              </li> 
+            <!--   <li class="header-nav-top_item last_li_header blinkx">
+                <a class="header-nav-top_link" href="aiu" style="">
+              AIU UNIFEST 2026
+                </a>
+              </li> -->
+
+              
+
+              <!--  <li class="header-nav-top_item dropdownlink new_dropdownlink">
+                                <a class="header-nav-top_link" href="about">
+                                    About Us
+                                </a>
+
+                                
+
+                                <div class="dropdown-content dropdown-content-new_width">
+                                    <div class="flex-a">
+                                                                               
+                                        <a class="font-14 " href="about/?type=history" ng-click="scrolltoDivnew('history');"> <span class=""> History </span> </a>
+                                        <a class="font-14 "  href="about/?type=mision" ng-click="scrolltoDivnew('mision');"> <span class=""> Mission & Vision </span> </a>
+                                        <a class="font-14 " href="about/?type=president" ng-click="scrolltoDivnew('president');"> <span class=""> Leadership (Chancellor, Vice-Chancellor, Deans) </span> </a>
+                                        <a class="font-14 " href="about/?type=accreditations" ng-click="scrolltoDivnew('accreditations');"> <span class=""> Accreditation & Affiliations </span> </a>
+                                        <a class="font-14 " href="about/?type=facility" ng-click="scrolltoDivnew('facility');"> <span class=""> Campus & Facilities </span> </a>
+                                        <a class="font-14 " href="about/?type=policies" ng-click="scrolltoDivnew('policies');"> <span class=""> University Policies </span> </a>
+                                    </div>
+                                </div>
+                            </li> -->
+
+              <!-- <li class="header-nav-top_item"> 
+                                <a class="header-nav-top_link" href="cvmu_committees"  >
+                                    CVMU Committee
+                                </a>
+                            </li> -->
+            </ul>
+
+
+            <ul class="header-nav-top">
+              <li class="header-nav-top_item websocial">
+                <a class="social-media" href="https://www.youtube.com/channel/UC7gvtRFAYIiJo1gjptY3Myg" target="_blank">
+                  <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="header-nav-top_item websocial">
+                <a class="social-media" href="https://www.facebook.com/CVMUniversity/" target="_blank">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="header-nav-top_item websocial">
+                <a class="social-media" href="https://www.instagram.com/cvmu.university/?hl=en" target="_blank">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="header-nav-top_item websocial">
+                <a class="social-media" href="https://in.linkedin.com/company/cvmuniversity" target="_blank">
+                  <i class="fab fa-linkedin-in"></i>
+                  <i class="fa fa-brands fa-linkedin"></i>
+                </a>
+              </li>
+
+
+
+              <!--  <li class="header-nav-top_item websocial">
+                                <a class="social-media" href="https://twitter.com/CVM_University" target="_blank">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li> -->
+              <!--  <li class="header-nav-top_item " style="background-color:#2473FF; margin-left: 0;">
+                                <a class="header-nav-top_link" href="javascript:void(0)" ng-click="openAdmissinForm()" style="color: #fff;">
+                                    Inquire Now
+                                </a>
+                            </li> 
+                            <li class="header-nav-top_item last_li_header">
+                                <!-- <a class="header-nav-top_link " ng-click="openAdmissinForm()" href="javascript:void(0)"> -->
+              <!-- <a class="header-nav-top_link" href="https://adm.cvmu.ac.in/" target="_blank"> 
+                                	Apply Now
+                                </a>
+                            </li> -->
+
+
+
+
+            </ul>
+          </div>
+
+
+
+          <style>
+            .last_li_header a {
+              color: #ffffff !important;
+            }
+
+            .blink {
+              animation: blink 1s linear infinite;
+            }
+
+            @keyframes blink {
+              0% {
+                opacity: 0;
+              }
+
+              50% {
+                opacity: .5;
+              }
+
+              100% {
+                opacity: 1;
+              }
+            }
+          </style>
+
+          <div class="bottom">
+            <ul class="header-nav-bottom">
+              <li class="header-nav-bottom_item">
+                <a class="header-nav-bottom_link" href="home">
+                  Home
+                </a>
+                <!-- <div class="flex-a">
+                                    <a class="font-14 " href="about/?type=history" ng-click="scrolltoDivnew('history');"> <span class=""> History </span> </a>
+                                    <a class="font-14 "  href="about/?type=mision" ng-click="scrolltoDivnew('mision');"> <span class=""> Mission & Vision </span> </a>
+                                    <a class="font-14 " href="about/?type=president" ng-click="scrolltoDivnew('president');"> <span class=""> Leadership (Chancellor, Vice-Chancellor, Deans) </span> </a>
+                                    <a class="font-14 " href="about/?type=accreditations" ng-click="scrolltoDivnew('accreditations');"> <span class=""> Accreditation & Affiliations </span> </a>
+                                    <a class="font-14" href="about/?type=facility" ng-click="scrolltoDivnew('facility');"> <span class=""> Campus & Facilities </span> </a>
+                                    <a class="font-14" href="about/?type=policies" ng-click="scrolltoDivnew('policies');"> <span class=""> University Policies </span> </a>
+                                </div> -->
+
+              </li>
+              <li class="header-nav-bottom_item  dropdownlink new_dropdownlink about_link">
+                <a class="header-nav-bottom_link" href="about">
+                  About Us
+                </a>
+
+                <!-- <div class="dropdown-content dropdown-content-about_width" style="display:block;opacity: 1;visibility: visible;z-index: 999999;"> -->
+                <div class="dropdown-content dropdown-content-about_width">
+                  <!-- <div class="flex-a">
+                                        <a class="font-14 " href="about/?type=history" ng-click="scrolltoDivnew('history');"> <span class=""> History </span> </a>
+                                        <a class="font-14 "  href="about/?type=mision" ng-click="scrolltoDivnew('mision');"> <span class=""> Mission & Vision </span> </a>
+                                        <a class="font-14 " href="about/?type=president" ng-click="scrolltoDivnew('president');"> <span class=""> Leadership (Chancellor, Vice-Chancellor, Deans) </span> </a>
+                                        <a class="font-14 " href="about/?type=accreditations" ng-click="scrolltoDivnew('accreditations');"> <span class=""> Accreditation & Affiliations </span> </a>
+                                        <a class="font-14" href="about/?type=facility" ng-click="scrolltoDivnew('facility');"> <span class=""> Campus & Facilities </span> </a>
+                                        <a class="font-14" href="about/?type=policies" ng-click="scrolltoDivnew('policies');"> <span class=""> University Policies </span> </a>
+                                    </div> -->
+                  <div class="about_hover_wrapper">
+                    <div class="about_wrapper">
+                      <div class="about_1">
+                        <div class="about_title">
+                          <div class="">
+                            <p class="black font-24 regular ">
+                              <a href="http://ecvm.net/" target="_blank" style="font-size:23px; padding-left: 0;"
+                                class="black font-24 regular ">
+                                About CVM Trust
+                              </a>
+                            </p>
+                          </div>
+                          <div class="">
+                            <p class="black font-24 regular "> About University </p>
+                          </div>
+                          <div class="">
+                            <a class="font-14 regular" href="assets/images/pdf/Gazette_CVMU_.pdf" target="_blank"> <span
+                                class="">Gazette & Notification </span> </a>
+                            <a class="font-14 regular" href="assets/images/pdf/CVM _Statutes.pdf" target="_blank"> <span
+                                class="">The Act & Statues </span> </a>
+                            <a class="font-14 regular" href="visionaries"> <span class="">Torch-Bearers </span> </a>
+                            <a class="font-14 regular" href="journey"> <span class="">Journey </span> </a>
+                            <a class="font-14 regular" href="accreditation-and-ranking"> <span class="">Accreditation &
+                                Ranking </span> </a>
+                            <a class="font-14 regular" href="president_desk_cvmu"> <span class="">From President's Desk
+                              </span> </a>
+                            <a class="font-14 regular" href="provost_desk"> <span class="">From Provost's Desk </span>
+                            </a>
+                            <a class="font-14 regular" href="registrar_desk_cvmu"> <span class="">From Registrar's Desk
+                              </span> </a>
+                            <a class="font-14 regular" href="governing_body"> <span class="">Governing Body </span> </a>
+                            <a class="font-14 regular" href="board_management"> <span class="">Board of Management
+                              </span> </a>
+                            <a class="font-14 regular" href="administrative_officers"> <span class="">Academic Council
+                              </span> </a>
+                            <a class="font-14 regular" href="academic_leadership"> <span class=""> Academic Leadership
+                              </span> </a>
+                            <a class="font-14 regular" href="university_officers"> <span class="">University Officers
+                              </span> </a>
+                            <a class="font-14 regular" href="convocations"> <span class="">Convocations </span> </a>
+							<a class="font-14 regular" href="assets/images/Code_of_Conduct for_students.pdf" target="_blank"> <span class="">Code of Conduct  </span> </a>
+                          </div>
+						  
+						  
+
+
+
+                        </div>
+                      </div>
+                      <div class="about_2">
+                        <div class="about_title">
+                          <div class="">
+                            <p class="black font-24 regular "> Centers & Cells </p>
+                          </div>
+                          <div class="">
+                            <a class="font-14 regular" href="antiragging"> <span class=""> National Ragging Prevention
+                                Programme ( Anti-Ragging Committee ) </span> </a>
+                            <!-- <a class="font-14 regular" href="javascriptvoid(0);"> <span class=""> Equal Opportunity Cell </span> </a> -->
+                            <a class="font-14 regular" href="grievance"> <span class=""> Grievance Redressal Cell
+                              </span> </a>
+
+                              <a class="font-14 regular" href="sc_st_obc_cell"> <span class=""> SC / ST / OBC Grievance Cell
+                              </span> </a>
+
+                              
+                            <a class="font-14 regular" href="entrepreneurship"> <span class=""> CVMUISC Idea Launchpad
+                              </span> </a>
+                            <!-- <a class="font-14 regular" href="javascriptvoid(0);"> <span class=""> University Industry
+                                Interaction Cell </span> </a> -->
+                            <a class="font-14 regular" href="women_development"> <span class=""> Womens' Development
+                                Cell </span> </a>
+                            <!-- <a class="font-14 regular" href="javascriptvoid(0);"> <span class=""> International Students' Cell </span> </a> -->
+                            <a class="font-14 regular" href="isa"> <span class=""> International Student Affairs </span>
+                            </a>
+                            <a class="font-14 regular" href="icc"> <span class=""> Internal Complaint Committee (ICC)
+                              </span> </a>
+                            <a class="font-14 regular" href="iec"> <span class=""> International Education Cell </span>
+                            </a>
+                            <a class="font-14 regular" href="cultural-committee"> <span class=""> Cultural Committee
+                              </span> </a>
+                            <!-- <a class="font-14 regular" href="campus-facilities"> <span class=""> Campus Facilities
+                              </span> </a> -->
+                            <a class="font-14 regular" href="sports_committee"> <span class=""> Sports Committee </span>
+                            </a>
+
+                            <a class="font-14 regular" href="sedgs_cell"> <span class=""> SEDGs Cell</span></a>
+
+
+                            <a class="font-14 regular" href="purchase_committee"> <span class=""> Purchase Committee
+                              </span></a>
+                            <a class="font-14 regular" href="academic_bank_credit"> <span class=""> Academic Bank Credit
+                              </span></a>
+                            <a class="font-14 regular" href="iqac"> <span class="">Internal Quality Assurance Cell
+                                (IQAC) </span></a>
+
+
+                            <a href="finance_committee"> <span class=""> Finance Committee Members</span> </a>
+                            <a href="cyber_club"> <span class=""> Cyber Club </span> </a>
+                            <a href="swayam_nptel"> <span class=""> SWAYAM/NPTEL Courses </span> </a>
+                            <a href="faculty-list"> <span class=""> List of  Faculty Members  </span> </a>
+                          </div>
+
+
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="header-nav-bottom_item">
+                                <a class="header-nav-bottom_link"  ng-class="{mobilemenu_active:activePath=='/academics'}" href="academics">
+                                	Academics
+                                </a>
+                            </li> -->
+              <li class="header-nav-bottom_item  dropdownlink new_dropdownlink about_link">
+                <a class="header-nav-bottom_link" href="javascript:void(0)">
+                  Faculties
+                </a>
+
+                <!-- <div class="dropdown-content dropdown-content-about_width" style="display:block;opacity: 1;visibility: visible;z-index: 999999;"> -->
+                <div class="dropdown-content dropdown-content-about_width header_menu_a">
+
+                  <div class="about_hover_wrapper">
+                    <div class="about_wrapper ">
+                      <div class="about_1x ">
+                        <div class="about_titlex">
+                          <!-- <div class="">
+                                                        <p class="black font-24 regular "> 
+                                                            <a href="http://ecvm.net/" target="_blank" style="font-size:23px; padding-left: 0;" class="black font-24 regular "> 
+                                                                About CVM Trust 
+                                                            </a>
+                                                              </p>
+                                                   </div> -->
+                          <!-- <div class="">
+                                                         <p class="black font-24 regular "> About University  </p>
+                                                    </div> -->
+                          <div class="about_wrapper_new" ng-repeat="programFaculty_data in programFaculty_list">
+                            <!-- <a class="font-14 regular" href="{{rootUrl}}/faculty/MQ=="> <span class="">Architecture & Planning </span></a>
+                                                        <a class="font-14 regular" href="javascript:void(0);"> <span class="">Ayurvedic Medicine </span> </a>
+                                                        <a class="font-14 regular" href="javascript:void(0);"> <span class="">Commerce, Management & Law </span> </a>
+                                                        <a class="font-14 regular" href="javascript:void(0);"> <span class="">Education </span> </a> -->
+                            <!-- <a class="font-14 regular" href="javascript:void(0);" > <span class="">Education </span> </a> -->
+                            <a href="faculty/{{toBase64(programFaculty_data.faculty_id)}}" style="display: block;"
+                              ng-class="{'active' : programFaculty_data.faculty_id == active_faculty_id}"
+                              class="w100 font_45 sfregular black_max uppercase"
+                              ng-click="accordianClick(); changeTab(programFaculty_data, programFaculty_data.faculty_programs[0], programFaculty_data.faculty_programs[0].type_id);">
+                              {{programFaculty_data.short_name}}
+                            </a>
+
+
+                          </div>
+                          <!-- <li class="accordion-block" ng-repeat="programFaculty_data in programFaculty_list">
+                                                        <a href="#" accordion ng-class="{'active' : programFaculty_data.faculty_id == active_faculty_id}" class="font_45 sfregular black_max uppercase accordion_title" ng-click="accordianClick(); changeTab(programFaculty_data, programFaculty_data.faculty_programs[0], programFaculty_data.faculty_programs[0].type_id);">
+                                                            {{programFaculty_data.short_name}}
+                                                        </a>
+                                                    </li>
+                                                    -->
+
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+              </li>
+
+
+
+
+              <li class="header-nav-bottom_item">
+                <a class="header-nav-bottom_link" href="research">
+                  Research
+                </a>
+              </li>
+              <!-- <li class="header-nav-bottom_item">
+                                <a class="header-nav-bottom_link" href="admission">
+                                	Admissions
+                                </a>
+                            </li> -->
+
+              <li class="header-nav-bottom_item  dropdownlink new_dropdownlink">
+                <a class="header-nav-bottom_link" href="javascript:void(0);">
+                  Admissions
+                </a>
+
+                <div class="dropdown-content dropdown-content-new_width">
+                  <div class="flex-a">
+                    <!-- <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> University News </span> </a>  
+                                        <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> Events Calendar </span> </a>
+                                        <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> Press Releases </span> </a>
+                                        <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> Newsletter </span> </a>                                          -->
+                    <a class="font-14" style="font-weight: 100;" href="admission"> Overview </a>
+                    <a class="font-14 " style="font-weight: 100;" href="academics"> <span class=""> Under Graduate
+                        Programmes </span></a>
+                    <a class="font-14 " style="font-weight: 100;" href="academics"> <span class=""> Post Graduate
+                        Programmes </span></a>
+                    <a class="font-14 " style="font-weight: 100;" href="doctral-program"> <span class=""> Doctoral
+                        Programmes </span></a>
+
+
+                  </div>
+                </div>
+              </li>
+
+
+              <!-- --------------------  -->
+
+              <li class="header-nav-bottom_item  dropdownlink new_dropdownlink">
+                <a class="header-nav-bottom_link" href="javascript:void(0);">
+                  Placement
+                </a>
+
+                <div class="dropdown-content dropdown-content-new_width">
+                  <div class="flex-a">
+                    <!-- <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> University News </span> </a>  
+                                        <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> Events Calendar </span> </a>
+                                        <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> Press Releases </span> </a>
+                                        <a class="font-14" style="font-weight: 100;"   href="news-and-events" > <span class=""> Newsletter </span> </a>                                          -->
+                    <a class="font-14" style="font-weight: 100;" href="training-and-placement-cell"> Training and Placement Cell </a>
+                    <a class="font-14 " style="font-weight: 100;" href="placement-stats"> <span class=""> Placement Stats </span></a>
+                    <a class="font-14 " style="font-weight: 100;" href="our-leading-recruiters"> <span class=""> Our Leading Recruiters </span></a>
+                    <a class="font-14 " style="font-weight: 100;" href="placement-gallery"> <span class=""> Placement Gallery </span></a>
+                  </div>
+                </div>
+              </li>
+              <!-- --------------------  -->
+
+              <!--  <li class="header-nav-bottom_item">
+                                <a class="header-nav-bottom_link" href="placement">
+                                	Placement
+                                </a>
+                            </li> -->
+
+
+
+              <!-- <li class="header-nav-bottom_item">
+                                <a class="header-nav-bottom_link" href="news-and-events">
+                                	News & Events
+                                </a>
+                            </li> -->
+              <li class="header-nav-bottom_item  dropdownlink new_dropdownlink">
+                <a class="header-nav-bottom_link" href="javascript:void(0)">
+                  News & Events
+                </a>
+
+                <div class="dropdown-content dropdown-content-new_width">
+                  <div class="flex-a">
+                  <a class="font-14" style="font-weight: 100;" href="news-and-events"> <span class=""> University News </span> </a>
+                    <a class="font-14" style="font-weight: 100;" href="press-release"> <span class=""> Press Releases </span> </a>
+                    <a class="font-14" style="font-weight:100;" href="newsletter"> <span>Newsletter</span></a>                     
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- ------ -->
+
+
+
+
+
+              <!-- ------ -->
+              <!-- <li class="header-nav-bottom_item">
+                                <a class="header-nav-bottom_link" href="faculty">
+                                    Faculty
+                                </a>
+                            </li> -->
+
+
+
+
+
+
+
+              <li class="header-nav-bottom_item dropdownlink">
+                <a class="header-nav-top_link" href="javascript:void(0);" style="color:black">
+                  Brochure
+                </a>
+                <div class="dropdown-content">
+                  <div class="">
+                    <!-- <a class="font-14 " href="assets/uploads/broucher/1656396780_CVMU-E-Brochure-2022.pdf"  target="_blank"> <span class="">   National Students </span></a> -->
+                    <a class="font-14 " href="{{bookletObj.broucher}}" target="_blank"> <span class=""> National
+                        Students </span></a>
+
+
+                    <a class="font-14 " href="assets/uploads/broucher/1659524372_Foreign_Students_Brochure.pdf"
+                      target="_blank"> <span class=""> Foreign Students </span></a>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="header-nav-bottom_item">
+                                <a class="header-nav-bottom_link" href="contact">
+                                	Contact
+                                </a>
+                            </li> -->
+
+
+
+              <!-- ------ -->
+              <li class="header-nav-bottom_item  dropdownlink new_dropdownlink">
+                <a class="header-nav-bottom_link" href="contact">
+                  Contact
+                </a>
+
+                <div class="dropdown-content dropdown-content-new_width">
+                  <div class="flex-a">
+                    <a class="font-14" style="font-weight: 100;" href="contact"> <span class=""> General Inquiries
+                      </span> </a>
+                    <a class="font-14" style="font-weight: 100;" href="contact"> <span class=""> Campus Directory
+                      </span> </a>
+                    <a class="font-14" style="font-weight: 100;" href="contact"> <span class=""> Maps &amp; Directions
+                      </span> </a>
+                    <a class="font-14" style="font-weight: 100;" href="contact"> <span class=""> Visit Us </span> </a>
+                  </div>
+                </div>
+              </li>
+
+              <li class="header-nav-bottom_item " onclick="openApplyForm()"
+                style="background-color: #ffffff;padding-left: 5px;padding-right: 5px;">
+                <!-- <a class="header-nav-bottom_link" href="https://admissions.cvmu.edu.in/" target="_blank" style="color: #fff;">Apply Now </a> -->
+                <a class="header-nav-bottom_link" href="javascript:void(0);" 
+                  style="color: #000000;">Apply Now </a>
+                <!-- openApplyForm() -->
+              </li>
+
+
+              <!-- <li class="header-nav-bottom_item">
+                                    <a class="header-nav-bottom_link" href="https://www.cvmu.edu.in/assets/uploads/broucher/1682491063_CVMU_Brochure_2023.pdf" target="_blank">                                    
+                                	E - Brochure 
+                                </a>
+                            </li> -->
+
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <!--mobile menu -->
+      <div class="mobile-nav" id="mobile-nav">
+        <div class="height100vhset">
+          <div class="container">
+            <div class="menu_bgcolor">
+              <div class="inner_mobile_color">
+                <ul class="mobile-nav_primary">
+                  <li class="mobile-nav_primary_item">
+                    <a class="mobile-nav_primary_link" href="{{rootUrl}}" ng-click="mobileMenuToggle();">
+                      Home
+                    </a>
+                  </li>
+                  <!-- <li class="mobile-nav_primary_item">
+                                    <a class="mobile-nav_primary_link" ng-class="{mobilemenu_active:activePath=='/about'}" href="about" ng-click="mobileMenuToggle();">
+                                    	About Us
+                                    </a>
+                                </li> -->
+
+
+                  <li class="web_header_slide_li mobile-nav_primary_item black fwbold mobile-nav_acr">
+                    <a href="javascript:void(0)" ng-class="{mobilemenu_active:activePath=='/about'}"
+                      class="white web_header_slide_li_accordian center_3" style="color: #fff;" accordion-menu>
+                      About Us
+                      <div class="accordion_click"></div>
+                    </a>
+                    <div class="content content_mobile web_header_slide_li_content">
+                      <div class="">
+                        <p class="black font-24 regular white" style="color: #fff; padding-left: 10px;"> About
+                          University </p>
+                      </div>
+                      <div class="">
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();"
+                          href="assets/images/pdf/Gazette_CVMU_.pdf" target="_blank"> <span class="">Gazette &
+                            Notification </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();"
+                          href="assets/images/pdf/CVM _Statutes.pdf" target="_blank"> <span class="">The Act & Statues
+                          </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="visionaries"> <span
+                            class="">Torch-Bearers </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="journey"> <span class="">Journey
+                          </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="accreditation-and-ranking">
+                          <span class="">Accreditation & Ranking </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="president_desk_cvmu"> <span
+                            class="">From President's Desk </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="provost_desk"> <span
+                            class="">From Provost's Desk </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="registrar_desk_cvmu"> <span
+                            class="">From Registrar's Desk</span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="governing_body"> <span
+                            class="">Governing Body </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="board_management"> <span
+                            class="">Board of Management </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="administrative_officers"> <span
+                            class="">Academic Council </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="academic_leadership"> <span
+                            class="">Academic Leadership </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="university_officers"> <span
+                            class="">University Officers </span> </a>
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();" href="javascriptvoid(0);"> <span
+                            class="">Convocations </span> </a>
+						<a class="font-14 regular" ng-click="mobileMenuToggle();" href="assets/images/Code_of_Conduct for_students.pdf" target="_blank"> <span
+                            class="">Code of Conduct  </span> </a>
+							
+							
+							
+                      </div>
+
+                      <div class="about_title">
+                        <div class="">
+                          <p class="black font-24 regular white" style="color: #fff; padding-left: 10px;"> Centers &
+                            Cells </p>
+                        </div>
+                        <div class="">
+                          <a class="font-14 regular" ng-click="mobileMenuToggle();" href="antiragging"> <span class="">
+                              National Ragging Prevention Programme ( Anti-Ragging Committee ) </span> </a>
+                          <!-- <a class="font-14 regular" ng-click="mobileMenuToggle();" href="javascriptvoid(0);"> <span class=""> Equal Opportunity Cell </span> </a> -->
+                          <a class="font-14 regular" ng-click="mobileMenuToggle();" href="grievance"> <span
+                              class=""> Grievance Redressal Cell </span> </a>
+
+                              <a class="font-14 regular" ng-click="mobileMenuToggle();" href="sc_st_obc_cell"> <span
+                              class=""> SC / ST / OBC Grievance Cell </span> </a>
+
+
+                              
+                          <a class="font-14 regular" ng-click="mobileMenuToggle();" href="entrepreneurship"> <span
+                              class=""> CVMUISC Idea Launchpad </span> </a>
+                          <!-- <a class="font-14 regular" ng-click="mobileMenuToggle();" href="javascriptvoid(0);"> <span
+                              class=""> University Industry Interaction Cell </span> </a> -->
+                          <a class="font-14 regular" ng-click="mobileMenuToggle();" href="women_development"> <span
+                              class=""> Womens' Development Cell </span> </a>
+                          <a class="font-14 regular" ng-click="mobileMenuToggle();" href="isa"> <span class="">
+                              International Student Affairs </span> </a>
+                          <!-- <a class="font-14 regular" ng-click="mobileMenuToggle();" href="javascriptvoid(0);"> <span class=""> International Students' Cell </span> </a> -->
+                          <a class="font-14 regular" href="icc"> <span class=""> Internal Complaint Committee (ICC)
+                            </span> </a>
+                          <a class="font-14 regular" href="iec"> <span class="">International Education Cell</span> </a>
+                          <a class="font-14 regular" href="cultural-committee"> <span class=""> Cultural Committee
+                            </span> </a>
+                          <!-- <a class="font-14 regular" href="campus-facilities"> <span class=""> Campus Facilities </span>
+                          </a> -->
+                          <a class="font-14 regular" href="sports_committee"> <span class=""> Sports Committee </span>
+                          </a>
+
+                          <a href="sedgs_cell" ng-click="mobileMenuToggle();"> <span class=""> SEDGs Cell</span> </a>
+                          <a href="purchase_committee" ng-click="mobileMenuToggle();"> <span class=""> Purchase
+                              Committee </span> </a>
+                          <a href="academic_bank_credit" ng-click="mobileMenuToggle();"> <span class=""> Academic Bank
+                              Credit </span> </a>
+                          <a href="finance_committee" ng-click="mobileMenuToggle();"> <span class=""> Finance Committee
+                              Members</span> </a>
+                          <a href="cyber_club" ng-click="mobileMenuToggle();"> <span class=""> Cyber Club </span> </a>
+
+                          <a href="swayam_nptel" ng-click="mobileMenuToggle();"> <span class=""> SWAYAM/NPTEL Courses
+                            </span> </a>
+                            <a href="faculty-list" ng-click="mobileMenuToggle();"> <span class=""> List of  Faculty Members
+                            </span> </a>
+
+                            
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- <li class="mobile-nav_primary_item">
+                                    <a class="mobile-nav_primary_link" ng-class="{mobilemenu_active:activePath=='/academics'}" href="academics" ng-click="mobileMenuToggle();">
+                                    	Academics
+                                    </a>
+                                </li> -->
+                  <li class="web_header_slide_li mobile-nav_primary_item black fwbold mobile-nav_acr">
+                    <a href="javascript:void(0)" class="white web_header_slide_li_accordian center_3"
+                      style="color: #fff;" accordion-menu>
+                      Faculties
+                      <div class="accordion_click"></div>
+                    </a>
+                    <div class="content content_mobile web_header_slide_li_content">
+
+                      <div class="" ng-repeat="programFaculty_data in programFaculty_list">
+                        <a class="font-14 regular" ng-click="mobileMenuToggle();"
+                          href="faculty/{{toBase64(programFaculty_data.faculty_id)}}"
+                          class="font_45 sfregular black_max uppercase accordion_title accordion_title_no_after">
+                          <div class="col-xs-10">
+                            {{programFaculty_data.short_name}}
+                          </div>
+                          <div class="col-xs-2 text-right">
+                            <img src="assets/images/cvm/Blue_arrowAsset 25.svg"
+                              class="pull-right blue_Arrrowtable img-responsive text-center" alt="cvm">
+                          </div>
+                          <div class="clearfix"></div>
+                        </a>
+                      </div>
+
+
+                    </div>
+                  </li>
+                  <li class="mobile-nav_primary_item">
+                    <a class="mobile-nav_primary_link" ng-class="{mobilemenu_active:activePath=='/research'}"
+                      href="research" ng-click="mobileMenuToggle();">
+                      Research
+                    </a>
+                  </li>
+                  <!-- <li class="mobile-nav_primary_item">
+                                    <a class="mobile-nav_primary_link" href="admission" ng-class="{mobilemenu_active:activePath=='/admission'}" ng-click="mobileMenuToggle();">
+                                    	Admissions
+                                    </a>
+                                </li> -->
+                  <li class="web_header_slide_li mobile-nav_primary_item black fwbold mobile-nav_acr">
+                    <a href="javascript:void(0)" class="white web_header_slide_li_accordian center_3"
+                      style="color: #fff;" accordion-menu>
+                      Admission
+                      <div class="accordion_click"></div>
+                    </a>
+
+
+                    <div class="content content_mobile web_header_slide_li_content">
+                      <a class="font-14" ng-click="mobileMenuToggle();" href="admission"> Overview </a>
+                      <a class="font-14 " ng-click="mobileMenuToggle();" href="academics"> <span class=""> Under
+                          Graduate Programmes </span></a>
+                      <a class="font-14 " ng-click="mobileMenuToggle();" href="academics"> <span class=""> Post Graduate
+                          Programmes </span></a>
+                      <a class="font-14 " ng-click="mobileMenuToggle();" href="doctral-program"> <span class="">
+                          Doctoral Programmes </span></a>
+                  </li>
+
+
+                   <li class="web_header_slide_li mobile-nav_primary_item black fwbold mobile-nav_acr">
+                    <a href="javascript:void(0)" class="white web_header_slide_li_accordian center_3"
+                      style="color: #fff;" accordion-menu>
+                      Placement
+                      <div class="accordion_click"></div>
+                    </a>
+
+
+                    <div class="content content_mobile web_header_slide_li_content">
+                      <!-- <a class="font-14" ng-click="mobileMenuToggle();" href="admission"> Overview </a>
+                      <a class="font-14 " ng-click="mobileMenuToggle();" href="academics"> <span class=""> Under
+                          Graduate Programmes </span></a>
+                      <a class="font-14 " ng-click="mobileMenuToggle();" href="academics"> <span class=""> Post Graduate
+                          Programmes </span></a>
+                      <a class="font-14 " ng-click="mobileMenuToggle();" href="doctral-program"> <span class="">
+                          Doctoral Programmes </span></a> -->
+
+   <a class="font-14"  ng-click="mobileMenuToggle();" style="font-weight: 100;" href="training-and-placement-cell"> Training and Placement Cell </a>
+                    <a class="font-14 " ng-click="mobileMenuToggle();" style="font-weight: 100;" href="placement-stats"> <span class=""> Placement Stats </span></a>
+                    <a class="font-14 " ng-click="mobileMenuToggle();" style="font-weight: 100;" href="our-leading-recruiters"> <span class=""> Our Leading Recruiters </span></a>
+                    <a class="font-14 " ng-click="mobileMenuToggle();" style="font-weight: 100;" href="placement-gallery"> <span class=""> Placement Gallery </span></a>
+                 
+
+
+                  </li>
+                  <!-- <li class="mobile-nav_primary_item">
+                                    <a class="mobile-nav_primary_link" href="placement" ng-class="{mobilemenu_active:activePath=='/placement'}"  ng-click="mobileMenuToggle();">
+                                        Placement
+                                    </a>
+                                </li> -->
+
+                  <!-- <li class="mobile-nav_primary_item">
+                    <a class="mobile-nav_primary_link" href="news-and-events"
+                      ng-class="{mobilemenu_active:activePath=='/news-and-events'}" ng-click="mobileMenuToggle();">
+                      News & Events
+                    </a>
+                  </li> -->
+
+
+
+
+                  <li class="web_header_slide_li mobile-nav_primary_item black fwbold mobile-nav_acr">
+                                    <a href="javascript:void(0)" class="white web_header_slide_li_accordian center_3" style="color: #fff;" accordion-menu>  
+                                          News and Events
+                                        <div class="accordion_click"></div>
+                                    </a>
+                                    <div class="content content_mobile web_header_slide_li_content">
+                                  
+                                      <a class="font-14 " ng-click="mobileMenuToggle();"  href="news-and-events" > <span class=""> University News </span> </a>  
+                                      <!-- <a class="font-14 " ng-click="mobileMenuToggle();"  href="news-and-events" > <span class=""> Events Calendar </span> </a> -->
+                                      <!-- <a class="font-14 " ng-click="mobileMenuToggle();"  href="news-and-events" > <span class=""> Press Releases </span> </a> -->
+                                      <a class="font-14 " ng-click="mobileMenuToggle();"  href="press-release" > <span class=""> Press Releases </span> </a>
+                                      <a class="font-14 " ng-click="mobileMenuToggle();"  href="newsletter" > <span class=""> Newsletter </span> </a>
+
+                                      
+                                      <!-- <a class="font-14 " ng-click="mobileMenuToggle();"  href="news-and-events" > <span class=""> Newsletter </span> </a> -->
+                                        
+                                  </li> 
+
+
+                  <!-- <li class="mobile-nav_primary_item">
+                                    <a class="mobile-nav_primary_link"  ng-class="{mobilemenu_active:activePath=='/faculty'}" href="faculty" ng-click="mobileMenuToggle();">
+                                        Faculty
+                                    </a>
+                                </li>  -->
+
+
+                  <!-- <li class="mobile-nav_primary_item">
+                                    <a class="mobile-nav_primary_link"  href="cvmu_committees"  ng-class="{mobilemenu_active:activePath=='/cvmu_committees'}"  ng-click="mobileMenuToggle();" >
+                                        CVMU Committee 
+                                    </a>
+                                </li>  -->
+
+
+                  <li class="web_header_slide_li mobile-nav_primary_item black fwbold mobile-nav_acr">
+                    <a href="javascript:void(0)" class="white web_header_slide_li_accordian center_3"
+                      style="color: #fff;" accordion-menu>
+                      Student Corner
+                      <div class="accordion_click"></div>
+                    </a>
+
+
+                    <div class="content content_mobile web_header_slide_li_content">
+                      <!-- <a  ng-class="{mobilemenu_active:activePath=='/academics'}" ng-click="mobileMenuToggle();" class="font-14 " href="academics"> <span class="">   Under Graduate Programme  </span></a>
+                                        <a  ng-class="{mobilemenu_active:activePath=='/academics'}" ng-click="mobileMenuToggle();" class="font-14 " href="academics"> <span class="">  Post Graduate Programme </span></a>
+                                        <a  ng-class="{mobilemenu_active:activePath=='/doctral-program'}" ng-click="mobileMenuToggle();" class="font-14 " href="doctral-program"> <span class="">  Doctoral Programme </span></a> -->
+
+                      <a ng-class="{mobilemenu_active:activePath=='/exam-timetable'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="exam-timetable"> <span class=""> Exam Time Table </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/exam-timetable-notification'}"
+                        ng-click="mobileMenuToggle();" class="font-14 " href="exam-timetable-notification"> <span
+                          class="">Exam Result Notification </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/campus_life'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="campus_life"> <span class=""> Campus Life </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/sports_Recreation'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="sports_Recreation"> <span class=""> Sports Recreation </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/cvmhostels'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="cvmhostels"> <span class=""> Hostel </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/transportation-facility'}"
+                        ng-click="mobileMenuToggle();" class="font-14 " href="transportation-facility"> <span class="">
+                          Transportation </span></a>
+                      <a ng-click="mobileMenuToggle();" class="font-14 " href="https://cvmu.ac.in/"> <span class=""> ERP
+                        </span></a>
+                      <!-- <a  ng-click="mobileMenuToggle();" class="font-14 " href="https://elearning.cvmu.edu.in/"> <span class=""> E - Learning </span></a> -->
+                      <!-- <a  ng-click="mobileMenuToggle();" class="font-14 " href="entrepreneurship"> <span class=""> CVMUISC (SSIP) </span></a> -->
+                      <a ng-class="{mobilemenu_active:activePath=='/cvmuhackathon'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="cvmuhackathon"> <span class=""> CVMU Hackathon </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/cvmu-bbic'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="cvmu-bbic"> <span class=""> CVMU BBIC </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/project-exhibition'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="project-exhibition"> <span class=""> Project Exhibition </span></a>
+                      <a ng-class="{mobilemenu_active:activePath=='/mba'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="mba"> <span class="">CVMU MBA </span></a>
+
+
+                      <a ng-class="{mobilemenu_active:activePath=='/grievance'}" ng-click="mobileMenuToggle();"
+                        class="font-14 " href="grievance"> <span class=""> Grievance Redressal &amp; Arbitration
+                        </span></a>
+
+
+                      <a ng-class="{mobilemenu_active:activePath=='/internationalization'}"
+                        ng-click="mobileMenuToggle();" class="font-14 " href="internationalization"> <span class="">
+                          Internationalization & Erasmus </span></a>
+
+
+                      <a href="https://shodhganga.inflibnet.ac.in/handle/10603/518015" target="_blank"> <span class="">
+                          PHD Thesis </span> </a>
+                      <a href="ncc_nss" ng-click="mobileMenuToggle();"> <span class=""> NCC/NSS</span> </a>
+					  <a href="assets/images/Coc_Undertaking_Code_of_Conduct_CVMU.pdf" target="_blank" ng-click="mobileMenuToggle();"> <span class=""> CoC-Undertaking </span> </a>
+					  
+					  
+                      <!-- <a href="anti-ragging" ng-click="mobileMenuToggle();" > <span class="">  Anti  Ragging</span> </a> -->
+                      <!-- <a href="grievance_Cell" ng-click="mobileMenuToggle();" > <span class="">  Grievance Cell</span> </a> -->
+
+                      <!-- <a href="assets/images/pdf/FET -Guidelines of Credit transfer through SWAYAM.pdf" target="_blank" ng-click="mobileMenuToggle();" > <span class="">  SWAYAM/NPTEL Courses </span> </a> -->
+
+                  </li>
+                  <li class="mobile-nav_primary_item">
+                    <a ng-class="{mobilemenu_active:activePath=='/scholarship'}" class="mobile-nav_primary_link "
+                      href="scholarship" ng-click="mobileMenuToggle();">
+                      Scholarship
+                    </a>
+                  </li>
+                  <li class="mobile-nav_primary_item">
+                    <a class="mobile-nav_primary_link" href="https://www.coursera.org/" target="_blank"
+                      ng-click="mobileMenuToggle();">
+                      Coursera
+                    </a>
+                  </li>
+                  <li class="mobile-nav_primary_item" ng-click="mobileMenuToggle();">
+                    <a class="mobile-nav_primary_link" href="circular">
+                      Circulars & Notices
+                    </a>
+                  </li>
+                  <!-- <li class="mobile-nav_primary_item" ng-click="mobileMenuToggle();">
+                                    <a  class="mobile-nav_primary_link" href="notices">
+                                         Notices
+                                    </a>
+                                </li> -->
+                  <li class="mobile-nav_primary_item" ng-click="mobileMenuToggle();">
+                    <a class="mobile-nav_primary_link" href="nep2020">
+                      NEP 2020
+                    </a>
+                  </li>
+
+
+                  
+                 <li class="web_header_slide_li mobile-nav_primary_item black fwbold mobile-nav_acr">
+                                    <a href="javascript:void(0)" class="white web_header_slide_li_accordian center_3" style="color: #fff;" accordion-menu>  
+                                          NIRF
+                                        <div class="accordion_click"></div>
+                                    </a>
+                                    <div class="content content_mobile web_header_slide_li_content">
+                                       <a class="font-14" style="font-weight: 100;" ng-click="mobileMenuToggle();" href="assets/pdf/nirf/nirf2026.pdf" target="_blank"> <span class=""> NIRF  2026 </span> </a>
+                                      <a class="font-14" style="font-weight: 100;" ng-click="mobileMenuToggle();" href="assets/pdf/nirf/nirf2025.pdf" target="_blank"> <span class=""> NIRF  2025 </span> </a>                                                                                  
+                                  </li> 
+
+
+
+
+
+
+
+                  <li class="mobile-nav_primary_item">
+                    <!-- <a class="mobile-nav_primary_link " href="https://rms.cvmu.ac.in/"  target="_blank" ng-click="mobileMenuToggle();"> -->
+                    <a class="mobile-nav_primary_link " href="career" ng-click="mobileMenuToggle();">
+
+
+                      Career
+                    </a>
+                  </li>
+
+
+                </ul>
+                <div class="bottom_mobilemenu">
+                  <li class="mobile-nav_primary_item">
+                    <a ng-class="{mobilemenu_active:activePath=='/fees_Payment'}"
+                      class="mobile-nav_primary_link fwnormal" href="fees_Payment" ng-click="mobileMenuToggle();">
+                      Fees Payment
+                    </a>
+                  </li>
+
+
+
+                  <li class="mobile-nav_primary_item">
+                    <a class="mobile-nav_primary_link fwnormal" href="assets/images/pdf/full_page.jpg" target="_blank">
+                      E - Brochure
+                    </a>
+                  </li>
+
+
+                  <li class="mobile-nav_primary_item">
+                    <a ng-class="{mobilemenu_active:activePath=='/contact'}" class="mobile-nav_primary_link fwnormal"
+                      href="contact" ng-click="mobileMenuToggle();">
+                      Contact
+                    </a>
+                  </li>
+                </div>
+
+              </div>
+              <div class="bottom_strip_sticky">
+                <div class="width50mobile_menu">
+                  <div class="menu_bottom_social_wrapper">
+                    <a class="social-media" href="https://www.facebook.com/CVMUniversity/" target="_blank">
+                      <div class="menu_bottom_social_icon">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                      </div>
+                    </a>
+                    <a class="social-media" href="https://www.instagram.com/cvmu.university/?hl=en" target="_blank">
+                      <div class="menu_bottom_social_icon">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                      </div>
+                    </a>
+                    <a class="social-media" href="https://www.youtube.com/channel/UC7gvtRFAYIiJo1gjptY3Myg"
+                      target="_blank">
+                      <div class="menu_bottom_social_icon">
+                        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                      </div>
+                    </a>
+                    <a class="social-media" href="https://in.linkedin.com/company/cvmuniversity" target="_blank">
+                      <div class="menu_bottom_social_icon">
+                        <i class="fab fa-linkedin-in"></i>
+                      </div>
+                    </a>
+
+
+
+                  </div>
+                  <!-- <div class="mobile_menu_icon"> 
+                                        <ul class="header-nav-top">                                                                               
+                                            <li class="header-nav-top_item websocial">
+                                                <a class="social-media" href="https://www.facebook.com/CVMUniversity/" target="_blank">
+                                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                           
+                                            <li class="header-nav-top_item websocial">
+                                                <a class="social-media" href="https://www.instagram.com/cvmu.university/?hl=en" target="_blank">
+                                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li class="header-nav-top_item websocial">
+                                                <a class="social-media" href="https://www.youtube.com/channel/UC7gvtRFAYIiJo1gjptY3Myg" target="_blank">
+                                                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div> -->
+                </div>
+                <div class="width50mobile_menu">
+                  <!-- <a class="menu_bottom_btn" href="https://admissions.cvmu.edu.in/" target="_blank">
+                                        <p>
+                                            PHD - Apply Now 
+                                        </p>
+                                        <div class="menu_bottom_btn_arrow">
+                                            <img src="assets/images/home/black_up.svg" class="img-responsive">
+                                        </div>
+                                    </a> -->
+
+                  <a class="menu_bottom_btn" href="CVMU_Public_Self_Disclosure.pdf" target="_blank">
+                    <p>
+                      <!-- Mandatory Disclosures -->
+                      Disclosures
+                    </p>
+                    <div class="menu_bottom_btn_arrow">
+                      <img src="assets/images/home/black_up.svg" class="img-responsive">
+                    </div>
+                  </a>
+
+                  <!-- <div class="width50mobile_menu_right">
+                                        <div class="mobile_menu_icon"> 
+                                            <ul class="header-nav-top">
+                                                <li class="header-nav-top_item last_li_header">
+                                                    <a class="header-nav-top_link" href="https://adm.cvmu.ac.in" target="_blank">
+                                                        Apply Now
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-nav-global_spacer"></div>
+    <div class="search-bar_overlay-screen"></div>
+  </header>
+</div>
+
+
+
+<style>
+  .about_wrapper_new a {
+    color: black;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    float: left;
+    width: 100% !important;
+
+  }
+
+  .about_wrapper_new:hover a {
+    color: #fff !important;
+  }
+</style>
+
+
+
+
+<!-- Start for Admission Form -->
+<div class="applyNowOverlay" id="applyOverlay"></div>
+
+<div class="apply_form_wrapper" id="applyFormWrapper">
+  <div class="apply_form_popup relative">
+    <div class="close_icon" onclick="closeApplyForm()">
+      <img src="assets/images/home/close.svg" alt="" />
+    </div>
+    <div class="apply_form_content">
+      <h2 class="font_40 title_fontfamily">Admission Open</h2>
+
+      <form id="apply_form" onsubmit="submitApplication(event)">
+        <div class="form_wrapper">
+          <div class="contact_lable">
+            <div class="field-title">Enter Name *</div>
+            <input id="name" name="name" type="text" required class="form-control" placeholder="Enter your full name" />
+          </div>
+
+          <div class="contact_lable">
+            <div class="field-title">Enter Email Address *</div>
+            <input id="email" name="email" type="email" required class="form-control"
+              placeholder="Enter your email address" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+            <span class="error-message" id="emailError"></span>
+          </div>
+
+          <div class="contact_lable">
+            <div class="field-title">Enter Mobile Number *</div>
+            <div class="phone_wrapper">
+              <select class="country_code" name="countryCode">
+                <!-- Will be populated by JavaScript -->
+              </select>
+              <input id="phone" name="phone" type="tel" required class="form-control" pattern="[0-9]{10}"
+                title="Please enter a valid phone number" placeholder="Enter your mobile number" />
+              <button type="button" id="sendOtpBtn" class="send-otp-btn" disabled>
+                Send OTP
+              </button>
+            </div>
+            <span class="error-message" id="phoneError"></span>
+          </div>
+
+          <div class="contact_lable">
+            <div class="field-title">Enter OTP</div>
+            <div class="otp-wrapper">
+              <input type="text" class="otp-input" maxlength="1" data-index="1" />
+              <input type="text" class="otp-input" maxlength="1" data-index="2" />
+              <input type="text" class="otp-input" maxlength="1" data-index="3" />
+              <input type="text" class="otp-input" maxlength="1" data-index="4" />
+              <input type="text" class="otp-input" maxlength="1" data-index="5" />
+              <input type="text" class="otp-input" maxlength="1" data-index="6" />
+              <input type="hidden" id="otp" name="otp" />
+            </div>
+            <div class="resend-otp-wrapper" style="display: none">
+              <span id="timer" class="timer"></span>
+              <button type="button" id="resendOtpBtn" class="resend-otp-btn" disabled>
+                🔄 Resend OTP
+              </button>
+            </div>
+          </div>
+
+          <div class="row location-row">
+            <div class="col-6 pr-2">
+              <div class="contact_lable">
+                <div class="field-title">Select State *</div>
+                <select id="state" name="state" required class="form-control">
+                  <option value="">Select State *</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 pl-2">
+              <div class="contact_lable">
+                <div class="field-title">Select City *</div>
+                <select id="city" name="city" required class="form-control">
+                  <option value="">Select City *</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact_lable">
+            <div class="field-title">Select Eligibility *</div>
+            <select id="eligibility" name="eligibility" required class="form-control">
+              <option value="">Select your eligibility</option>
+            </select>
+          </div>
+
+          <div class="contact_lable">
+            <div class="field-title">Select Program *</div>
+            <select id="program" name="program" required class="form-control">
+              <option value="">Select Program</option>
+            </select>
+          </div>
+
+          <div class="checkbox_wrapper">
+            <input type="checkbox" id="authorize" name="authorize" required />
+            <label for="authorize">
+              I authorize The Charutar Vidya Mandal (CVM) University to contact me via Email, SMS, WhatsApp, and Phone
+              Calls for updates and notifications. This consent overrides any registration on DND/NDNC lists. *
+            </label>
+          </div>
+
+          <button type="submit" class="submit_btn">SUBMIT</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Update the floating button HTML -->
+<div class="floating-apply-btn" onclick="openApplyForm()">
+  <img src="assets/images/mba/apply.png" alt="Apply Now" class="apply-img" />
+</div>
+
+<!-- Add this before the closing </body> tag -->
+<div class="floating-call-btn">
+  <a href="tel:6358819009">
+    <div class="call-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
+      </svg>
+    </div>
+    <span class="call-text">6358819009</span>
+  </a>
+</div>
+
+<!-- Add this after the floating-call-btn div -->
+<!-- <div class="floating-whatsapp-btn">
+<a href="https://wa.me/916358818008" target="_blank">
+  <div class="whatsapp-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </div>
+  <span class="whatsapp-text">+91 6358 818 008</span>
+</a>
+</div> -->
+
+<style>
+  .quickEnquiryOverlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -999;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+  }
+
+  .quickEnquiryOverlay.inqury_active {
+    z-index: 99999 !important;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .side_popup_wrapper {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    height: 100%;
+    background-color: #fff;
+    z-index: 99999999;
+    width: 530px;
+    transition: all ease 0.4s;
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto;
+  }
+
+  .side_popup_wrapper.inqury_active {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .side_popup_wrapper .inquiry_popup {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .side_popup_wrapper .close_icon {
+    width: 2rem;
+    margin-left: auto;
+  }
+
+  .side_popup_wrapper .inquiry_title p {
+    font-family: var(--regular-font-family);
+    color: #000;
+  }
+
+  .side_popup_wrapper .location_text p {
+    font-size: var(--font-18);
+    font-family: var(--regular-font-family);
+    color: #000;
+    line-height: 1.4;
+    width: 60%;
+    padding-top: 1.5rem;
+  }
+
+  .side_popup_wrapper .side_popup_in form {
+    padding-top: 60px;
+  }
+
+  .side_popup_wrapper .form_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .side_popup_wrapper .contact_lable {
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .side_popup_wrapper .form-control {
+    position: relative;
+    border-radius: 0.25rem;
+    border: 1px solid #000000;
+    width: 100%;
+    padding: 6px 12px;
+    font-family: var(--roboto-regular);
+    -webkit-appearance: none;
+    height: 40px;
+  }
+
+  .side_popup_wrapper .md-lable {
+    color: #000000;
+    padding: 4px 6px;
+    position: absolute;
+    top: 50%;
+    transition: all 0.1s ease;
+    transform: translateY(-50%);
+    left: 1rem;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: normal;
+    /* background-color: white!important; */
+  }
+
+  .side_popup_wrapper div.contact_lable input:focus~label.md-lable,
+  .side_popup_wrapper div.contact_lable textarea:focus~label.md-lable,
+  .side_popup_wrapper div.contact_lable input.not_required~label.md-lable,
+  .side_popup_wrapper div.contact_lable textarea.not_required~label.md-lable {
+    transition: all 0.1s ease;
+    top: 5%;
+    transform: translateY(-50%);
+    left: 0.3rem;
+    background: #fff;
+    z-index: 5;
+    color: #000;
+    font-size: 14px;
+  }
+
+  .side_popup_wrapper .contact_lable input.ng-not-empty~label.md-lable,
+  .side_popup_wrapper.contact_lable textarea.ng-not-empty~label.md-lable,
+  .side_popup_wrapper .contact_lable select.ng-not-empty~label.md-lable {
+    transition: all 0.1s ease;
+    top: 5%;
+    transform: translateY(-50%);
+    left: 0.3rem;
+    background: #fff;
+    z-index: 5;
+    color: #000;
+    font-size: 14px;
+  }
+
+  .side_popup_wrapper textarea.ng-not-empty~label.md-lable {
+    transition: all 0.1s ease;
+    top: 5%;
+    transform: translateY(-50%);
+    left: 0.3rem;
+    background: #fff;
+    z-index: 5;
+    color: #000;
+    font-size: 14px;
+  }
+
+  input:focus {
+    border-color: #000 !important;
+    box-shadow: unset !important;
+  }
+
+  textarea:focus {
+    border-color: #000 !important;
+    box-shadow: unset !important;
+  }
+
+  .side_popup_wrapper .filled-div-button.button-div .button-style.orange-button {
+    background-color: #efaf1a;
+    border-color: #efaf1a;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  .side_popup_wrapper .button-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0 1.5rem;
+    height: 54px;
+    background-color: transparent;
+    border-radius: 8px;
+    border: 1px solid transparent;
+  }
+
+  .side_popup_wrapper .filled-div-button:hover .button-style.orange-button {
+    background-color: transparent;
+    border-color: #000;
+    color: #000;
+  }
+
+  label.error {
+    position: absolute;
+    margin-top: 0.15rem;
+    display: block;
+    padding-left: 0rem;
+    font-size: 1rem;
+    color: #ff0000;
+    font-family: var(--roboto-regular);
+  }
+
+  @media only screen and (max-width: 991px) {
+    .side_popup_wrapper {
+      position: fixed;
+      right: unset;
+      bottom: -100%;
+      top: unset;
+      height: 70%;
+      width: 100%;
+    }
+
+    .side_popup_wrapper.inqury_active {
+      right: unset;
+      bottom: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .applyNowOverlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -999;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .applyNowOverlay.active {
+    z-index: 99999;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .apply_form_wrapper {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 500px;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 999999;
+    transition: all 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .apply_form_wrapper.active {
+    right: 0;
+  }
+
+  .apply_form_popup {
+    padding: 30px;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .apply_form_popup h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 12px;
+  }
+
+  .close_icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .close_icon:hover {
+    background: #eee;
+  }
+
+  .form_wrapper {
+    margin-top: 15px;
+  }
+
+  .field-title {
+    font-size: 12px;
+    color: #007bff;
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+
+  .contact_lable {
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .form-control {
+    width: 100%;
+    height: 40px;
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+  }
+
+  .md-lable {
+    display: none;
+  }
+
+  .phone_wrapper {
+    display: flex;
+    gap: 8px;
+    position: relative;
+    margin-top: 0;
+    align-items: flex-start;
+  }
+
+  .phone_wrapper .md-lable {
+    top: -10px;
+    left: 0;
+    font-size: 12px;
+    color: #666;
+    background: #fff;
+    padding: 0 5px;
+    transform: none;
+  }
+
+  .country_code {
+    width: 100px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  select.form-control {
+    appearance: none;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23666' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+
+  .checkbox_wrapper {
+    margin: 8px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .checkbox_wrapper input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+  }
+
+  .checkbox_wrapper label {
+    font-size: 12px;
+    line-height: 1.3;
+    color: #666;
+  }
+
+  .submit_btn {
+    width: 100%;
+    height: 50px;
+    background: #e4a853;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .submit_btn.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 576px) {
+    .apply_form_wrapper {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .apply_form_popup {
+      padding: 20px;
+    }
+
+    .phone_wrapper {
+      flex-wrap: wrap;
+    }
+
+    .country_code {
+      width: 100%;
+    }
+  }
+
+  .row {
+    margin-bottom: 8px;
+  }
+
+  .otp-wrapper {
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .otp-input {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .otp-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+    outline: none;
+  }
+
+  @media (max-width: 400px) {
+    .otp-input {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    .otp-wrapper {
+      gap: 5px;
+    }
+  }
+
+  .resend-otp-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .timer {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .resend-otp-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .resend-otp-btn:not(:disabled):hover {
+    background: rgba(0, 123, 255, 0.1);
+  }
+
+  .resend-otp-btn:disabled {
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  /* Animation for the emoji */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .resend-otp-btn:not(:disabled):hover .emoji {
+    animation: spin 1s linear infinite;
+  }
+
+  :root {
+    /* Light theme variables */
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --border-color: #dddddd;
+    --input-bg: #ffffff;
+    --title-color: #007bff;
+    --label-color: #666666;
+    --hover-bg: rgba(0, 123, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    --checkbox-bg: #ffffff;
+    --submit-btn-bg: #e4a853;
+    --submit-btn-color: #ffffff;
+    --close-btn-bg: #f5f5f5;
+  }
+
+  [data-theme="dark"] {
+    /* Dark theme variables */
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --border-color: #444444;
+    --input-bg: #2d2d2d;
+    --title-color: #5aa6ff;
+    --label-color: #bbbbbb;
+    --hover-bg: rgba(90, 166, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --checkbox-bg: #2d2d2d;
+    --submit-btn-bg: #e4a853;
+    --submit-btn-color: #ffffff;
+    --close-btn-bg: #2d2d2d;
+  }
+
+  /* Theme toggle button */
+  .theme-toggle {
+    position: absolute;
+    right: 70px;
+    top: 20px;
+    cursor: pointer;
+    z-index: 2;
+    font-size: 20px;
+    background: var(--close-btn-bg);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .theme-toggle:hover {
+    transform: scale(1.1);
+  }
+
+  .theme-toggle .dark-mode {
+    display: none;
+  }
+
+  [data-theme="dark"] .theme-toggle .dark-mode {
+    display: block;
+  }
+
+  [data-theme="dark"] .theme-toggle .light-mode {
+    display: none;
+  }
+
+  /* Update existing styles to use variables */
+  .apply_form_wrapper {
+    background-color: var(--bg-color);
+    box-shadow: -5px 0 15px var(--shadow-color);
+  }
+
+  .apply_form_popup h2 {
+    color: var(--text-color);
+    border-bottom-color: var(--title-color);
+  }
+
+  .field-title {
+    color: var(--title-color);
+  }
+
+  .form-control {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+  }
+
+  .form-control::placeholder {
+    color: var(--label-color);
+  }
+
+  .form-control:focus {
+    border-color: var(--title-color);
+    box-shadow: 0 0 0 2px var(--hover-bg);
+  }
+
+  .close_icon {
+    background: var(--close-btn-bg);
+  }
+
+  .checkbox_wrapper label {
+    color: var(--text-color);
+  }
+
+  .checkbox_wrapper input[type="checkbox"] {
+    background-color: var(--checkbox-bg);
+    border-color: var(--border-color);
+  }
+
+  .submit_btn {
+    background: var(--submit-btn-bg);
+    color: var(--submit-btn-color);
+  }
+
+  .timer {
+    color: var(--label-color);
+  }
+
+  .resend-otp-btn {
+    color: var(--title-color);
+  }
+
+  .resend-otp-btn:not(:disabled):hover {
+    background: var(--hover-bg);
+  }
+
+  .resend-otp-btn:disabled {
+    color: var(--label-color);
+  }
+
+  .otp-input {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+  }
+
+  select.form-control option {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+  }
+
+  .floating-apply-btn {
+    position: fixed;
+    right: -77px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    display: block;
+    border-radius: 0;
+  }
+
+  .apply-img {
+    width: 200px;
+    height: auto;
+    transform: rotate(-90deg);
+    transition: all 0.3s ease;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  .floating-apply-btn:hover .apply-img {
+    transform: rotate(-90deg) scale(1.1);
+    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .floating-apply-btn {
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      bottom: 20px;
+    }
+
+    .apply-img {
+      width: 150px;
+      height: auto;
+      transform: rotate(-90deg);
+    }
+
+    .floating-apply-btn:hover .apply-img {
+      transform: rotate(-90deg) scale(1.05);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .floating-apply-btn {
+      right: -40px;
+      bottom: 200px;
+    }
+
+    .apply-img {
+      width: 130px;
+    }
+  }
+
+  /* Add touch device support */
+  @media (hover: none) {
+    .floating-apply-btn:active .apply-img {
+      transform: rotate(-90deg) scale(1.05);
+    }
+  }
+
+  /* Add transition for theme changes */
+  .apply_form_wrapper {
+    transition: all 0.3s ease;
+  }
+
+  /* Update theme-related styles to be more specific */
+  .apply_form_wrapper[data-theme="dark"] {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .apply_form_wrapper[data-theme="dark"] .form-control {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+  }
+
+  /* Add any other theme-specific styles you need */
+
+  /* Add these styles */
+  .floating-call-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+
+  .floating-call-btn a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #e4853a;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .floating-call-btn a:hover {
+    background: #d67728;
+    transform: translateX(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .call-icon {
+    width: 24px;
+    height: 24px;
+    animation: pulse 2s infinite;
+  }
+
+  .call-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .call-text {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--regular-font-family);
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .floating-call-btn {
+      bottom: 15px;
+      right: 15px;
+    }
+
+    .floating-call-btn a {
+      padding: 8px 15px;
+    }
+
+    .call-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .call-text {
+      font-size: 14px;
+    }
+  }
+
+  /* Add these styles after your existing floating-call-btn styles */
+  .floating-whatsapp-btn {
+    position: fixed;
+    bottom: 90px;
+    /* Position above the call button */
+    right: 20px;
+    z-index: 9999;
+  }
+
+  .floating-whatsapp-btn a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25d366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .floating-whatsapp-btn a:hover {
+    background: #128c7e;
+    transform: translateX(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .whatsapp-icon {
+    width: 24px;
+    height: 24px;
+    animation: pulse 2s infinite;
+  }
+
+  .whatsapp-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .whatsapp-text {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--regular-font-family);
+  }
+
+  /* Update mobile responsiveness */
+  @media (max-width: 768px) {
+    .floating-whatsapp-btn {
+      bottom: 80px;
+      right: 15px;
+    }
+
+    .floating-call-btn {
+      bottom: 20px;
+      right: 15px;
+    }
+
+    .floating-whatsapp-btn a,
+    .floating-call-btn a {
+      padding: 8px 15px;
+    }
+
+    .whatsapp-icon,
+    .call-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .whatsapp-text,
+    .call-text {
+      font-size: 14px;
+    }
+  }
+
+  /* Add hover animation for both buttons */
+  @keyframes slideIn {
+    from {
+      transform: translateX(10px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .floating-whatsapp-btn,
+  .floating-call-btn {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .location-row {
+    display: flex;
+    margin: 0 -8px;
+    margin-bottom: 8px;
+  }
+
+  .col-6 {
+    flex: 0 0 46%;
+    max-width: 46%;
+    padding: 0 8px;
+  }
+
+  .pr-2 {
+    padding-right: 8px;
+  }
+
+  .pl-2 {
+    padding-left: 8px;
+  }
+
+  /* Update existing form-control style */
+  .form-control {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 8px;
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  /* Remove margin from form-controls inside location-row */
+  .location-row .form-control {
+    margin-bottom: 0;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 480px) {
+    .location-row {
+      margin: 0 -4px;
+    }
+
+    .col-6 {
+      padding: 0 4px;
+    }
+
+    .pr-2 {
+      padding-right: 4px;
+    }
+
+    .pl-2 {
+      padding-left: 4px;
+    }
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+  }
+
+  .form-control.error {
+    border-color: #dc3545;
+  }
+
+  .form-control.valid {
+    border-color: #28a745;
+  }
+
+  .send-otp-btn {
+    min-width: 90px;
+    height: 40px;
+    background: #e4a853;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .send-otp-btn.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .send-otp-btn.active:hover {
+    background: #d67728;
+  }
+
+  .send-otp-btn.sent {
+    background: #28a745;
+    pointer-events: none;
+  }
+
+  @media (max-width: 576px) {
+    .phone_wrapper {
+      flex-wrap: wrap;
+    }
+
+    .send-otp-btn {
+      margin-top: 8px;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Add these functions at the beginning of your script section
+  async function fetchCountryCodes() {
+    try {
+      const response = await fetch(
+        "https://api.cvmu.edu.in/hrms/api/v1/country/view?limit=300&offset=0"
+      );
+      const data = await response.json();
+      return data.data.results;
+    } catch (error) {
+      console.error("Error fetching country codes:", error);
+      return [];
+    }
+  }
+
+  function populateCountryCodeDropdown(countries) {
+    const countryCodeSelects = document.querySelectorAll(".country_code");
+
+    countryCodeSelects.forEach((select) => {
+      select.innerHTML = "";
+
+      // Sort countries by name
+      countries.sort((a, b) => a.name.localeCompare(b.name));
+
+      // Add India as first option
+      const indiaOption = countries.find((country) => country.name === "India");
+      if (indiaOption) {
+        const option = document.createElement("option");
+        option.value = indiaOption.code;
+        option.textContent = `+${indiaOption.code.replace("+", "")}`;
+        option.selected = true;
+        select.appendChild(option);
+      }
+
+      // Add other countries
+      countries.forEach((country) => {
+        if (country.name !== "India") {
+          const option = document.createElement("option");
+          option.value = country.code;
+          option.textContent = `+${country.code.replace("+", "")}`;
+          select.appendChild(option);
+        }
+      });
+    });
+  }
+
+  // Add these functions at the beginning of your script section
+  async function fetchStates() {
+    try {
+      const response = await fetch(
+        "https://api.cvmu.edu.in/hrms/api/v1/state/view/1"
+      );
+      const data = await response.json();
+      return data.data.results;
+    } catch (error) {
+      console.error("Error fetching states:", error);
+      return [];
+    }
+  }
+
+  async function fetchDistricts(stateId) {
+    try {
+      const response = await fetch(
+        `https://api.cvmu.edu.in/hrms/api/v1/district/view/${stateId}`
+      );
+      const data = await response.json();
+      return data.data.results;
+    } catch (error) {
+      console.error("Error fetching districts:", error);
+      return [];
+    }
+  }
+
+  // Function to populate state dropdown
+  async function populateStateDropdown() {
+    const states = await fetchStates();
+    const stateSelects = document.querySelectorAll('select[name="state"]');
+    let gujaratOption;
+
+    stateSelects.forEach((select) => {
+      select.innerHTML = '<option value="">Select State *</option>';
+
+      // Sort states alphabetically
+      states.sort((a, b) => a.name.localeCompare(b.name));
+
+      // Add Gujarat as first option
+      gujaratOption = states.find((state) => state.name === "Gujarat");
+      if (gujaratOption) {
+        const option = document.createElement("option");
+        option.value = gujaratOption.id;
+        option.textContent = gujaratOption.name;
+        option.selected = true;
+        select.appendChild(option);
+      }
+
+      // Add other states
+      states.forEach((state) => {
+        if (state.name !== "Gujarat") {
+          const option = document.createElement("option");
+          option.value = state.id;
+          option.textContent = state.name;
+          select.appendChild(option);
+        }
+      });
+    });
+
+    // Immediately populate cities for Gujarat
+    if (gujaratOption) {
+      await populateCityDropdown(gujaratOption.id);
+    }
+  }
+
+  // Function to populate city dropdown
+  async function populateCityDropdown(stateId) {
+    const districts = await fetchDistricts(stateId);
+    const citySelects = document.querySelectorAll('select[name="city"]');
+
+    citySelects.forEach((select) => {
+      select.innerHTML = '<option value="">Select City *</option>';
+
+      // Sort districts alphabetically
+      districts.sort((a, b) => a.name.localeCompare(b.name));
+
+      districts.forEach((district) => {
+        const option = document.createElement("option");
+        option.value = district.id;
+        option.textContent = district.name;
+        select.appendChild(option);
+      });
+    });
+  }
+
+
+  function populateProgramDropdown(programs) {
+    const select = document.getElementById("program");
+    if (!select) {
+      console.error("Program select element not found");
+      return;
+    }
+
+    select.innerHTML = '<option value="">Select Program</option>';
+
+    if (programs && Array.isArray(programs)) {
+      // Sort programs by name
+      programs
+        .sort((a, b) => a.program_data.name.localeCompare(b.program_data.name))
+        .forEach(program => {
+          const option = document.createElement("option");
+          option.value = program.program_id;
+          option.textContent = program.program_data.name;
+          select.appendChild(option);
+        });
+    }
+  }
+
+  // Modify your existing openApplyForm function
+  async function openApplyForm() {
+    const overlay = document.getElementById("applyOverlay");
+    const formWrapper = document.getElementById("applyFormWrapper");
+
+    overlay.classList.add("active");
+    setTimeout(() => {
+      formWrapper.classList.add("active");
+    }, 50);
+
+    document.body.style.overflow = "hidden";
+
+    // Initialize eligibility dropdown first
+    await populateEligibilityDropdown();
+
+    // Then initialize other dropdowns
+    const countries = await fetchCountryCodes();
+    populateCountryCodeDropdown(countries);
+    await populateStateDropdown();
+
+    // Initialize checkbox handler
+    handleAuthorizeCheckbox();
+
+    // Initialize floating labels
+    initializeFloatingLabels();
+
+    // Initialize OTP inputs
+    initializeOTPInputs();
+    handlePhoneValidation();
+  }
+
+  function closeApplyForm() {
+    const overlay = document.getElementById("applyOverlay");
+    const formWrapper = document.getElementById("applyFormWrapper");
+
+    formWrapper.classList.remove("active");
+    setTimeout(() => {
+      overlay.classList.remove("active");
+    }, 300); // Match this with your CSS transition time
+
+    document.body.style.overflow = "";
+  }
+
+  // Close form when clicking overlay
+  document
+    .getElementById("applyOverlay")
+    .addEventListener("click", closeApplyForm);
+
+
+  // Update the state change event listener
+  document.querySelectorAll('select[name="state"]').forEach((stateSelect) => {
+    stateSelect.addEventListener("change", async function (e) {
+      const stateId = e.target.value;
+      if (stateId) {
+        await populateCityDropdown(stateId);
+      } else {
+        const citySelects = document.querySelectorAll('select[name="city"]');
+        citySelects.forEach((select) => {
+          select.innerHTML = '<option value="">Select City *</option>';
+        });
+      }
+    });
+  });
+
+  // Update the floating label initialization
+  function initializeFloatingLabels() {
+    document.querySelectorAll(".form-control").forEach((input) => {
+      input.setAttribute("placeholder", " ");
+
+      // Add focus and blur events for better label animation
+      input.addEventListener("focus", () => {
+        input.parentElement.classList.add("focused");
+      });
+
+      input.addEventListener("blur", () => {
+        input.parentElement.classList.remove("focused");
+      });
+    });
+  }
+
+  // Call initializeFloatingLabels when the page loads
+  document.addEventListener("DOMContentLoaded", initializeFloatingLabels);
+
+  // Add this to handle section changes
+  function handleSectionChange() {
+    const formWrapper = document.getElementById("applyFormWrapper");
+    if (formWrapper.classList.contains("active")) {
+      // Keep the form visible but update its content if needed
+      // You can add specific section-related updates here
+    }
+  }
+
+  // Add event listeners for section changes if needed
+  // This depends on how your sections are implemented
+  document.querySelectorAll(".section-link").forEach((link) => {
+    link.addEventListener("click", handleSectionChange);
+  });
+
+  // Add checkbox handler for submit button
+  function handleAuthorizeCheckbox() {
+    const authorizeCheckbox = document.getElementById("authorize");
+    const submitBtn = document.querySelector(".submit_btn");
+
+    authorizeCheckbox.addEventListener("change", function () {
+      if (this.checked) {
+        submitBtn.classList.add("active");
+      } else {
+        submitBtn.classList.remove("active");
+      }
+    });
+  }
+
+  // Add this to your existing JavaScript
+  function initializeOTPInputs() {
+    const otpWrapper = document.querySelector(".otp-wrapper");
+    const otpInputs = otpWrapper.querySelectorAll(".otp-input");
+    const hiddenOtpInput = document.getElementById("otp");
+    const resendWrapper = document.querySelector(".resend-otp-wrapper");
+    let isVerifying = false; // Add flag to prevent duplicate verification
+
+    // Initially disable OTP inputs
+    otpInputs.forEach((input) => {
+      input.disabled = true;
+    });
+
+    // Function to enable OTP inputs and show timer
+    window.enableOTPInput = function () {
+      otpInputs.forEach((input) => {
+        input.disabled = false;
+        input.value = "";
+      });
+      otpInputs[0].focus();
+      resendWrapper.style.display = "flex";
+      startOtpTimer();
+    };
+
+    // Allow only numbers
+    function isNumberKey(evt) {
+      const charCode = evt.which ? evt.which : evt.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        evt.preventDefault();
+        return false;
+      }
+      return true;
+    }
+
+    // Update hidden input with complete OTP
+    function updateHiddenInput() {
+      const otp = Array.from(otpInputs)
+        .map((input) => input.value)
+        .join("");
+      hiddenOtpInput.value = otp;
+
+      if (otp.length === 6 && !window.isVerifyingOTP) {
+        window.isVerifyingOTP = true;
+        verifyOTP().finally(() => {
+          window.isVerifyingOTP = false;
+        });
+      }
+    }
+
+
+    otpInputs.forEach((input, index) => {
+      input.addEventListener("keydown", isNumberKey);
+
+      input.addEventListener("input", (e) => {
+        const currentInput = e.target;
+        const nextInput = otpInputs[index + 1];
+        currentInput.value = currentInput.value.replace(/[^0-9]/g, "");
+
+        if (currentInput.value !== "" && nextInput) {
+          nextInput.focus();
+        }
+        updateHiddenInput();
+      });
+
+      input.addEventListener("keydown", (e) => {
+        const currentInput = e.target;
+        const prevInput = otpInputs[index - 1];
+
+        if (e.key === "Backspace") {
+          if (currentInput.value === "" && prevInput) {
+            e.preventDefault();
+            prevInput.value = "";
+            prevInput.focus();
+            updateHiddenInput();
+          }
+        }
+      });
+
+      input.addEventListener("paste", (e) => {
+        e.preventDefault();
+        const pastedData = e.clipboardData.getData("text").slice(0, 6);
+        const numbers = pastedData.replace(/[^0-9]/g, "").split("");
+
+        otpInputs.forEach((input, i) => {
+          input.value = numbers[i] || "";
+        });
+
+        if (numbers.length > 0) {
+          otpInputs[Math.min(numbers.length, 5)].focus();
+        }
+        updateHiddenInput();
+      });
+    });
+  }
+
+  // Update the phone input handler to trigger OTP
+  function handlePhoneSubmit() {
+    const phoneInput = document.getElementById("phone");
+    const countryCode = document.querySelector(".country_code");
+
+    phoneInput.addEventListener("blur", async function () {
+      if (phoneInput.value.length === 10 && phoneInput.validity.valid) {
+        try {
+          // Here you would make your API call to send OTP
+          // For demo, we'll just simulate it
+          console.log("Sending OTP to:", countryCode.value + phoneInput.value);
+
+          // Enable OTP inputs and show timer after successful OTP send
+          window.enableOTPInput();
+        } catch (error) {
+          console.error("Error sending OTP:", error);
+        }
+      }
+    });
+  }
+
+  // Update startOtpTimer function
+  function startOtpTimer() {
+    const timerDisplay = document.getElementById("timer");
+    const resendButton = document.getElementById("resendOtpBtn");
+    let timeLeft = 60;
+
+    resendButton.disabled = true;
+
+    timerDisplay.textContent = `Wait ${timeLeft}s`;
+    window.otpTimer = setInterval(() => {
+      timeLeft--;
+      timerDisplay.textContent = `Wait ${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(window.otpTimer);
+        timerDisplay.textContent = "";
+        resendButton.disabled = false;
+      }
+    }, 1000);
+  }
+
+
+  // Update handleResendOtp function
+  function handleResendOtp() {
+    const resendButton = document.getElementById("resendOtpBtn");
+
+    resendButton.addEventListener("click", async () => {
+      const phoneInput = document.getElementById("phone");
+      const countryCode = document.querySelector(".country_code");
+
+      try {
+        // Here you would make your API call to resend OTP
+        console.log("Resending OTP to:", countryCode.value + phoneInput.value);
+
+        // Clear existing OTP inputs
+        const otpInputs = document.querySelectorAll(".otp-input");
+        otpInputs.forEach((input) => {
+          input.value = "";
+          input.disabled = false;
+        });
+        otpInputs[0].focus();
+
+        // Restart timer
+        startOtpTimer();
+      } catch (error) {
+        console.error("Error resending OTP:", error);
+      }
+    });
+  }
+
+  // function toggleTheme() {
+  //   const form = document.querySelector(".apply_form_wrapper");
+  //   const currentTheme = form.getAttribute("data-theme");
+  //   const newTheme = currentTheme === "light" ? "light" : "dark";
+
+  //   form.setAttribute("data-theme", newTheme);
+  //   localStorage.setItem("form-theme", newTheme);
+  // }
+
+  // // Initialize theme from localStorage
+  // function initializeTheme() {
+  //   const savedTheme = localStorage.getItem("form-theme");
+  //   const form = document.querySelector(".apply_form_wrapper");
+
+  //   if (savedTheme) {
+  //     form.setAttribute("data-theme", savedTheme);
+  //   } else {
+  //     const prefersDark = window.matchMedia(
+  //       "(prefers-color-scheme: dark)"
+  //     ).matches;
+  //     const theme = prefersDark ? "light" : "light";
+  //     form.setAttribute("data-theme", theme);
+  //   }
+  // }
+
+  // // Update the system theme detection
+  // function detectSystemTheme() {
+  //   const prefersDark = window.matchMedia(
+  //     "(prefers-color-scheme: dark)"
+  //   ).matches;
+  //   const form = document.querySelector(".apply_form_wrapper");
+
+  //   if (form) {
+  //     const theme = prefersDark ? "light" : "dark";
+  //     form.setAttribute("data-theme", theme);
+  //     localStorage.setItem("form-theme", theme);
+  //   }
+  // }
+
+  // // Listen for system theme changes
+  // window
+  //   .matchMedia("(prefers-color-scheme: dark)")
+  //   .addEventListener("change", detectSystemTheme);
+
+  // Initialize theme detection on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    // detectSystemTheme();
+    initializeSectionBehavior();
+  });
+
+  // Update the initializeSectionBehavior function
+  function initializeSectionBehavior() {
+    const banner = document.querySelector(".section1_banner_swiper");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            openApplyForm();
+          } else {
+            closeApplyForm();
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    if (banner) {
+      observer.observe(banner);
+    }
+  }
+
+  // Update isInFirstSection function
+  function isInFirstSection() {
+    const firstSection = document.querySelector(".section1_banner_swiper");
+    if (!firstSection) return false;
+
+    const rect = firstSection.getBoundingClientRect();
+    return rect.top <= 100 && rect.bottom > 0;
+  }
+
+  // Add scroll handler to close form
+  let lastScrollTop = 0;
+  const scrollThreshold = 100; // Increased threshold
+
+  window.addEventListener("scroll", () => {
+    const formWrapper = document.getElementById("applyFormWrapper");
+    if (!formWrapper || !formWrapper.classList.contains("active")) return;
+
+    const st = window.pageYOffset || document.documentElement.scrollTop;
+    if (Math.abs(st - lastScrollTop) > scrollThreshold) {
+      if (!isInFirstSection()) {
+        closeApplyForm();
+      }
+    }
+    lastScrollTop = st;
+  });
+
+  // Add email validation function
+  function validateEmail(email) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  // Add email handler
+  function handleEmailValidation() {
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
+
+    emailInput.addEventListener("blur", function () {
+      const email = this.value.trim();
+
+      if (email === "") {
+        emailError.textContent = "Email is required";
+        emailError.style.display = "block";
+        this.classList.add("error");
+        this.classList.remove("valid");
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        emailError.textContent = "Please enter a valid email address";
+        emailError.style.display = "block";
+        this.classList.add("error");
+        this.classList.remove("valid");
+        return;
+      }
+
+      // Check if email domain exists (optional)
+      const domain = email.split("@")[1];
+      if (!domain.includes(".")) {
+        emailError.textContent = "Invalid email domain";
+        emailError.style.display = "block";
+        this.classList.add("error");
+        this.classList.remove("valid");
+        return;
+      }
+
+      // Email is valid
+      emailError.style.display = "none";
+      this.classList.remove("error");
+      this.classList.add("valid");
+    });
+
+    // Add input event listener to clear error on typing
+    emailInput.addEventListener("input", function () {
+      if (this.value.trim() === "") {
+        emailError.style.display = "none";
+        this.classList.remove("error", "valid");
+      }
+    });
+  }
+
+  // Update form submission to include email validation
+  async function submitApplication(event) {
+    event.preventDefault();
+    console.log("Form submission started");
+
+    const emailInput = document.getElementById("email");
+    const email = emailInput.value.trim();
+    const emailError = document.getElementById("emailError");
+
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail) {
+      emailError.textContent = "Please enter a valid email address";
+      emailError.style.display = "block";
+      emailInput.classList.add("error");
+      emailInput.focus();
+      return;
+    }
+
+    const formData = new FormData(event.target);
+    const formObject = Object.fromEntries(formData.entries());
+    console.log("Form data collected:", formObject);
+
+    const fullName = formObject.name.trim();
+    const [first_name, ...rest] = fullName.split(" ");
+    const last_name = rest.join(" ") || "";
+
+    const stateId = parseInt(formObject.state);
+    const cityId = parseInt(formObject.city);
+    const programId = parseInt(formObject.program);
+    const eligibilityId = parseInt(formObject.eligibility);
+
+    // Get program select element and selected option
+    const programSelect = document.getElementById("program");
+    const selectedOption = programSelect.options[programSelect.selectedIndex];
+    console.log("Selected program:", selectedOption.value);
+
+    // Get phone number
+    const phoneInput = document.getElementById("phone");
+    const phoneNumber = phoneInput ? phoneInput.value.trim() : "";
+
+    try {
+      // First fetch program details to get admission_id
+      const programResponse = await fetch(`https://api.cvmu.edu.in/applicant/api/v1/applicant_portal/get_programs?status=Open&eligibility_head_id=${eligibilityId}`);
+      const programData = await programResponse.json();
+
+      if (!programData.success) {
+        throw new Error("Failed to fetch program details");
+      }
+
+      // Find the selected program
+      const selectedProgram = programData.data.results.find(p => p.program_id === programId);
+      if (!selectedProgram) {
+        throw new Error("Selected program not found");
+      }
+
+      console.log("Selected program details:", selectedProgram);
+
+      // Create the payload with correct admission_id
+      const payload = {
+        first_name,
+        last_name,
+        full_name: fullName,
+        mobile_number: phoneNumber ? `+91-${phoneNumber}` : "",
+        email: formObject.email,
+        city_id: cityId,
+        district_id: cityId,
+        state_id: stateId,
+        faculty_id: null,
+        phd_subject_id: null,
+        program_type_id: selectedProgram.program_data.program_type_id,
+        phd_admission_process_id: null,
+        eligibility_head_id: eligibilityId,
+        program_data: [{
+          admission_id: selectedProgram.admission_id,
+          program_id: programId,
+          is_approved: true
+        }],
+        is_mobile_number_verified: true,
+        utm_source: "cvmu.edu.in",
+        utm_medium: "portal",
+        utm_campaign: "cvmu_website",
+        utm_term: "all",
+        utm_content: "website"
+      };
+
+      console.log("Submitting payload:", payload);
+
+      const response = await fetch("https://api.cvmu.edu.in/applicant/api/v1/applicant_user_register/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+      console.log("✅ Registration API Response:", data);
+
+      if (data.success) {
+        // Close the form first
+        closeApplyForm();
+
+        // Create and show success message
+        const message = document.createElement("div");
+        message.style.position = "fixed";
+        message.style.top = "50%";
+        message.style.left = "50%";
+        message.style.transform = "translate(-50%, -50%)";
+        message.style.background = "#28a745";
+        message.style.color = "#fff";
+        message.style.padding = "30px";
+        message.style.borderRadius = "8px";
+        message.style.zIndex = 10000;
+        message.style.fontSize = "20px";
+        message.style.textAlign = "center";
+        message.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+        message.innerHTML = `
+        <div style="margin-bottom: 15px;">✅ Application Submitted Successfully!</div>
+        <div style="font-size: 16px;">Redirecting to login page in <strong><span id="countdown">5</span></strong> seconds...</div>
+      `;
+        document.body.appendChild(message);
+
+        let countdown = 5;
+        const interval = setInterval(() => {
+          countdown--;
+          document.getElementById("countdown").textContent = countdown;
+          if (countdown === 0) {
+            clearInterval(interval);
+            window.location.href = `https://admissions.cvmu.edu.in/login?phone_number=${phoneNumber}`;
+          }
+        }, 1000);
+      } else {
+        console.error("❌ Submission failed:", data);
+        alert("❌ Submission failed: " + (data.message || "Unknown error"));
+      }
+    } catch (err) {
+      console.error("❌ Error submitting application:", err);
+      alert("Something went wrong. Please try again.");
+    }
+  }
+
+  // Attach submit handler to form
+  document.getElementById("applyForm")?.addEventListener("submit", submitApplication);
+
+  // Add to your initialization
+  document.addEventListener("DOMContentLoaded", () => {
+    handleEmailValidation();
+    // ... your other initializations
+  });
+
+  // Update phone validation and OTP handling
+  function handlePhoneValidation() {
+    console.log("handlePhoneValidation() called ✅");
+
+    const phoneInput = document.querySelector("#applyFormWrapper #phone");
+    const sendOtpBtn = document.querySelector("#applyFormWrapper #sendOtpBtn");
+    const otpInputs = document.querySelectorAll(".otp-input");
+    const timerDisplay = document.getElementById("timer");
+    const resendBtn = document.getElementById("resendOtpBtn");
+    const otpWrapper = document.querySelector(".resend-otp-wrapper");
+
+    if (!phoneInput || !sendOtpBtn) {
+      console.error("Phone input or send button not found ❌");
+      return;
+    }
+
+    // Enable button immediately
+    phoneInput.addEventListener("input", function () {
+      if (this.value.trim().length === 10 && /^\d{10}$/.test(this.value)) {
+        sendOtpBtn.disabled = false;
+        sendOtpBtn.classList.add("active");
+      } else {
+        sendOtpBtn.disabled = true;
+        sendOtpBtn.classList.remove("active");
+      }
+    });
+
+    sendOtpBtn.addEventListener("click", async function () {
+      const phone = phoneInput.value.trim();
+      console.log("Sending OTP to:", phone);
+
+      try {
+        sendOtpBtn.textContent = "Sending...";
+        sendOtpBtn.disabled = true;
+
+        const response = await fetch(
+          "https://api.cvmu.edu.in/applicant/api/v1/applicant_mobile_and_email/otp_send",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              mobile_number: phone,
+              country_code: "91" // Add country code for India
+            }),
+          }
+        );
+
+        const data = await response.json();
+        console.log("API Response:", data);
+
+        if (data.success === true) {
+          sendOtpBtn.textContent = "Sent ✓";
+          sendOtpBtn.classList.add("sent");
+
+          // ✅ Enable OTP inputs
+          otpInputs.forEach((input) => {
+            input.disabled = false;
+            input.value = "";
+          });
+          otpInputs[0].focus();
+
+          // ✅ Show resend section
+          otpWrapper.style.display = "flex";
+
+          // ✅ Start timer
+          let timeLeft = 60;
+          resendBtn.disabled = true;
+          timerDisplay.textContent = `Wait ${timeLeft}s`;
+
+          const timer = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `Wait ${timeLeft}s`;
+            if (timeLeft <= 0) {
+              clearInterval(timer);
+              timerDisplay.textContent = "";
+              resendBtn.disabled = false;
+            }
+          }, 1000);
+        } else {
+          throw new Error(data.message || "Failed to send OTP");
+        }
+      } catch (err) {
+        console.error("OTP API error:", err.message);
+        sendOtpBtn.textContent = "Send OTP";
+        sendOtpBtn.disabled = false;
+      }
+    });
+  }
+
+
+
+  async function verifyOTP() {
+    const phone = document.querySelector("#applyFormWrapper #phone").value.trim();
+    const otp = document.getElementById("otp").value.trim();
+    const otpInputs = document.querySelectorAll(".otp-input");
+    const sendOtpBtn = document.getElementById("sendOtpBtn");
+    const phoneInput = document.getElementById("phone");
+    const resendWrapper = document.querySelector(".resend-otp-wrapper");
+
+    if (otp.length !== 6) {
+      alert("Please enter a valid 6-digit OTP");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://api.cvmu.edu.in/applicant/api/v1/applicant_mobile_and_email/otp_verify", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mobile_number: phone,
+          otp: otp
+        })
+      });
+
+      const data = await response.json();
+      console.log("Verify OTP Response:", data);
+
+      if (data.success) {
+        // Disable OTP inputs
+        otpInputs.forEach(input => {
+          input.disabled = true;
+          input.style.borderColor = "#28a745";
+        });
+
+        // Disable phone input
+        phoneInput.disabled = true;
+
+        // Hide Send OTP button
+        if (sendOtpBtn) {
+          sendOtpBtn.style.display = "none";
+        }
+
+        // Hide resend section
+        if (resendWrapper) {
+          resendWrapper.style.display = "none";
+        }
+
+        // Stop timer
+        if (window.otpTimer) {
+          clearInterval(window.otpTimer);
+        }
+
+        // Show verified badge
+        const verifiedBadge = document.createElement("span");
+        verifiedBadge.textContent = "✔ Verified";
+        verifiedBadge.style.color = "#28a745";
+        verifiedBadge.style.marginLeft = "10px";
+        verifiedBadge.style.fontWeight = "bold";
+        verifiedBadge.style.fontSize = "14px";
+        verifiedBadge.style.marginTop = "5px";
+        verifiedBadge.style.display = "inline-block";
+
+        phoneInput.parentElement.appendChild(verifiedBadge);
+        return true;
+      } else {
+        alert("❌ Invalid OTP, please try again.");
+        return false;
+      }
+    } catch (err) {
+      console.error("Error verifying OTP:", err);
+      alert("Something went wrong. Please try again.");
+      return false;
+    }
+  }
+
+  // Remove duplicate event listeners for resend OTP
+  document.addEventListener("DOMContentLoaded", () => {
+    const resendBtn = document.getElementById("resendOtpBtn");
+    if (resendBtn) {
+      // Remove existing listeners
+      const newResendBtn = resendBtn.cloneNode(true);
+      resendBtn.parentNode.replaceChild(newResendBtn, resendBtn);
+
+      // Add single click handler
+      newResendBtn.addEventListener("click", () => {
+        const sendOtpBtn = document.getElementById("sendOtpBtn");
+        if (sendOtpBtn && !window.isVerifyingOTP) {
+          sendOtpBtn.click();
+        }
+      });
+    }
+  });
+
+  // Function to fetch and populate eligibility options
+  async function populateEligibilityDropdown() {
+    const eligibilitySelect = document.getElementById("eligibility");
+
+    if (!eligibilitySelect) {
+      console.error("Eligibility select element not found");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://api.cvmu.edu.in/university/api/v1/eligibility_head/view");
+      const data = await response.json();
+
+      if (data.success) {
+        eligibilitySelect.innerHTML = '<option value="">Select your eligibility</option>';
+
+        data.data.results.forEach(eligibility => {
+          const option = document.createElement("option");
+          option.value = eligibility.id;
+          option.textContent = eligibility.name;
+          eligibilitySelect.appendChild(option);
+        });
+
+        // Remove any existing event listeners
+        const newEligibilitySelect = eligibilitySelect.cloneNode(true);
+        eligibilitySelect.parentNode.replaceChild(newEligibilitySelect, eligibilitySelect);
+
+        // Add change event listener
+        newEligibilitySelect.addEventListener("change", async function () {
+          const selectedEligibilityId = this.value;
+          console.log("Eligibility changed to:", selectedEligibilityId);
+
+          const programSelect = document.getElementById("program");
+          if (!programSelect) {
+            console.error("Program select element not found");
+            return;
+          }
+
+          if (selectedEligibilityId) {
+            programSelect.innerHTML = '<option value="">Loading programs...</option>';
+            try {
+              const response = await fetch(`https://api.cvmu.edu.in/applicant/api/v1/applicant_portal/get_programs?status=Open&eligibility_head_id=${selectedEligibilityId}`);
+              const data = await response.json();
+
+              if (data.success) {
+                populateProgramDropdown(data.data.results);
+              } else {
+                programSelect.innerHTML = '<option value="">Error loading programs</option>';
+              }
+            } catch (error) {
+              console.error("Error fetching programs:", error);
+              programSelect.innerHTML = '<option value="">Error loading programs</option>';
+            }
+          } else {
+            programSelect.innerHTML = '<option value="">First select eligibility</option>';
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching eligibility data:", error);
+      newEligibilitySelect.innerHTML = '<option value="">Error loading eligibility data</option>';
+    }
+  }
+
+  // Update populateProgramDropdown to use correct ID
+  function populateProgramDropdown(programs) {
+    const select = document.getElementById("program");
+    if (!select) {
+      console.error("Program select element not found in populateProgramDropdown");
+      return;
+    }
+
+    select.innerHTML = '<option value="">Select Program</option>';
+
+    if (programs && Array.isArray(programs)) {
+      programs.forEach((program) => {
+        const option = document.createElement("option");
+        option.value = program.program_id;
+        option.textContent = program.program_data.name;
+        option.dataset.admissionId = program.admission_id;
+        option.dataset.admissionName = program.admission_name;
+        option.dataset.startDate = program.start_date;
+        option.dataset.endDate = program.end_date;
+        option.dataset.totalIntake = program.total_intake;
+        option.dataset.programTypeId = program.program_data.program_type_id;
+        select.appendChild(option);
+      });
+    }
+  }
+
+  // Initialize the form when document is ready
+  document.addEventListener("DOMContentLoaded", function () {
+    // Fetch eligibility data
+    populateEligibilityDropdown();
+
+    // Add change event listener for eligibility dropdown
+    document.getElementById("eligibility")?.addEventListener("change", function () {
+      const selectedEligibilityId = this.value;
+      const programSelect = document.getElementById("program");
+
+      if (!programSelect) {
+        console.error("Program select element not found");
+        return;
+      }
+
+      if (selectedEligibilityId) {
+        fetchPrograms(selectedEligibilityId);
+      } else {
+        programSelect.innerHTML = '<option value="">First select eligibility</option>';
+        programSelect.disabled = true;
+      }
+    });
+
+    // Remove this block since we already have the program select in HTML
+    /* const eligibilitySelect = document.getElementById("eligibility");
+    if (eligibilitySelect) {
+      const programSelectContainer = document.createElement("div");
+      programSelectContainer.innerHTML = `
+        <div class="contact_lable">
+          <div class="field-title">Select Program *</div>
+          <select id="program" name="program" required class="form-control">
+            <option value="">Select Program</option>
+          </select>
+        </div>
+      `;
+      eligibilitySelect.parentElement.after(programSelectContainer);
+    } */
+
+    // Update form submission
+    document.getElementById("applyForm")?.addEventListener("submit", submitApplication);
+  });
+
+  // Initialize form data when document loads
+  document.addEventListener("DOMContentLoaded", async function () {
+    // First, fetch eligibility data
+    await populateEligibilityDropdown();
+
+    // Then fetch other data
+    await populateCountryDropdown();
+    await populateStateDropdown();
+
+    // Initialize other form elements
+    initializeOTPInputs();
+    setupFormValidation();
+
+    // Initially disable program select
+    const programSelect = document.getElementById("program");
+    if (programSelect) {
+      programSelect.disabled = true;
+    }
+  });
+
+
+  // Single initialization function for the entire form
+  document.addEventListener("DOMContentLoaded", async function () {
+    try {
+      // Initialize UI elements first
+      initializeFloatingLabels();
+      initializeOTPInputs();
+      setupFormValidation();
+
+      // Initialize dropdowns in sequence
+      await populateCountryDropdown();
+      await populateStateDropdown();
+
+      // Initialize eligibility last
+      const eligibilitySelect = document.getElementById("eligibility");
+      if (eligibilitySelect) {
+        await populateEligibilityDropdown();
+
+        // Set up eligibility change handler
+        eligibilitySelect.addEventListener("change", function () {
+          const selectedEligibilityId = this.value;
+          if (selectedEligibilityId) {
+            fetchPrograms(selectedEligibilityId);
+          }
+        });
+      }
+
+      console.log("Form initialization complete");
+    } catch (error) {
+      console.error("Error during form initialization:", error);
+    }
+  });
+
+
+  // Initialize form when document is ready
+  async function initializeForm() {
+    try {
+      console.log("Starting form initialization...");
+
+      // First, fetch eligibility data
+      await populateEligibilityDropdown();
+
+      // Then initialize other form elements
+      await Promise.all([
+        populateCountryDropdown(),
+        populateStateDropdown()
+      ]);
+
+      // Initialize UI elements
+      initializeFloatingLabels();
+      initializeOTPInputs();
+      setupFormValidation();
+
+      // Add change event listener for eligibility dropdown
+      const eligibilitySelect = document.getElementById("eligibility");
+      if (eligibilitySelect) {
+        eligibilitySelect.addEventListener("change", async function () {
+          const selectedEligibilityId = this.value;
+          const programSelect = document.getElementById("program");
+
+          if (selectedEligibilityId) {
+            programSelect.innerHTML = '<option value="">Select Program</option>';
+            try {
+              const response = await fetch(`https://api.cvmu.edu.in/applicant/api/v1/applicant_portal/get_programs?status=Open&eligibility_head_id=${selectedEligibilityId}`);
+              const data = await response.json();
+
+              if (data.success) {
+                populateProgramDropdown(data.data.results);
+              }
+            } catch (error) {
+              console.error("Error fetching programs:", error);
+              programSelect.innerHTML = '<option value="">Select Program</option>';
+            }
+          } else {
+            programSelect.innerHTML = '<option value="">Select Program</option>';
+          }
+        });
+      }
+
+      console.log("Form initialization complete");
+    } catch (error) {
+      console.error("Error during form initialization:", error);
+    }
+  }
+
+  // Single event listener for initialization
+  document.addEventListener("DOMContentLoaded", initializeForm);
+
+  // ... rest of your existing code ...
+</script>
+
+<!-- Close for Admission Form -->
+	</div>	
+	<div class="dashboard_main_wrapper">
+		<div ng-view></div>
+		<div class="clearfix"></div>
+	</div>
+	<!-- <div ng-include="'templates/include/footer.html'"></div> -->
+		<div class="footer_out">
+  			<div class="relative">
+    <div id="flip">
+        <div class="center_3 justify_center">
+            <p class="white medium uppercase" style="font-size: 16px;" ng-if="!footer_openF" ng-click="footer_open();">
+                Discover
+            </p>
+            <p class="white medium uppercase" style="font-size: 16px;" ng-if="footer_openF" ng-click="footer_open();">
+                Uncover
+            </p>
+        </div>
+    </div>
+</div>
+<footer id="footerpanel" class="footerpanel">
+    <div class="bg_footer">
+        <div class="footer_width footer_padding ten-columns">
+            <div class="  col-xs-12 mobile">
+                <div class="footer_logo">
+                    <img src="assets/images/footer/footerlogo.png" class="footer_logo_img" alt="CVM" />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-sm-2  m_p_f web">
+                <div class="footer_logo">
+                    <img src="assets/images/cvm/footer_logo_final.svg" class="footer_logo_img" alt="CVM">
+                    <div class="footer_btn_link">
+                        <a href="https://adm.cvmu.ac.in/"  class="white bluebtn regular"> Apply Now </a>
+                        <a href="assets/images/pdf/full_page.jpg" target="_blank" class="white white_footer_btn regular"> E - Brochure </a>
+                    </div>
+                </div>
+                <!-- <div class=" relative">
+                       <h3 class="footer_title title_fontfamily  font_16 bold">Subscribe</h3>
+                       <div class="subscribe_footer relative arrow_change2 font-18  wow fadeIn animated  animated" data-wow-delay="0.9s" data-wow-duration="1s">
+                           <input type="text" class="" placeholder="Email id ">
+                           <div class="clearfix"></div>
+                       </div>
+                   </div> -->
+                <!--
+                    <div class=" relative">
+                            <h3 class="footer_title title_fontfamily  font_16 bold">Subscribe</h3>
+                            <div class="subscribe1 font-18  wow fadeIn animated  animated" data-wow-delay="0.9s" data-wow-duration="1s">
+                                <div class="contact">
+                                    <a href="javascript:void(0);" class="white bregular"> <span class="bregular arrow_change1"></span> Email id  </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                    </div> 
+                -->
+            </div>
+            <div class="col-sm-2   ">
+                <h3 class="footer_title title_fontfamily  font_16 bold"> Why Join CVMU</h3>
+                <ul class="footer_ul">
+                    <li>
+                        <a href="faculty">Faculties </a>
+                    </li>
+                    <li>
+                        <a href="academics">Programme </a>
+                    </li>
+                    <li>
+                        <a href="pedagogy">Pedagogy </a>
+                    </li>
+                    <li>
+                        <a href="research">Research & Innovation </a>
+                    </li>
+                    <li>
+                        <a href="entrepreneurship"> Entrepreneurship & Start-Up Centre </a>
+                    </li>
+                    <!-- <li><a href="javascript:void(0);">CVMU </a></li>  -->
+                    <li>
+                        <a href="mou"> MOU </a>
+                    </li>
+                    <li>
+                        <a href="cvmlibraries">Library </a>
+                    </li>                   
+                </ul>
+            </div><div style="display:none"><a href="http://ankararus.net" title="ankara escort">ankara escort</a></div>
+            <div class="col-sm-2 ">
+                <h3 class="footer_title title_fontfamily  font_16 bold"> Student Corner </h3>
+                <ul class="footer_ul">
+                    <li>
+                        <a href="academics">Under Graduate Programme </a>
+                    </li>
+                    <li>
+                        <a href="academics">Post Graduate Programme </a>
+                    </li>
+                    <li>
+                        <a href="doctral-program">Doctoral Programme </a>
+                    </li>
+                    <li>
+                        <a href="exam-timetable">Exam Time Table  </a>
+                    </li>
+                    <li>
+                        <a href="exam-timetable-notification">Exam Result  Notification </a>
+                    </li>
+                    <li>
+                        <a href="campus_life">Campus Life </a>
+                    </li>
+                    <li>
+                        <a href="placement">Placements </a>
+                    </li>
+                    <li>
+                        <a href="scholarship"> Scholarships </a>
+                    </li>
+                    <!-- <li>
+                        <a href="javascript:void(0);">Anti-Ragging Committee </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">Grievance Committee </a>
+                    </li> -->
+                    <li>
+                        <a href="cvmhostels">Hostel </a>
+                    </li>
+                    <li>
+                        <a href="transportation-facility">Transportation </a>
+                    </li>
+                     <li>
+                            <a href="sports_Recreation"> Sports &  Recreation </a>
+                        </li>   
+                        <li>
+                            <a href="cvmuhackathon">  CVMU Hackathon  </a>                            
+                        </li>   
+                        <li>
+                            <a href="cvmu-bbic">  CVMU BBIC  </a>                            
+                        </li>   
+                        <li>
+                            <a href="project-exhibition">  Project Exhibition </a>                            
+                        </li>
+                         <li>
+                            <a href="mba">CVMU MBA  </a>
+                        </li>
+
+                          <li>
+                            <a href="grievance"> Grievance Redressal &amp; Arbitration   </a>
+                        </li>
+
+                        <li>
+                            <a href="internationalization"> Internationalization & Erasmus   </a>
+                        </li>
+
+                          <li>
+                            <a href="https://shodhganga.inflibnet.ac.in/handle/10603/518015" target="_blank"> PHD Thesis  </a>
+                        </li>
+
+
+                        <li>
+                            <a href="anti-ragging">  Anti  Ragging  </a>
+                        </li>                                           
+                              
+                        <li>
+                            <a href="grievance_Cell">  Grievance Cell  </a>
+                        </li> 
+                        <li>
+                            <a href="sedgs_cell"> SEDGs Cell </a>
+                        </li> 
+
+                       
+                         
+                </ul>
+            </div>
+            <div class="clearfix_mobile"></div>
+            <div class="col-sm-2   ">
+                <h3 class="footer_title title_fontfamily  font_16 bold"> Important Links </h3>
+                <ul class="footer_ul">
+                    <li>
+                        <a href="https://cvmu.ac.in/" target="_blank"> ERP </a>
+                    </li>
+                    <li ng-if="activePath == '/about'">
+                        <a href="javascript:void(0);" ng-click="scrolltoDiv_about('governing_body', 'page')">Statutory committee </a>
+                    </li>
+                    <li ng-if="activePath != '/about'">
+                        <a href="about" ng-click="about_scroll('governing_body')">Statutory committee </a>
+                    </li>
+                    <li ng-if="activePath == '/about'">
+                        <a href="javascript:void(0);" ng-click="scrolltoDiv_about('governing_body', 'page')">Non-Statutory committee </a>
+                    </li>
+                    <li>
+                        <!-- <a  href="assets/uploads/broucher/Approved_PG-Titles-website.pdf" target="_blank"> Approved list of PG Dissertation </a> -->
+                           <a  href="assets/uploads/broucher/Approved_PG-Titles-website.pdf" target="_blank"> Approved list of PG Dissertation </a>
+                    </li>
+                    <li ng-if="activePath != '/about'">
+                        <a href="about" ng-click="about_scroll('governing_body')">Non-Statutory committee </a>
+                    </li>
+                   <!--  <li>
+                        <a href="javascript:void(0);">Extension and Community Services </a>
+                    </li> -->
+                    <!--<li>
+                        <a href="javascript:void(0);"> Terms & Conditions </a>
+                    </li> -->
+                    <li>
+                        <a href="privacy_policy">Privacy Policy </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);"> Site Map </a>
+                    </li>
+                    <!--  UGC e-Samadhan https://samadhaan.ugc.ac.in/ -->
+                    <li>
+                        <a href="https://samadhaan.ugc.ac.in/" target="_blank"> UGC e-Samadhan </a>
+                    </li>
+                </ul>
+            </div>
+            <!--   <div class="col-sm-2   col-sm-6 col-xs-6"><h3 class="footer_title title_fontfamily  font_16 bold"> Important Links </h3><ul class="footer_ul"><li><a href="javascript:void(0);">About CVM </a></li><li><a href="javascript:void(0);">Circulars  </a></li><li><a href="javascript:void(0);">Gallery  </a></li><li><a href="javascript:void(0);">CVMU in News  </a></li><li><a href="javascript:void(0);">NCC / NSS  </a></li><li><a href="javascript:void(0);">Awards & Rankings  </a></li></ul></div> -->
+            <div class="clearfix_for_new_line"></div>
+            <div class="footer_secondrow ten-columns">
+                <div class="col-sm-2 col-xs-6">
+                    <h3 class="footer_title title_fontfamily  font_16 bold">Contact</h3>
+                    <ul class="footer_ul footer_contact_detail">
+                        <li class="fgray fontaw">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> CVM UNIVERSITY Beside BVM College, <br class="hidden-xs "> Opp Shastri Maidan, Vallabh Vidyanagar <br class="hidden-xs ">-388120 Gujarat-India
+                        </li>
+                        <li class="fontaw">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <a href="tel:+912692238001">+91-2692-238001 </a>
+                        </li>
+                        <li class="fontaw">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                            <a href="mailto:adminoffice@cvmu.edu.in"> adminoffice@cvmu.edu.in </a>
+                        </li>
+                    </ul>
+                    <br />
+                    <h3 class="footer_title title_fontfamily  mr0 font_16 bold" style="margin: 0;">Follow Us</h3>
+                    <ul class="footer_social_icon">
+                        <li>
+                            <a class="social-media" href="https://www.facebook.com/CVMUniversity/" target="_blank">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                      <!--   <li>
+                            <a class="social-media" href="https://twitter.com/CVM_University" target="_blank">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a class="social-media" href="https://www.instagram.com/CVM.university/" target="_blank">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="social-media" href="https://www.youtube.com/channel/UC7gvtRFAYIiJo1gjptY3Myg" target="_blank">
+                                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="social-media" href="https://in.linkedin.com/company/cvmuniversity" target="_blank">
+                                 <i class="fa fa-brands fa-linkedin"></i>
+                            </a>
+                        </li>                    
+
+                     
+                    </ul>
+                </div>
+                <div class="col-sm-2 col-sm-6 col-xs-6">
+                    <h3 class="footer_title title_fontfamily  font_16 bold"> Quick Links </h3>
+                    <ul class="footer_ul">
+                        <li>
+                            <a href="about">About CVM </a>
+                        </li>
+                        <li>
+                            <a href="circular">Circulars </a>
+                        </li>
+                        <li>
+                            <a href="gallery">Gallery </a>
+                        </li>
+                        <li>
+                            <a href="news-and-events"> News and Media </a>
+                        </li>
+                        <li>
+                            <a href="ranking-and-accreditation"> Ranking & Accreditation </a>
+                        </li>
+                        <!-- <li>
+                            <a href="javascript:void(0);"> Awards </a>
+                        </li> -->
+                        <li>
+                            <!-- <a href="https://rms.cvmu.ac.in/"  target="_blank"> Career </a> -->
+                            <a href="career"  target="_blank"> Career </a>
+                            
+                        </li>
+                        <li><a href="nep2020"> NEP 2020 </a></li>
+                        <li>
+                            <a href="contact"> Contact </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix_mobilex"></div>
+                <!--     <div class="col-sm-2 col-xs-6"><h3 class="footer_title title_fontfamily  font_16 bold">Quick Links</h3><ul class="footer_ul"><li><a href="javascript:void(0);">Site Map</a></li><li><a href="javascript:void(0);">Terms & Conditions</a></li><li><a href="javascript:void(0);">Privacy Policy</a></li></ul></div>  -->
+                <div class="clearfix_sm"></div>
+              <!--   <div class="col-sm-2 col-xs-6">
+                    <h3 class="footer_title title_fontfamily  font_16 bold"> About</h3>
+                    <ul class="footer_ul">
+                        <li class="fgray">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</li>
+                    </ul>
+                     <ul class="footer_social_icon">
+                           <li>
+                               <a class="social-media" href="javascript:void(0);">
+                                   <i class="fa fa-facebook" aria-hidden="true"></i>
+                               </a>
+                           </li>
+                           <li>
+                               <a class="social-media" href="javascript:void(0);">
+                                   <i class="fa fa-twitter" aria-hidden="true"></i>
+                               </a>
+                           </li>
+                           <li>
+                               <a class="social-media" href="javascript:void(0);">
+                                   <i class="fa fa-instagram" aria-hidden="true"></i>
+                               </a>
+                           </li>
+                           <li>
+                               <a class="social-media" href="javascript:void(0);">
+                                   <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                               </a>
+                           </li>
+                       </ul>
+                </div> -->
+                <div class="clearfix_mobile"></div>
+                <div class="mobile_selection ten-columns">
+                    <div class="col-sm-2 col-xs-12">
+                        <div class="right_sec_footer relative">
+                            <h3 class="footer_title title_fontfamily  font_16 bold">College Website</h3>
+                            <!--  <div class="subscribe1 font-18  wow fadeIn animated  animated" data-wow-delay="0.9s" data-wow-duration="1s" ><div class="contact"><a href="javascript:void(0);" class="white bregular"><span class="bregular arrow_change1"></span> Select College 
+                                    </a></div><div class="clearfix"></div></div> -->
+                            <div class="relative dpWidth_footer">
+                                <select name="faculties" ng-model="collegeObj.college_id" id="faculties" class="dropdwnClass sfregular font_18" ng-change="redirectToCollege(collegeObj.college_id)">
+                                    <option value="">Select College</option>
+                                    <option ng-value="college.college_id" ng-if="excludeCollegeFooter.indexOf(college.college_id) < 0" ng-repeat="college in colleges">{{college.name}}</option>
+                                    <!-- <option value="1">GLS Institute</option>
+                                    <option value="2">Som Lalit </option>
+                                    <option value="3"> Chimanbhai Patel </option>
+                                    <option value="4">St. Xavier College</option> -->
+                                </select>
+                                <div class="downarw">
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                            <br>
+                            <div class=" relative">
+                                <form id="newslatter_form" name="newslatter_form" ng-submit="saveNewsLatter(newslatter_form)" ng-validate="newslatterformValidate">
+                                <!-- <h3 class="footer_title title_fontfamily  font_16 bold">Subscribe</h3> -->
+                                    <div class="subscribe_footer relative arrow_change2 font-18  wow fadeIn animated  animated" data-wow-delay="0.9s" data-wow-duration="1s">
+                                        <input type="text" name="email" ng-model="newslatterObj.email" class="" placeholder="Email to Subscribe" required="">
+                                        <button type="submit" style="position: absolute;top: 0;right: 0;width: 50px;height: 100%;background: transparent;border: 0;opacity: 0;z-index: 99;">&nbsp;</button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-2 col-xs-12"><div class=" relative"><h3 class="footer_title title_fontfamily  font_16 bold">Subscribe</h3><div class="subscribe1 font-18  wow fadeIn animated  animated" data-wow-delay="0.9s" data-wow-duration="1s" ><div class="contact"><a href="javascript:void(0);" class="white bregular"><span class="bregular arrow_change1"></span> Email id 
+                                </a></div><div class="clearfix"></div></div></div></div> -->
+                <!-- <div class="clearfix"></div> -->
+                <div class="clearfix"> </div>
+                <!-- <div class="footer_secondrow ten-columns">
+                     <div class="col-sm-2 col-sm-6 col-xs-6">
+                       <ul class="footer_ul">
+                           <li>
+                               <a href="javascript:void(0);"> Terms & Conditions   </a>
+                           </li>
+                           <li>
+                               <a href="javascript:void(0);">Privacy Policy </a>
+                           </li>
+                       </ul>
+                   </div>
+                     <div class="col-sm-2 col-sm-6 col-xs-6">
+                       <ul class="footer_ul">
+                           <li>
+                               <a href="javascript:void(0);"> Site Map </a>
+                           </li>
+                       </ul>
+                   </div>
+                 </div> -->
+            </div>
+            <!--  <div class=" mobile"><div class="footer_social"><h3 class="footer_title title_fontfamily  font_16 regular bold">Follow us</h3><ul><li><a href="javascript:void(0);" class="regular" ><img src="assets/images/footer/footertwo.png" alt="CVM"></a></li><li><a href="javascript:void(0);" class="regular" ><img src="assets/images/footer/footerone.png" alt="CVM"></a></li></ul></div></div> -->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="footer_copy">
+        <div class="footer_width">
+            <!-- <div class="col-md-4 col-sm-6 col-xs-12"><div class="row"><p class ="regular gray_color"> (+91) - 2692 - 238400 |<a href="mailto:cvmandal@hotmail.com"> cvmandal@hotmail.com </a></p></div></div> -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="">
+                    <!--     <p class ="regular bluecolor"> All rights reserved. CVM university © 2021 </p> -->
+                    <p class="regular bluecolor">
+                        <!-- All rights reserved by CVM university 2021 by CVM university -->All rights are reserved by CVM University. Copyright @ {{year}} by CVM University
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class=" text-right">
+                    <p class="regular bluecolor">Powered By: <a href="http://www.identixdesign.com/" target="_blank" class="bluecolor"> I</a> &  <a href="https://saltpixels.in/" target="_blank" class="bluecolor"> S </a> </p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- <script type="text/javascript"> var s=document.createElement("script"); s.type="text/javascript"; s.async=true; s.src="https://widgets.nopaperforms.com/emwgts.js"; document.body.appendChild(s); </script> -->
+    <!-- <script src="https://cdn.npfs.co/js/widget/npfwpopup.js"></script> 
+    <script>
+        let npfW6fc37025119621d9a28e9784f14d744d = new NpfWidgetsInit({ 
+            "widgetId":"6fc37025119621d9a28e9784f14d744d", 
+            "baseurl":"widgets.nopaperforms.com", 
+            "formTitle":"Feedback Form", 
+            "titleColor":"#FF0033", 
+            "backgroundColor":"#ddd", 
+            "iframeHeight":"500px", 
+            "buttonbgColor":"#ff0000", 
+            "buttonTextColor":"#FFF", 
+        }); 
+    </script> -->
+</footer>
+<!-- <script type="text/javascript">
+  $(document).ready(function(){
+  $("#flip").click(function(){
+    $("#footerpanel").slideToggle("slow");
+  });
+});
+</script> 
+<script type="text/javascript">
+  var IsOpenFooter = false;
+  $(".footerItemClick").click(function () {
+    if (IsOpenFooter == false) {
+      IsOpenFooter = true;
+      $(".fooetDataOff").slideDown('slow');
+      $(".footericon").removeClass("fa fa-angle-right");
+      $(".footericon").addClass("fa fa-angle-down");
+      $(".footericon_down").removeClass("fa fa-angle-double-up");
+      $(".footericon_down").addClass("fa fa-angle-double-down");
+      $(".footer_padding").addClass("footer_padding_big");
+    } else {
+      IsOpenFooter = false;
+      $(".fooetDataOff").slideUp('slow');
+      $(".footericon").removeClass("fa fa-angle-down");
+      $(".footericon").addClass("fa fa-angle-right");
+      $(".footericon_down").removeClass("fa fa-angle-double-down");
+      $(".footericon_down").addClass("fa fa-angle-double-up");
+      $(".footer_padding").removeClass("footer_padding_big");
+    }
+    $("html, body").animate({
+      scrollTop: $(document).height()
+    }, 1000);
+  });
+</script> -->
+		</div>	
+
+	<!-- <script src="https://cdn.npfs.co/js/widget/npfwpopup.js"></script> -->
+	<!-- <div class="npf_wgts" data-height="550px" data-w="6fc37025119621d9a28e9784f14d744d"></div> -->
+
+	<!-- <div title="Online Admission Enquiry" class="pop_up_wrapper adminssionPopup">
+	    <div class="pop_up_close" ng-click="closeAdmission();">
+	        <i class="fa fa-close"></i>
+	    </div>
+		<div class="npf_wgts" data-height="400px" data-w="6fc37025119621d9a28e9784f14d744d"></div>	    
+	</div> -->
+
+	<div class="overlay_popup" ng-click="closeAdmission();"></div>
+	
+</body>
+
+</html>

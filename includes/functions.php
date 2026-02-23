@@ -23,6 +23,24 @@ function requireAdmin() {
         setFlash('danger', 'Access denied. Administrative login required.');
         redirect(APP_URL . '/login.php');
     }
+    // Session Healing: Refresh admin data on every page load to handle ID changes after seeding
+    refreshAdminSession();
+}
+
+function refreshAdminSession() {
+    global $pdo;
+    if (isset($_SESSION['admin_id'])) {
+        $stmt = $pdo->prepare("SELECT role, department_id FROM admins WHERE id = ?");
+        $stmt->execute([$_SESSION['admin_id']]);
+        $admin = $stmt->fetch();
+        if ($admin) {
+            $_SESSION['admin_role'] = $admin['role'];
+            $_SESSION['admin_dept_id'] = $admin['department_id'];
+        } else {
+            // Admin no longer exists in DB (e.g. after truncate/seed without admins)
+            // But we don't logout immediately here to avoid infinite loops if it's a temp state
+        }
+    }
 }
 
 function requireStudent() {

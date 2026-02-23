@@ -5,7 +5,7 @@
  * Imports all courses from the ADIT IT curriculum (Sem 1-8)
  * and generates Course Feedback + Course Exit Survey forms for each.
  */
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireLogin();
 
 $pageTitle = 'Seed IT Courses & NAAC Forms';

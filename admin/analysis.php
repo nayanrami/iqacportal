@@ -4,7 +4,7 @@
  * v2.2 - Added Year filtering, Formula explanations & PDF optimization
  */
 $pageTitle = 'NAAC Detailed Analysis';
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireAdmin();
 
 // Filters
@@ -39,6 +39,16 @@ foreach ($coData as $co) {
     }
     $coCourses[$key]['cos'][] = $co;
 }
+
+// ── Advanced Pagination Logic (Array-based) ──
+$limit = isset($_GET['limit']) ? intval($_GET['limit']) : 20;
+if (!in_array($limit, [10, 20, 50, 100])) $limit = 20;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$offset = ($page - 1) * $limit;
+
+$totalRecords = count($coCourses);
+$totalPages = ceil($totalRecords / $limit);
+$paginatedCourses = array_slice($coCourses, $offset, $limit);
 
 require_once __DIR__ . '/header.php';
 ?>
@@ -133,6 +143,17 @@ require_once __DIR__ . '/header.php';
     </div>
 
     <!-- NAAC Summary Dashboard -->
+    <?php 
+    $isFiltered = isset($_GET['dept']) || isset($_GET['year']) || isset($_GET['sem']);
+    if (!$isFiltered): ?>
+        <div class="bg-white border border-gray-200 rounded-3xl p-12 text-center shadow-sm">
+            <div class="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-chart-bar text-3xl text-indigo-400"></i>
+            </div>
+            <h3 class="text-xl font-black text-gray-800">Please apply a filter to view Analysis</h3>
+            <p class="text-gray-400 text-sm mt-1">Select a department, year, or semester to generate the NAAC attainment metrics.</p>
+        </div>
+    <?php else: ?>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- (Stats cards same as before but ensured to load correctly) -->
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
@@ -215,6 +236,7 @@ require_once __DIR__ . '/header.php';
             <table class="w-full text-left text-sm">
                 <thead>
                     <tr class="bg-gray-50 text-gray-500 font-bold uppercase text-[10px] tracking-wider">
+                        <th class="px-6 py-4 text-center">Sr. No.</th>
                         <th class="px-6 py-4">Sem/Year</th>
                         <th class="px-6 py-4">Course</th>
                         <th class="px-6 py-4">CO Breakdown (Avg Score)</th>
@@ -223,9 +245,11 @@ require_once __DIR__ . '/header.php';
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
-                    <?php if (empty($coCourses)): ?>
-                        <tr><td colspan="5" class="px-6 py-10 text-center text-gray-400">No course data found. Ensure subjects are assigned to semester <?= $selectedSem ?: '' ?> in year <?= $selectedYear ?>.</td></tr>
-                    <?php else: foreach ($coCourses as $c): 
+                    <?php if (empty($paginatedCourses)): ?>
+                        <tr><td colspan="6" class="px-6 py-10 text-center text-gray-400">No course data found. Ensure subjects are assigned to semester <?= $selectedSem ?: '' ?> in year <?= $selectedYear ?>.</td></tr>
+                    <?php else: 
+                        $srNo = $offset + 1;
+                        foreach ($paginatedCourses as $c): 
                         $totalPct = 0; $coCount = count($c['cos']);
                         foreach($c['cos'] as $co) { 
                             $max = $co['max_score'] ?: 3;
@@ -234,7 +258,10 @@ require_once __DIR__ . '/header.php';
                         $avgPct = $coCount > 0 ? round($totalPct / $coCount, 1) : 0;
                         $al = getAttainmentLevel($avgPct);
                     ?>
-                    <tr class="hover:bg-gray-50">
+                    <tr class="hover:bg-gray-50 transition border-b border-gray-50 last:border-0 hover:border-indigo-100">
+                        <td class="px-6 py-4 text-center text-xs font-black text-gray-400">
+                            <?= $srNo++ ?>
+                        </td>
                         <td class="px-6 py-4 text-[10px] font-bold text-gray-400">
                             S<?= $c['sem'] ?> | <?= $c['year'] ?>
                         </td>
@@ -265,8 +292,59 @@ require_once __DIR__ . '/header.php';
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination -->
+        <?php if ($totalRecords > 0): ?>
+        <div class="px-6 py-4 bg-gray-50/50 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 print:hidden">
+            <div class="flex items-center gap-4">
+                <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    Showing <?= $offset + 1 ?> to <?= min($offset + $limit, $totalRecords) ?> of <?= $totalRecords ?> Results
+                </div>
+                <form method="GET" class="flex items-center gap-2">
+                    <?php foreach($_GET as $k => $v): if($k != 'limit' && $k != 'page'): ?>
+                    <input type="hidden" name="<?= sanitize($k) ?>" value="<?= sanitize($v) ?>">
+                    <?php endif; endforeach; ?>
+                    <select name="limit" onchange="this.form.submit()" class="px-2 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-500 outline-none focus:border-indigo-500 transition shadow-sm">
+                        <?php foreach([10, 20, 50, 100] as $l): ?>
+                            <option value="<?= $l ?>" <?= $limit == $l ? 'selected' : '' ?>><?= $l ?> per page</option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
+            </div>
+
+            <?php if ($totalPages > 1): ?>
+            <div class="flex items-center gap-1">
+                <?php 
+                $queryParams = $_GET;
+                unset($queryParams['page']);
+                $baseLink = '?' . http_build_query($queryParams) . '&page=';
+                ?>
+                
+                <?php if ($page > 1): ?>
+                    <a href="<?= $baseLink . ($page - 1) ?>" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-100 rounded-lg text-gray-400 hover:text-indigo-600 hover:border-indigo-200 transition shadow-sm"><i class="fas fa-chevron-left text-[10px]"></i></a>
+                <?php endif; ?>
+
+                <?php
+                $startPage = max(1, $page - 2);
+                $endPage = min($totalPages, $startPage + 4);
+                $startPage = max(1, $endPage - 4);
+                
+                for ($i = $startPage; $i <= $endPage; $i++): 
+                    if($i < 1) continue;
+                ?>
+                    <a href="<?= $baseLink . $i ?>" class="w-8 h-8 flex items-center justify-center rounded-lg text-xs font-black transition shadow-sm <?= $i == $page ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-100 text-gray-400 hover:text-indigo-600 hover:border-indigo-200' ?>"><?= $i ?></a>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <a href="<?= $baseLink . ($page + 1) ?>" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-100 rounded-lg text-gray-400 hover:text-indigo-600 hover:border-indigo-200 transition shadow-sm"><i class="fas fa-chevron-right text-[10px]"></i></a>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
     </div>
-    <?php endif; ?>
+    <?php endif; // End of co_attainment check ?>
+    <?php endif; // End of isFiltered check ?>
 </div>
 
 <script>

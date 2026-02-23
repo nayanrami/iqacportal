@@ -2,7 +2,7 @@
 /**
  * Admin Login - Light Theme
  */
-require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/includes/functions.php';
 
 if (isLoggedIn()) { 
     if (isset($_SESSION['admin_id'])) {
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['admin_id'] = $user['id'];
         $_SESSION['admin_name'] = $user['full_name'];
         $_SESSION['admin_dept_id'] = $user['department_id']; // NULL for Superadmin
+        $_SESSION['admin_role'] = $user['role']; // Store role for NAAC criterion access
         
         setFlash('success', 'Welcome back, ' . $user['full_name'] . '!');
         redirect(APP_URL . '/admin/');
@@ -57,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Portal Login - <?= APP_NAME ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="font-sans min-h-screen flex items-center justify-center">

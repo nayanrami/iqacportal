@@ -1,0 +1,14 @@
+--- DEPT ADMINS ---
+DEPT: Information Technology | CODE: IT | USERNAME: naac_iqac
+DEPT: Artificial Intelligence | CODE: AI | USERNAME: BTECH-AI
+DEPT: Automobile Engineering | CODE: AE | USERNAME: BTECH-AE
+DEPT: Civil Engineering | CODE: CIVIL | USERNAME: BTECH-CIVIL
+DEPT: Computer Engineering | CODE: CP | USERNAME: BTECH-CP
+DEPT: Comp. Science & Design | CODE: CSD | USERNAME: BTECH-CSD
+DEPT: Dairy Technology | CODE: DT | USERNAME: BTECH-DT
+DEPT: Food Processing Tech. | CODE: FPT | USERNAME: BTECH-FPT
+DEPT: Electronics & Comm. | CODE: EC | USERNAME: BTECH-EC
+DEPT: Electrical Engineering | CODE: EE | USERNAME: BTECH-EE
+DEPT: Mechanical Engineering | CODE: ME | USERNAME: BTECH-ME
+
+--- SUPER ADMINS ---

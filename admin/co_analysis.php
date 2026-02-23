@@ -4,7 +4,7 @@
  * Shows per-course CO attainment with charts, response details, and printable report
  */
 $pageTitle = 'Course-wise CO Analysis';
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireAdmin();
 
 $isDeptAdmin = isset($_SESSION['admin_dept_id']) && $_SESSION['admin_dept_id'] !== null;
@@ -41,10 +41,20 @@ foreach ($coData as $co) {
     $courses[$key]['cos'][] = $co;
 }
 
-// Get per-course response details
+// ── Advanced Pagination Logic (Array-based) ──
+$limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10; // Lower default as blocks are large
+if (!in_array($limit, [10, 20, 50, 100])) $limit = 10;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$offset = ($page - 1) * $limit;
+
+$totalRecords = count($courses);
+$totalPages = ceil($totalRecords / $limit);
+$paginatedCourses = array_slice($courses, $offset, $limit);
+
+// Get per-course response details (Optimized: ONLY for current page)
 $courseResponses = [];
-if (!empty($courses)) {
-    $courseIds = array_keys($courses);
+if (!empty($paginatedCourses)) {
+    $courseIds = array_keys($paginatedCourses);
     $placeholders = implode(',', array_fill(0, count($courseIds), '?'));
     $stmt = $pdo->prepare("
         SELECT r.id, r.student_name, r.student_roll, r.submitted_at,
@@ -176,14 +186,27 @@ require_once __DIR__ . '/header.php';
     <?php endif; ?>
 
     <!-- Per-Course Detailed Analysis -->
-    <?php if (empty($courses)): ?>
+    <?php 
+    $isFiltered = isset($_GET['dept']) || isset($_GET['year']) || isset($_GET['sem']);
+    if (!$isFiltered): ?>
+        <div class="bg-white border border-gray-200 rounded-2xl p-12 text-center shadow-sm">
+            <div class="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-filter text-3xl text-indigo-400"></i>
+            </div>
+            <h3 class="text-xl font-black text-gray-800">Select Filters to View Analysis</h3>
+            <p class="text-gray-400 text-sm mt-1">Please select a department, year, or semester to generate the CO attainment report.</p>
+        </div>
+    <?php elseif (empty($paginatedCourses)): ?>
         <div class="bg-white border border-gray-200 rounded-2xl p-12 text-center shadow-sm">
             <i class="fas fa-inbox text-4xl text-gray-200 mb-4 block"></i>
             <h3 class="text-lg font-bold text-gray-500">No course data found</h3>
             <p class="text-sm text-gray-400 mt-1">No CO attainment data for this department/semester/year combination.</p>
         </div>
     <?php else: ?>
-        <?php $courseIdx = 0; foreach ($courses as $courseId => $c):
+        <?php 
+        $srNo = $offset + 1;
+        $courseIdx = 0; 
+        foreach ($paginatedCourses as $courseId => $c):
             $totalPctCourse = 0; $coCountCourse = count($c['cos']);
             foreach ($c['cos'] as $co) {
                 $max = $co['max_score'] ?: 3;
@@ -191,7 +214,6 @@ require_once __DIR__ . '/header.php';
             }
             $avgPctCourse = $coCountCourse > 0 ? round($totalPctCourse / $coCountCourse, 1) : 0;
             $al = getAttainmentLevel($avgPctCourse);
-            $responses = $courseResponses[$courseId] ?? [];
             $courseIdx++;
         ?>
 
@@ -200,6 +222,9 @@ require_once __DIR__ . '/header.php';
             <div class="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-indigo-50 via-white to-purple-50">
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-400 shadow-sm border border-gray-50 text-[10px] font-black">
+                            <?= $srNo++ ?>
+                        </div>
                         <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
                             <i class="fas fa-book text-lg"></i>
                         </div>
@@ -273,48 +298,60 @@ require_once __DIR__ . '/header.php';
                     </div>
                 </div>
             </div>
+        </div>
+        <?php endforeach; ?>
 
-            <!-- Student Responses for this Course -->
-            <?php if (!empty($responses)): ?>
-            <div class="px-6 py-4">
-                <details class="group">
-                    <summary class="flex items-center justify-between cursor-pointer select-none">
-                        <h4 class="text-xs font-black text-gray-500 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fas fa-users text-indigo-400"></i> Student Responses (<?= count($responses) ?>)
-                        </h4>
-                        <i class="fas fa-chevron-down text-gray-300 text-xs group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <div class="mt-3 overflow-x-auto max-h-[300px] overflow-y-auto">
-                        <table class="w-full text-xs">
-                            <thead class="sticky top-0 z-10">
-                                <tr class="bg-gray-50 text-[9px] font-black uppercase text-gray-400 tracking-wider">
-                                    <th class="px-3 py-2 text-left">#</th>
-                                    <th class="px-3 py-2 text-left">Student</th>
-                                    <th class="px-3 py-2 text-left">Enrollment</th>
-                                    <th class="px-3 py-2 text-center">Avg Score</th>
-                                    <th class="px-3 py-2 text-center">Answers</th>
-                                    <th class="px-3 py-2 text-left">Submitted</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-50">
-                                <?php foreach ($responses as $ri => $resp): ?>
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-3 py-2 text-gray-400 font-bold"><?= $ri + 1 ?></td>
-                                    <td class="px-3 py-2 font-bold text-gray-700"><?= sanitize($resp['student_name_db'] ?: ($resp['student_name'] ?: 'Anonymous')) ?></td>
-                                    <td class="px-3 py-2 text-gray-400 font-mono"><?= sanitize($resp['enrollment_no'] ?: ($resp['student_roll'] ?: 'N/A')) ?></td>
-                                    <td class="px-3 py-2 text-center font-bold text-indigo-600"><?= $resp['avg_score'] ?></td>
-                                    <td class="px-3 py-2 text-center text-gray-500"><?= $resp['answer_count'] ?></td>
-                                    <td class="px-3 py-2 text-gray-400"><?= date('d M Y, h:i A', strtotime($resp['submitted_at'])) ?></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
+        <!-- Pagination -->
+        <?php if ($totalRecords > 0): ?>
+        <div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 print:hidden px-6 pb-6 bg-white border border-gray-200 rounded-2xl shadow-sm">
+            <div class="flex items-center gap-4 pt-4">
+                <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                    Showing <?= $offset + 1 ?> to <?= min($offset + $limit, $totalRecords) ?> of <?= $totalRecords ?> Courses
+                </div>
+                <form method="GET" class="flex items-center gap-2">
+                    <?php foreach($_GET as $k => $v): if($k != 'limit' && $k != 'page'): ?>
+                    <input type="hidden" name="<?= sanitize($k) ?>" value="<?= sanitize($v) ?>">
+                    <?php endif; endforeach; ?>
+                    <select name="limit" onchange="this.form.submit()" class="px-2 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-500 outline-none focus:border-indigo-500 transition shadow-sm">
+                        <?php foreach([10, 20, 50, 100] as $l): ?>
+                            <option value="<?= $l ?>" <?= $limit == $l ? 'selected' : '' ?>><?= $l ?> per page</option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
+            </div>
+
+            <?php if ($totalPages > 1): ?>
+            <div class="flex items-center gap-1 pt-4">
+                <?php 
+                $queryParams = $_GET;
+                unset($queryParams['page']);
+                $baseLink = '?' . http_build_query($queryParams) . '&page=';
+                ?>
+                
+                <?php if ($page > 1): ?>
+                    <a href="<?= $baseLink . ($page - 1) ?>" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-100 rounded-lg text-gray-400 hover:text-indigo-600 hover:border-indigo-200 transition shadow-sm"><i class="fas fa-chevron-left text-[10px]"></i></a>
+                <?php endif; ?>
+
+                <?php
+                $startPage = max(1, $page - 2);
+                $endPage = min($totalPages, $startPage + 4);
+                $startPage = max(1, $endPage - 4);
+                
+                for ($i = $startPage; $i <= $endPage; $i++): 
+                    if($i < 1) continue;
+                ?>
+                    <a href="<?= $baseLink . $i ?>" class="w-8 h-8 flex items-center justify-center rounded-lg text-xs font-black transition shadow-sm <?= $i == $page ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-100 text-gray-400 hover:text-indigo-600 hover:border-indigo-200' ?>"><?= $i ?></a>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <a href="<?= $baseLink . ($page + 1) ?>" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-100 rounded-lg text-gray-400 hover:text-indigo-600 hover:border-indigo-200 transition shadow-sm"><i class="fas fa-chevron-right text-[10px]"></i></a>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
         </div>
-        <?php endforeach; endif; ?>
+        <?php endif; ?>
+
+    <?php endif; ?>
 
     <!-- Signature Section (print only) -->
     <div class="hidden print:block mt-12 pt-8 border-t-2 border-gray-300">

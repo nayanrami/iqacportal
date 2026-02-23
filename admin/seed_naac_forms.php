@@ -3,7 +3,7 @@
  * NAAC Criteria-wise Feedback Forms Seeder
  * Creates comprehensive feedback forms for all 7 NAAC Criteria
  */
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireLogin();
 
 $seeded = 0;

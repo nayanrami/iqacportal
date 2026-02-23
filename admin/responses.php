@@ -4,7 +4,7 @@
  * v2.1 - Added Student Details & Year filtering
  */
 $pageTitle = 'Student Responses';
-require_once __DIR__ . '/../functions.php';
+require_once __DIR__ . '/../includes/functions.php';
 requireAdmin();
 
 $isDeptAdmin = isset($_SESSION['admin_dept_id']) && $_SESSION['admin_dept_id'] !== null;
@@ -67,12 +67,32 @@ if ($filterCourse) {
     $params[] = $filterCourse;
 }
 
-if ($where) $sql .= " WHERE " . implode(' AND ', $where);
-$sql .= " GROUP BY r.id ORDER BY r.submitted_at DESC LIMIT 500";
+// ── Advanced Pagination Logic ──
+$limit = isset($_GET['limit']) ? intval($_GET['limit']) : 20;
+if (!in_array($limit, [10, 20, 50, 100])) $limit = 20;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$offset = ($page - 1) * $limit;
+$totalRecords = 0;
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-$responses = $stmt->fetchAll();
+if ($where) $sql .= " WHERE " . implode(' AND ', $where);
+
+try {
+    // Count total
+    $countSql = "SELECT COUNT(DISTINCT r.id) FROM responses r JOIN feedback_forms ff ON ff.id = r.feedback_form_id LEFT JOIN courses c ON c.id = ff.course_id";
+    if ($where) $countSql .= " WHERE " . implode(' AND ', $where);
+    $totalStmt = $pdo->prepare($countSql);
+    $totalStmt->execute($params);
+    $totalRecords = $totalStmt->fetchColumn();
+    $totalPages = ceil($totalRecords / $limit);
+
+    // Fetch paginated
+    $sql .= " GROUP BY r.id ORDER BY r.submitted_at DESC LIMIT $limit OFFSET $offset";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    $responses = $stmt->fetchAll();
+} catch (Exception $e) {
+    $responses = [];
+}
 
 $forms = $pdo->query("SELECT id, title, form_type FROM feedback_forms ORDER BY form_type, title")->fetchAll();
 $courses = $pdo->query("SELECT id, code, name, semester FROM courses ORDER BY semester, code")->fetchAll();
@@ -133,14 +153,26 @@ $courses = $pdo->query("SELECT id, code, name, semester FROM courses ORDER BY se
 <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg">
     <div class="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
         <div>
-            <h3 class="font-black text-gray-800 tracking-tight">Student Evaluations (<?= count($responses) ?>)</h3>
+            <h3 class="font-black text-gray-800 tracking-tight">Student Evaluations</h3>
             <p class="text-xs text-gray-400">Viewing detailed feedback submissions</p>
         </div>
     </div>
     <div class="overflow-x-auto">
+        <?php 
+        $isFiltered = $filterType || $filterForm || $filterYear || $filterSem || $filterCourse;
+        if (!$isFiltered): ?>
+            <div class="px-6 py-20 text-center">
+                <div class="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-filter text-2xl text-indigo-400"></i>
+                </div>
+                <h3 class="text-lg font-black text-gray-800">Please apply a filter to view responses</h3>
+                <p class="text-gray-400 text-xs mt-1">Select a type, semester, or course to display records.</p>
+            </div>
+        <?php else: ?>
         <table class="w-full text-left">
             <thead>
                 <tr class="bg-gray-50/50 text-[10px] font-black uppercase text-gray-400 tracking-widest">
+                    <th class="px-6 py-4 text-center">Sr. No.</th>
                     <th class="px-6 py-4">Submission</th>
                     <th class="px-6 py-4">Student Identity</th>
                     <th class="px-6 py-4 text-center">Score Index</th>
@@ -150,9 +182,14 @@ $courses = $pdo->query("SELECT id, code, name, semester FROM courses ORDER BY se
             </thead>
             <tbody class="divide-y divide-gray-100">
                 <?php if (empty($responses)): ?>
-                    <tr><td colspan="5" class="px-6 py-12 text-center text-gray-400 font-bold"><i class="fas fa-inbox text-4xl block mb-4 opacity-20"></i>No student data found for these filters.</td></tr>
-                <?php else: foreach ($responses as $r): ?>
+                    <tr><td colspan="6" class="px-6 py-12 text-center text-gray-400 font-bold"><i class="fas fa-inbox text-4xl block mb-4 opacity-20"></i>No student data found for these filters.</td></tr>
+                <?php else: 
+                    $srNo = $offset + 1;
+                    foreach ($responses as $r): ?>
                     <tr class="hover:bg-gray-50/50 transition-colors group">
+                        <td class="px-6 py-5 text-center text-xs font-black text-gray-400">
+                            <?= $srNo++ ?>
+                        </td>
                         <td class="px-6 py-5">
                             <div class="text-sm font-bold text-gray-700 leading-tight"><?= sanitize(substr($r['form_title'], 0, 60)) ?><?= strlen($r['form_title']) > 60 ? '...' : '' ?></div>
                             <div class="flex items-center gap-2 mt-1">
@@ -202,7 +239,58 @@ $courses = $pdo->query("SELECT id, code, name, semester FROM courses ORDER BY se
                 <?php endforeach; endif; ?>
             </tbody>
         </table>
+        <?php endif; ?>
     </div>
 </div>
+
+<!-- Pagination -->
+<?php if ($totalRecords > 0): ?>
+<div class="mt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-4">
+        <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+            Showing <?= $offset + 1 ?> to <?= min($offset + $limit, $totalRecords) ?> of <?= $totalRecords ?> Results
+        </div>
+        <form method="GET" class="flex items-center gap-2">
+            <?php foreach($_GET as $k => $v): if($k != 'limit' && $k != 'page'): ?>
+            <input type="hidden" name="<?= sanitize($k) ?>" value="<?= sanitize($v) ?>">
+            <?php endif; endforeach; ?>
+            <select name="limit" onchange="this.form.submit()" class="px-2 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-500 outline-none focus:border-indigo-500 transition">
+                <?php foreach([10, 20, 50, 100] as $l): ?>
+                    <option value="<?= $l ?>" <?= $limit == $l ? 'selected' : '' ?>><?= $l ?> per page</option>
+                <?php endforeach; ?>
+            </select>
+        </form>
+    </div>
+
+    <?php if ($totalPages > 1): ?>
+    <div class="flex items-center gap-1">
+        <?php 
+        $queryParams = $_GET;
+        unset($queryParams['page']);
+        $baseLink = '?' . http_build_query($queryParams) . '&page=';
+        ?>
+        
+        <?php if ($page > 1): ?>
+            <a href="<?= $baseLink . ($page - 1) ?>" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-100 rounded-lg text-gray-400 hover:text-indigo-600 hover:border-indigo-200 transition shadow-sm"><i class="fas fa-chevron-left text-[10px]"></i></a>
+        <?php endif; ?>
+
+        <?php
+        $startPage = max(1, $page - 2);
+        $endPage = min($totalPages, $startPage + 4);
+        $startPage = max(1, $endPage - 4);
+        
+        for ($i = $startPage; $i <= $endPage; $i++): 
+            if($i < 1) continue;
+        ?>
+            <a href="<?= $baseLink . $i ?>" class="w-8 h-8 flex items-center justify-center rounded-lg text-xs font-black transition shadow-sm <?= $i == $page ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-100 text-gray-400 hover:text-indigo-600 hover:border-indigo-200' ?>"><?= $i ?></a>
+        <?php endfor; ?>
+
+        <?php if ($page < $totalPages): ?>
+            <a href="<?= $baseLink . ($page + 1) ?>" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-100 rounded-lg text-gray-400 hover:text-indigo-600 hover:border-indigo-200 transition shadow-sm"><i class="fas fa-chevron-right text-[10px]"></i></a>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
+</div>
+<?php endif; ?>
 
 <?php require_once __DIR__ . '/footer.php'; ?>
